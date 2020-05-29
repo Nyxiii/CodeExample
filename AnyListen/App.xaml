@@ -8,4 +8,14 @@
                 <ResourceDictionary Source="/Resources/Languages/AnyListen.zh-cn.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceD
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="Resources/Styles/CleanWindowStyle.xaml" />
+                <ResourceDictionary Source="/Resources/VectorGraphics.xaml" />
+
+                <ResourceDictionary Source="/Resources/Themes/BaseLight.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/Cyan.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="VisualizingListView" TargetType="{x:Type ListView}">
+             
