@@ -9,4 +9,29 @@ using System.Windows.Threading;
 using AnyListen.Notification.WindowMessages;
 using AnyListen.Settings;
 using AnyListen.Settings.RegistryManager;
-using AnyListen.Setting
+using AnyListen.Settings.Themes;
+using AnyListen.Utilities;
+using AnyListen.Utilities.Native;
+using AnyListen.ViewModels;
+using AnyListen.Views;
+using AnyListen.Views.Test;
+using AnyListen.Views.Tools;
+
+namespace AnyListen
+{
+    /// <summary>
+    /// Interaction logic for "App.xaml"
+    /// </summary>
+    public partial class App
+    {
+        Mutex _myMutex;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            //if (e.Args.Length > 0 && e.Args[0] == "/update")
+            //    UpdateService.UpdateSettings(AnyListenSettings.Paths.BaseDirectory);
+            AnyListenSettings.Instance.Load();
+
+            var openfile = false;
+            if (e.Args.Length > 0)
+            {
