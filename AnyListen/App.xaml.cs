@@ -35,3 +35,18 @@ namespace AnyListen
             var openfile = false;
             if (e.Args.Length > 0)
             {
+                switch (e.Args[0])
+                {
+                    case "/test":
+                        var view = new TestWindow();
+                        view.Show();
+                        break;
+                    case "/language_creator":
+                        var languageCreator = new LanguageCreatorWindow();
+                        languageCreator.ShowDialog();
+                        return;
+                    case "/designer":
+                        var resource = new ResourceDictionary { Source = new Uri("/Resources/Themes/Cyan.xaml", UriKind.Relative) };
+                        ApplicationThemeManager.Instance.LoadResource("accentcolor", resource);
+                        var designer = new Designer.DesignerWindow();
+         
