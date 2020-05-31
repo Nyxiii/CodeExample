@@ -49,4 +49,18 @@ namespace AnyListen
                         var resource = new ResourceDictionary { Source = new Uri("/Resources/Themes/Cyan.xaml", UriKind.Relative) };
                         ApplicationThemeManager.Instance.LoadResource("accentcolor", resource);
                         var designer = new Designer.DesignerWindow();
-         
+                        designer.ShowDialog();
+                        return;
+                    case "/registry":
+                        var manager = new RegistryManager();
+                        var item = manager.ContextMenuItems.First(x => x.Extension == Environment.GetCommandLineArgs()[2]);
+                        try
+                        {
+                            if (item != null) item.ToggleRegister(!item.IsRegistered, false);
+                        }
+                        catch (SecurityException)
+                        {
+                            MessageBox.Show("Something went extremly wrong. This application didn't got administrator rights so it can't register anything.");
+                        }
+
+                 
