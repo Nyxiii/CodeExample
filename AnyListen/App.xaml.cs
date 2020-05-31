@@ -63,4 +63,15 @@ namespace AnyListen
                             MessageBox.Show("Something went extremly wrong. This application didn't got administrator rights so it can't register anything.");
                         }
 
-                 
+                        Current.Shutdown();
+                        return;
+                    case "/screeninfo":
+                        var message = new StringBuilder();
+                        var screens = WpfScreen.AllScreens().ToList();
+                        message.AppendLine("AnyListen - Detected Screens");
+                        message.AppendLine("-----------------------------------------------------------------------------------");
+                        message.AppendFormat("Found screens: {0}", screens.Count);
+                        message.AppendLine();
+                        foreach (var wpfScreen in screens)
+                        {
+                            message.AppendFormat("Screen #{0} ({1})", screens.IndexOf
