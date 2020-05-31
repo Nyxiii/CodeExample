@@ -74,4 +74,12 @@ namespace AnyListen
                         message.AppendLine();
                         foreach (var wpfScreen in screens)
                         {
-                            message.AppendFormat("Screen #{0} ({1})", screens.IndexOf
+                            message.AppendFormat("Screen #{0} ({1})", screens.IndexOf(wpfScreen), wpfScreen.DeviceName);
+                            message.AppendFormat("Size: Width {0}, Height {1}", wpfScreen.WorkingArea.Width, wpfScreen.WorkingArea.Height);
+                            message.AppendFormat("Position: X {0}, Y {1}", wpfScreen.WorkingArea.X, wpfScreen.WorkingArea.Y);
+                            message.AppendFormat("IsPrimary: {0}", wpfScreen.IsPrimary);
+                            message.AppendLine();
+                        }
+                        message.AppendLine("-----------------------------------------------------------------------------------");
+                        message.AppendLine();
+                        message.AppendFormat("Most left x: {0}", WpfScre
