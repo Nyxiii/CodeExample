@@ -82,4 +82,23 @@ namespace AnyListen
                         }
                         message.AppendLine("-----------------------------------------------------------------------------------");
                         message.AppendLine();
-                        message.AppendFormat("Most left x: {0}", WpfScre
+                        message.AppendFormat("Most left x: {0}", WpfScreen.MostLeftX);
+                        message.AppendFormat("Most right x: {0}", WpfScreen.MostRightX);
+                        MessageBox.Show(message.ToString());
+                        Current.Shutdown();
+                        return;
+                    case "/showlines":
+                        MagicArrow.StrokeWindow.ShowLines = true;
+                        break;
+                    case "/positiontest":
+                        PositionTestWindow positionTest = new PositionTestWindow();
+                        positionTest.Show();
+                        return;
+                    default:
+                        openfile = true;
+                        break;
+                }
+            }
+
+            bool aIsNewInstance;
+  
