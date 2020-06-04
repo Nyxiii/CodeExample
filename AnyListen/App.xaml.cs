@@ -101,4 +101,22 @@ namespace AnyListen
             }
 
             bool aIsNewInstance;
-  
+            _myMutex = new Mutex(true, "AnyListen", out aIsNewInstance);
+            if (!aIsNewInstance)
+            {
+                IntPtr hwnd = UnsafeNativeMethods.FindWindow(null, "AnyListen");
+                if (openfile)
+                {
+                    WindowMessanger.SendMessageToWindow(hwnd, WindowMessanger.WM_OPENMUSICFILE, new FileInfo(Environment.GetCommandLineArgs()[1]).FullName);
+                }
+                else
+                {
+                    WindowMessanger.SendMessageToWindow(hwnd, WindowMessanger.WM_BRINGTOFRONT, string.Empty);
+                }
+                Current.Shutdown();
+                return;
+            }
+#if !DEBUG
+            EnableExteptionless();
+#endif
+            /
