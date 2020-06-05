@@ -119,4 +119,18 @@ namespace AnyListen
 #if !DEBUG
             EnableExteptionless();
 #endif
-            /
+            //We remove the two last resource dictionarys so we can skip the annyoing ThemeManagers/current theme detections, ...
+            //AnyListenSettings will load the needed resources
+            Resources.MergedDictionaries.RemoveAt(Resources.MergedDictionaries.Count -2);
+            Resources.MergedDictionaries.RemoveAt(Resources.MergedDictionaries.Count - 2);
+            ApplicationThemeManager.Instance.Apply(AnyListenSettings.Instance.Config.ApplicationDesign);
+
+            MainWindow window = new MainWindow();
+
+            WindowMessanger messanger = new WindowMessanger(window);
+            window.Show();
+            if (openfile)
+            {
+                try
+                {
+        
