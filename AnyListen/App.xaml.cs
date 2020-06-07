@@ -174,4 +174,24 @@ namespace AnyListen
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            OnExceptionOccu
+            OnExceptionOccurred((Exception)e.ExceptionObject);
+        }
+
+        bool _isHandled;
+        protected void OnExceptionOccurred(Exception ex)
+        {
+            if (_isHandled) return;
+            _isHandled = true;
+            if (MainViewModel.Instance.MusicManager != null && MainViewModel.Instance.MusicManager.CSCoreEngine.IsPlaying)
+                MainViewModel.Instance.MusicManager.CSCoreEngine.StopPlayback();
+            var window = new ReportExceptionWindow(ex);
+            window.ShowDialog();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            _myMutex?.Dispose();
+        }
+    }
+}
