@@ -153,4 +153,25 @@ namespace AnyListen
             messanger.PlayMusicFile += (s, ev) =>
             {
                 FileInfo fi = new FileInfo(ev.Filename);
-                if (fi
+                if (fi.Exists)
+                {
+                    MainViewModel.Instance.OpenFile(fi, true);
+                }
+            };
+        }
+
+        protected void EnableExteptionless()
+        {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+        }
+
+        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            OnExceptionOccurred(e.Exception);
+            e.Handled = true;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            OnExceptionOccu
