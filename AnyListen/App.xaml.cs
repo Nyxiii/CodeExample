@@ -133,4 +133,24 @@ namespace AnyListen
             {
                 try
                 {
-        
+                    foreach (var path in Environment.GetCommandLineArgs().Skip(1))
+                    {
+                        FileInfo fi = new FileInfo(path);
+                        if (fi.Exists)
+                        {
+                            MainViewModel.Instance.OpenFile(fi, Environment.GetCommandLineArgs().Skip(1).Last() == path);
+                        }
+                    }
+                }
+                catch (IOException) { }
+            }
+
+            messanger.BringWindowToFront += (s, ev) =>
+            {
+                window.BringToFront();
+            };
+
+            messanger.PlayMusicFile += (s, ev) =>
+            {
+                FileInfo fi = new FileInfo(ev.Filename);
+                if (fi
