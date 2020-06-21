@@ -8,4 +8,14 @@
     <Grid Margin="0 10 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"
-                      
+                            MinHeight="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                    Margin="0 5 0 0"
+                    FontSize="{StaticResource DialogMessageFontSize}"
+                    Text="{Binding Message, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="Wrap"
+                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" />
+       
