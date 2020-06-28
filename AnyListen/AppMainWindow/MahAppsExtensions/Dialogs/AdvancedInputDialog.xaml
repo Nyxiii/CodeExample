@@ -27,4 +27,15 @@
                     TextWrapping="Wrap"
                     Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" />
 
-        <StackPanel Gri
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Height="85">
+            <Button x:Name="PART_AffirmativeButton"
+                    Height="35"
+                    MinWidth="80"
+                    Style="{DynamicResource AccentedDialogSquareButton}"
+                    Content="{Binding AffirmativeButtonText, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="0 0 5 0" IsEnabled="{Binding ElementName=PART_TextBox,Path=Text,Converter={StaticResource FalseOnEmptyString}}"/>
+            <Button x:Name="PART_NegativeButton"
+                 
