@@ -18,4 +18,13 @@
                     Text="{Binding Message, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap"
                     Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" />
-       
+        <TextBox Grid.Row="1"
+                    Margin="0 5 0 0"
+                    FontSize="{StaticResource DialogMessageFontSize}"
+                    controls:ControlsHelper.FocusBorderBrush="{DynamicResource AccentColorBrush}"
+                    x:Name="PART_TextBox"
+                    Text="{Binding Input, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="Wrap"
+                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Gri
