@@ -11,4 +11,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.W
+using System.Windows.Shapes;
+using AnyListen.Views.UserControls;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+
+namespace AnyListen.AppMainWindow.MahAppsExtensions.Dialogs
+{
+    /// <summary>
+    /// Interaction logic for EqualizerDialog.xaml
+    /// </summary>
+    public partial class EqualizerDialog
+    {
+        internal EqualizerDialog(MetroWindow parentWindow, MetroDialogSettings settings)
+            : base(parentWindow, settings)
+        {
+            InitializeComponent();
+        }
+
+        internal Task WaitForCloseAsync()
+        {
+            var tcs = new TaskCompletionSource<object>();
+            KeyEventHandler escapeKeyHandler = null;
+            EventHandler closeHand
