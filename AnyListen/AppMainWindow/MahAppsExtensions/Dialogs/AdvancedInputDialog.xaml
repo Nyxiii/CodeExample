@@ -38,4 +38,10 @@
                     Content="{Binding AffirmativeButtonText, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 5 0" IsEnabled="{Binding ElementName=PART_TextBox,Path=Text,Converter={StaticResource FalseOnEmptyString}}"/>
             <Button x:Name="PART_NegativeButton"
-                 
+                    Height="35"
+                    MinWidth="80"
+                    Content="{Binding NegativeButtonText, RelativeSource={RelativeSource AncestorType=hurricaneDialogs:AdvancedInputDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 0 5 0" />
+        </StackPanel>
+    </Grid>
+</dialogs:BaseMetroDialog>
