@@ -33,4 +33,30 @@ namespace AnyListen.AppMainWindow.MahAppsExtensions.Dialogs
         {
             var tcs = new TaskCompletionSource<object>();
             KeyEventHandler escapeKeyHandler = null;
-            EventHandler closeHand
+            EventHandler closeHandler = null;
+            EventHandler viewcloseHandler = null;
+
+            Action cleanUpHandlers = () =>
+            {
+                KeyDown -= escapeKeyHandler;
+                ((EqualizerView)Content).WantClose -= closeHandler;
+            };
+            
+            escapeKeyHandler = (sender, e) =>
+            {
+                if (e.Key == Key.Escape)
+                {
+                    cleanUpHandlers();
+                    tcs.TrySetResult(null);
+                }
+            };
+
+            closeHandler = (sender, e) =>
+            {
+                cleanUpHandlers();
+                tcs.TrySetResult(null);
+            };
+
+            viewcloseHandler = (sender, e) =>
+            {
+                clea
