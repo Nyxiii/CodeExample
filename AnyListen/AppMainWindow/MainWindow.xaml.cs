@@ -209,3 +209,362 @@ namespace AnyListen
             }
 
             if (skin.Configuration.SupportsCustomBackground)
+            {
+                SetBackground().Forget();
+            }
+            else
+            {
+                BackgroundImage.Visibility = Visibility.Collapsed;
+                BackgroundImage.Source = null;
+                BackgroundMediaElement.Stop();
+                BackgroundMediaElement.Source = null;
+                BackgroundMediaElement.Visibility = Visibility.Collapsed;
+            }
+            BackgroundImage.Visibility = skin.Configuration.SupportsCustomBackground ? Visibility.Visible : Visibility.Collapsed;
+
+            if (skin == SmartWindowSkin)
+            {
+                Width = 300;
+                Height = MagicArrow.DockManager.WindowHeight;
+                if (MainViewModel.Instance.MusicManager != null)
+                    MainViewModel.Instance.MusicManager.DownloadManager.IsOpen = false;
+            }
+
+            ShowMinButton = skin.Configuration.ShowWindowControls;
+            ShowMaxRestoreButton = skin.Configuration.ShowWindowControls;
+            ShowCloseButton = skin.Configuration.ShowWindowControls;
+
+            var newUserControl = (FrameworkElement) skin;
+            ContentGrid.Children.Add(newUserControl);
+            var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+            newUserControl.BeginAnimation(OpacityProperty, animation);
+            HostedWindow = skin;
+            HostedWindow.EnableWindow();
+        }
+
+        #endregion
+
+        #region Events / Closing
+
+        private bool _isHiden;
+        void MainWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized && AnyListenSettings.Instance.Config.MinimizeToTray)
+            {
+                Hide();
+                _isHiden = true;
+                NotifyIcon.Visibility = Visibility.Visible;
+                if (AnyListenSettings.Instance.Config.ShowNotificationIfMinimizeToTray)
+                    NotifyIcon.ShowBalloonTip("AnyListen",
+                        Application.Current.Resources["MinimizeToTrayNotification"].ToString(), BalloonIcon.Info);
+            }
+        }
+
+        private void NotifyIcon_OnTrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            ShowWindow();
+        }
+
+        public void ShowWindow()
+        {
+            NotifyIcon.Visibility = Visibility.Hidden;
+            Show();
+            _isHiden = false;
+            WindowState = WindowState.Normal;
+            Activate();
+        }
+
+        void CSCoreEngine_PlaybackStateChanged(object sender, PlayStateChangedEventArgs e)
+        {
+            RefreshTaskbarInfo(e.NewPlaybackState);
+        }
+
+        public void RefreshTaskbarInfo(PlaybackState playbackState)
+        {
+            if (!AnyListenSettings.Instance.Config.ShowProgressInTaskbar)
+            {
+                TaskbarInfo.ProgressState = TaskbarItemProgressState.None;
+                return;
+            }
+            TaskbarInfo.ProgressState = playbackState == PlaybackState.Playing ? TaskbarItemProgressState.Normal : TaskbarItemProgressState.Paused;
+        }
+
+        void skin_ToggleWindowState(object sender, EventArgs e)
+        {
+            WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        }
+
+        #region Dragging
+
+        private bool _restoreIfMove;
+        private bool _isDragging;
+
+        void skin_DragMoveStart(object sender, EventArgs e)
+        {
+            _isDragging = true;
+            if (WindowState == WindowState.Maximized) _restoreIfMove = true;
+            ResizeMode = ResizeMode.CanResize;
+            WindowHelper.HideMinimizeAndMaximizeButtons(this);
+
+            MagicArrow.DockManager.DragStart();
+            if (HostedWindow.Configuration.NeedsMovingHelp)
+            {
+                try
+                {
+                    DragMove();
+                }
+                catch (InvalidOperationException)
+                {
+                    //ignore
+                }
+            }
+        }
+
+        private void DockManagerOnDragStopped(object sender, EventArgs eventArgs)
+        {
+            _isDragging = false;
+            if (HostedWindow.Configuration.IsResizable)
+            {
+                WindowHelper.ShowMinimizeAndMaximizeButtons(this);
+                ResizeMode = ResizeMode.CanResize;
+            }
+            else
+            {
+                WindowHelper.HideMinimizeAndMaximizeButtons(this);
+                ResizeMode = ResizeMode.NoResize;
+            }
+        }
+
+        void skin_DragMoveStop(object sender, EventArgs e)
+        {
+            _restoreIfMove = false;
+            MagicArrow.DockManager.DragStop();
+        }
+
+        void skin_TitleBarMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_restoreIfMove)
+            {
+                _restoreIfMove = false;
+
+                double percentHorizontal = e.GetPosition(this).X / ActualWidth;
+                double targetHorizontal = RestoreBounds.Width * percentHorizontal;
+
+                double percentVertical = e.GetPosition(this).Y / ActualHeight;
+                double targetVertical = RestoreBounds.Height * percentVertical;
+
+                WindowState = WindowState.Normal;
+
+                POINT lMousePosition;
+                UnsafeNativeMethods.GetCursorPos(out lMousePosition);
+
+                Left = lMousePosition.X - targetHorizontal;
+                Top = lMousePosition.Y - targetVertical;
+
+                try
+                {
+                    DragMove();
+                }
+                catch (InvalidOperationException)
+                {
+                }
+            }
+        }
+
+        #endregion
+
+        void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (MagicArrow.DockManager.CurrentSide == DockingSide.None)
+            {
+                if (AnyListenSettings.Instance.CurrentState.ApplicationState == null) AnyListenSettings.Instance.CurrentState.ApplicationState = new DockingApplicationState();
+                var appstate = AnyListenSettings.Instance.CurrentState.ApplicationState;
+                appstate.Height = Height;
+                appstate.Width = Width;
+                appstate.Left = Left;
+                appstate.Top = Top;
+                appstate.WindowState = WindowState;
+            }
+            if (AnyListenSettings.Instance.IsLoaded)
+                MagicArrow.DockManager.Save();
+            MainViewModel.Instance.Closing();
+            MagicArrow.Dispose();
+            Application.Current.Shutdown(); //Important if other windows like the track notification are open
+        }
+
+        public void BringToFront()
+        {
+            if (_isHiden)
+            {
+                ShowWindow();
+            }
+            else
+            {
+                MagicArrow.BringToFront();
+            }
+        }
+
+        #endregion
+
+        #region Messages
+
+        public WindowDialogService WindowDialogService { get; set; }
+
+        EqualizerWindow _equalizerWindow;
+        private bool _equalizerIsOpen;
+
+        public void ShowEqualizer()
+        {
+            if (HostedWindow.Configuration.ShowFullscreenDialogs)
+            {
+                AnyListenSettings.Instance.CurrentState.EqualizerIsOpen = !AnyListenSettings.Instance.CurrentState.EqualizerIsOpen;
+            }
+            else
+            {
+                if (!_equalizerIsOpen)
+                {
+                    var rect = WindowHelper.GetWindowRectangle(this);
+                    _equalizerWindow = new EqualizerWindow(rect, ActualWidth);
+                    _equalizerWindow.Closed += (s, e) => _equalizerIsOpen = false;
+                    _equalizerWindow.BeginCloseAnimation += (s, e) => Activate();
+                    _equalizerWindow.Show();
+                    _equalizerIsOpen = true;
+                }
+                else
+                {
+                    _equalizerWindow.Activate();
+                }
+            }
+        }
+
+        private void HideEqualizer()
+        {
+            if (_equalizerIsOpen) { _equalizerWindow.Close(); _equalizerIsOpen = false; }
+        }
+
+        #endregion
+
+        #region Themes
+
+        public async Task MoveOut()
+        {
+            var fadeanimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
+            var control = (DependencyObject)HostedWindow;
+
+            Storyboard.SetTarget(fadeanimation, control);
+
+            Storyboard.SetTargetProperty(fadeanimation, new PropertyPath(OpacityProperty));
+
+            var story = new Storyboard();
+            story.Children.Add(fadeanimation);
+            var handler = new AutoResetEvent(false);
+            story.Completed += (s, e) => handler.Set();
+            story.Begin(this);
+            await Task.Run(() => handler.WaitOne());
+            handler.Dispose();
+        }
+
+        public async Task ResetAndMoveIn()
+        {
+            _smartWindowSkin.DisableWindow();
+            _advancedWindowSkin.DisableWindow();
+            bool isadvancedwindow = HostedWindow != _smartWindowSkin;
+            _smartWindowSkin = new WindowSmartView();
+            _advancedWindowSkin = new WindowAdvancedView();
+            ApplyHostWindow(isadvancedwindow ? _advancedWindowSkin : _smartWindowSkin, false);
+
+            var outanimation = new ThicknessAnimation(new Thickness(-100, 0, 100, 0), new Thickness(0), TimeSpan.FromMilliseconds(350));
+            var fadeanimation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(400));
+            var control = (DependencyObject)HostedWindow;
+
+            Storyboard.SetTarget(outanimation, control);
+            Storyboard.SetTarget(fadeanimation, control);
+
+            Storyboard.SetTargetProperty(outanimation, new PropertyPath(MarginProperty));
+            Storyboard.SetTargetProperty(fadeanimation, new PropertyPath(OpacityProperty));
+            
+            var story = new Storyboard();
+            story.Children.Add(outanimation);
+            story.Children.Add(fadeanimation);
+            var handler = new AutoResetEvent(false);
+            story.Completed += (s, e) => handler.Set();
+            story.Begin(this);
+            await Task.Run(() => handler.WaitOne());
+            handler.Dispose();
+            ResetFlyout();
+        }
+
+        public async Task BackgroundChanged()
+        {
+            await SetBackground();
+            var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(1000));
+            BackgroundContainer.BeginAnimation(OpacityProperty, animation);
+        }
+
+        private async Task SetBackground()
+        {
+            if (AnyListenSettings.Instance.Config.ApplicationDesign.ApplicationBackground == null || !AnyListenSettings.Instance.Config.ApplicationDesign.ApplicationBackground.IsAvailable)
+            {
+                BackgroundImage.Source = null;
+                BackgroundMediaElement.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            if (AnyListenSettings.Instance.Config.ApplicationDesign.ApplicationBackground.IsAnimated)
+            {
+                BackgroundImage.Source = null;
+                BackgroundMediaElement.Visibility = Visibility.Visible;
+                BackgroundMediaElement.Source =
+                    AnyListenSettings.Instance.Config.ApplicationDesign.ApplicationBackground.GetBackground();
+                BackgroundMediaElement.Play();
+            }
+            else
+            {
+                BackgroundMediaElement.Source = null;
+                BackgroundMediaElement.Visibility = Visibility.Collapsed;
+                BackgroundImage.Visibility = Visibility.Visible;
+                BackgroundImage.Source = await Task.Run(() =>
+                {
+                    var img =
+                        new BitmapImage(
+                            AnyListenSettings.Instance.Config.ApplicationDesign.ApplicationBackground.GetBackground());
+                    img.Freeze();
+                    return img;
+                });
+            }
+        }
+
+        private async void SystemEventsOnPowerModeChanged(object sender, PowerModeChangedEventArgs powerModeChangedEventArgs)
+        {
+            if (powerModeChangedEventArgs.Mode == PowerModes.Resume)
+            {
+                BackgroundMediaElement.Source = null; //Else it doesn't get refreshed
+                await SetBackground();
+            }
+        }
+
+        private Flyout _oldFlyout;
+        private void ResetFlyout()
+        {
+            if (_oldFlyout != null) FlyoutControl.Items.Remove(_oldFlyout);
+            var newflyout = (Flyout)Resources["DownloadFlyout"];
+            FlyoutControl.Items.Add(newflyout);
+            _oldFlyout = newflyout;
+        }
+
+        #endregion
+
+        private void BackgroundMediaElement_OnMediaEnded(object sender, RoutedEventArgs e)
+        {
+            BackgroundMediaElement.Position = TimeSpan.Zero;
+            BackgroundMediaElement.Play();
+        }
+
+        private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
+    }
+
+    public enum DialogMode { Single, First, Last, Following }
+}
