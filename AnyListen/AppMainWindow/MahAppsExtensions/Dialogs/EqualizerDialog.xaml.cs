@@ -59,4 +59,14 @@ namespace AnyListen.AppMainWindow.MahAppsExtensions.Dialogs
 
             viewcloseHandler = (sender, e) =>
             {
-                clea
+                cleanUpHandlers();
+                tcs.TrySetResult(null);
+            };
+
+            KeyDown += escapeKeyHandler;
+            ((EqualizerView)Content).WantClose += closeHandler;
+
+            return tcs.Task;
+        }
+    }
+}
