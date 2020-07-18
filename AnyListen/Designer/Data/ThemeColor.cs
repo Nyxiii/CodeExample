@@ -36,3 +36,14 @@ namespace AnyListen.Designer.Data
             return withTransparencyValue ? $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}"
                 : $"{c.R:X2}{c.G:X2}{c.B:X2}";
         }
+
+        public void SetValue(string content)
+        {
+            var newColor = ColorConverter.ConvertFromString(content);
+            if (newColor == null) return;
+            Color = (Color)newColor;
+        }
+
+        public event EventHandler ValueChanged;
+    }
+}
