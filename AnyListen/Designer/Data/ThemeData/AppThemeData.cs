@@ -14,4 +14,22 @@ namespace AnyListen.Designer.Data.ThemeData
             {
                 new ThemeColor
                 {
-                
+                    RegexPattern = "x:Key=\"BlackColor\">(?<content>(.*?))<",
+                    ID = "BlackColor",
+                    DisplayName ="Black color"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"WhiteColor\">(?<content>(.*?))<",
+                    ID = "WhiteColor",
+                    DisplayName ="White color"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"Gray1\">(?<content>(.*?))<",
+                    ID = "Gray1",
+                    DisplayName ="Gray #1"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"Gray2\">(?<cont
