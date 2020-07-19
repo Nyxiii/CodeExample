@@ -70,4 +70,20 @@ namespace AnyListen.Designer.Data.ThemeData
                 {
                     RegexPattern = "x:Key=\"FlyoutColor\">(?<content>(.*?))<",
                     ID = "FlyoutColor",
-                    DisplayNam
+                    DisplayName ="Flyout color"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"SliderValueDisabled\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderValueDisabled",
+                    DisplayName ="Slider value disabled"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"SliderTrackDisabled\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderTrackDisabled",
+                    DisplayName ="Slider track disabled"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"SliderThumbDisabled\" Color=\"(?<content>(.*?
