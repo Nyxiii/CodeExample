@@ -86,4 +86,22 @@ namespace AnyListen.Designer.Data.ThemeData
                 },
                 new ThemeColor
                 {
-                    RegexPattern = "x:Key=\"SliderThumbDisabled\" Color=\"(?<content>(.*?
+                    RegexPattern = "x:Key=\"SliderThumbDisabled\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderThumbDisabled",
+                    DisplayName ="Slider thumb disabled"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"SliderThumbDisabled\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderThumbDisabled",
+                    DisplayName ="Slider thumb disabled"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"SliderTrackHover\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderTrackHover",
+                    DisplayName ="Slider track hover"
+                },
+                new ThemeColor
+                {
+              
