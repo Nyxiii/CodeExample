@@ -52,4 +52,22 @@ namespace AnyListen.Designer.Data.ThemeData
                 {
                     RegexPattern = "x:Key=\"Gray10\" Color=\"(?<content>(.*?))\"",
                     ID = "Gray10",
-                    DisplayName ="Gray #10
+                    DisplayName ="Gray #10"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"GrayNormal\">(?<content>(.*?))<",
+                    ID = "GrayNormal",
+                    DisplayName ="Gray normal"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"GrayHover\">(?<content>(.*?))<",
+                    ID = "GrayHover",
+                    DisplayName ="Gray hover"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"FlyoutColor\">(?<content>(.*?))<",
+                    ID = "FlyoutColor",
+                    DisplayNam
