@@ -118,4 +118,21 @@ namespace AnyListen.Designer.Data.ThemeData
                 {
                     RegexPattern = "x:Key=\"MenuItemSelectionFill\" Color=\"(?<content>(.*?))\"",
                     ID = "MenuItemSelectionFill",
-                    Display
+                    DisplayName ="Menu item selection fill"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"MenuItemSelectionStroke\" Color=\"(?<content>(.*?))\"",
+                    ID = "MenuItemSelectionStroke",
+                    DisplayName ="Menu item selection stroke"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"TopMenuItemPressedFill\" Color=\"(?<content>(.*?))\"",
+                    ID = "TopMenuItemPressedFill",
+                    DisplayName ="Top menu item pressed fill"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"TopMenuItemPressedStroke\" Color=\"(?<content>(.*?))\"",
+              
