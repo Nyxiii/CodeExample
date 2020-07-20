@@ -104,4 +104,18 @@ namespace AnyListen.Designer.Data.ThemeData
                 },
                 new ThemeColor
                 {
-              
+                    RegexPattern = "x:Key=\"SliderTrackNormal\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderTrackNormal",
+                    DisplayName ="Slider track normal"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"FlatButtonPressedBackgroundBrush\" Color=\"(?<content>(.*?))\"",
+                    ID = "FlatButtonPressedBackgroundBrush",
+                    DisplayName ="Flat button pressed background brush"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"MenuItemSelectionFill\" Color=\"(?<content>(.*?))\"",
+                    ID = "MenuItemSelectionFill",
+                    Display
