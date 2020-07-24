@@ -152,4 +152,18 @@ namespace AnyListen.Designer.Data.ThemeData
                 },
                 new ThemeColor
                 {
-                   
+                    RegexPattern = "x:Key=\"MenuShadowColor\">(?<content>(.*?))<",
+                    ID = "MenuShadowColor",
+                    DisplayName ="Menu shadow color"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"PicturePreviewBackgroundBrush\" Color=\"(?<content>(.*?))\"",
+                    ID = "PicturePreviewBackgroundBrush",
+                    DisplayName ="Preview picture background color"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"PicturePreviewForegroundBrush\" Color=\"(?<content>(.*?))\"",
+                    ID = "PicturePreviewForegroundBrush",
+                    DisplayName ="Previ
