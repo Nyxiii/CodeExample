@@ -185,4 +185,15 @@ namespace AnyListen.Designer.Data.ThemeData
         
         public static AppThemeData LoadDefault()
         {
-            var appTheme 
+            var appTheme = new AppThemeData();
+            appTheme.LoadFromResourceDictionary(ApplicationThemeManager.Instance.AppThemes.First(x => x.Name == "BaseLight").ResourceDictionary);
+            return appTheme;
+        }
+
+        public override string Source => Properties.Resources.AppTheme;
+
+        public override string Filter => $"{Application.Current.Resources["AppTheme"]}|*.xaml";
+
+        public override string BaseDirectory => AnyListenSettings.Paths.AppThemesDirectory;
+    }
+}
