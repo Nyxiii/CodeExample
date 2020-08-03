@@ -166,4 +166,23 @@ namespace AnyListen.Designer.Data.ThemeData
                 {
                     RegexPattern = "x:Key=\"PicturePreviewForegroundBrush\" Color=\"(?<content>(.*?))\"",
                     ID = "PicturePreviewForegroundBrush",
-                    DisplayName ="Previ
+                    DisplayName ="Preview picture foreground color"
+                },
+                new ThemeColor
+                {
+                    RegexPattern = "x:Key=\"SliderBackground\" Color=\"(?<content>(.*?))\"",
+                    ID = "SliderBackground",
+                    DisplayName ="Slider background"
+                },
+                new ThemeColor
+                {
+                    RegexPattern ="x:Key=\"DisabledMenuItemGlyphPanel\" Color=\"(?<content>(.*?))\"",
+                    ID ="DisabledMenuItemGlyphPanel",
+                    DisplayName ="Disabled menu item glyph panel"
+                }
+            };
+        }
+        
+        public static AppThemeData LoadDefault()
+        {
+            var appTheme 
