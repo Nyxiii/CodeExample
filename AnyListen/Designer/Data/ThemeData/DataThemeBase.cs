@@ -28,4 +28,26 @@ namespace AnyListen.Designer.Data.ThemeData
             }
         }
 
-        private object GetValueFromDictionary(string key, Resourc
+        private object GetValueFromDictionary(string key, ResourceDictionary dictionary)
+        {
+            if (dictionary.Contains(key))
+            {
+                return dictionary[key];
+            }
+            foreach (var resourceDictionary in dictionary.MergedDictionaries)
+            {
+                var result = GetValueFromDictionary(key, resourceDictionary);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        public ResourceDictionary GetResourceDictionary()
+        {
+            var toString = ToString();
+            return (ResourceDictionary)XamlReader.Parse(toString);
+        }
+
+        public override string ToString()
+        {
+            return ThemeSettings.Aggregate(Source, (current, color) => current.Replace("{" + color.ID + "}"
