@@ -46,4 +46,22 @@ namespace AnyListen.Designer.Data
         public string BackgroundName { get; set; }
 
 
-        public static bool FromFile(string fileNam
+        public static bool FromFile(string fileName, out ThemePack result)
+        {
+            var fiSource = new FileInfo(fileName);
+
+            using (var fs = new FileStream(fiSource.FullName, FileMode.Open, FileAccess.Read))
+            using (var zf = new ZipFile(fs))
+            {
+                var ze = zf.GetEntry("info.json");
+                if (ze == null)
+                {
+                    result = null;
+                    return false;
+                }
+
+                using (var s = zf.GetInputStream(ze))
+                using (var reader = new StreamReader(s))
+                {
+                    var themePack = JsonConvert.DeserializeObject<ThemePack>(reader.ReadToEnd());
+                    t
