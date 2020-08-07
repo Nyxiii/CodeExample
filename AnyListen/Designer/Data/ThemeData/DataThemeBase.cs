@@ -50,4 +50,12 @@ namespace AnyListen.Designer.Data.ThemeData
 
         public override string ToString()
         {
-            return ThemeSettings.Aggregate(Source, (current, color) => current.Replace("{" + color.ID + "}"
+            return ThemeSettings.Aggregate(Source, (current, color) => current.Replace("{" + color.ID + "}", color.Value));
+        }
+
+        public void Save(string path)
+        {
+            File.WriteAllText(path, ToString());
+        }
+    }
+}
