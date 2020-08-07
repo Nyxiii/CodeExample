@@ -16,4 +16,34 @@ using Newtonsoft.Json;
 
 namespace AnyListen.Designer.Data
 {
-    public class ThemePack : IApplicatio
+    public class ThemePack : IApplicationBackground, IAppTheme, IAccentColor, IAudioVisualisationContainer
+    {
+        [XmlIgnore]
+        public string Creator { get; set; }
+
+        [XmlIgnore]
+        public string Name { get; set; }
+
+        public string FileName { get; set; }
+
+        #region ContainInfo
+
+        [XmlIgnore]
+        public bool ContainsAppTheme { get; set; }
+
+        [XmlIgnore]
+        public bool ContainsAccentColor { get; set; }
+
+        [XmlIgnore]
+        public bool ContainsAudioVisualisation { get; set; }
+
+        [XmlIgnore]
+        public bool ContainsBackground { get; set; }
+
+        #endregion
+
+        [XmlIgnore]
+        public string BackgroundName { get; set; }
+
+
+        public static bool FromFile(string fileNam
