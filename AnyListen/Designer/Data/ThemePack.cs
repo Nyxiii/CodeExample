@@ -64,4 +64,23 @@ namespace AnyListen.Designer.Data
                 using (var reader = new StreamReader(s))
                 {
                     var themePack = JsonConvert.DeserializeObject<ThemePack>(reader.ReadToEnd());
-                    t
+                    themePack.FileName = fiSource.Name;
+
+                    result = themePack;
+                    return true;
+                }
+            }
+        }
+
+        public async Task Load(string filePath)
+        {
+            var fiSource = new FileInfo(filePath);
+
+            using (var fs = new FileStream(fiSource.FullName, FileMode.Open, FileAccess.Read))
+            using (var zf = new ZipFile(fs))
+            {
+                if (ContainsAudioVisualisation)
+                {
+                    using (var stream = zf.GetInputStream(zf.GetEntry(ThemePackConsts.AudioVisualisationName)))
+                    {
+                        _audioVisualisationPlugin = await Task.Run(() => AudioVisualisationPlu
