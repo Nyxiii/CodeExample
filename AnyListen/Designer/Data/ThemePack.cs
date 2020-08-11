@@ -83,4 +83,20 @@ namespace AnyListen.Designer.Data
                 {
                     using (var stream = zf.GetInputStream(zf.GetEntry(ThemePackConsts.AudioVisualisationName)))
                     {
-                        _audioVisualisationPlugin = await Task.Run(() => AudioVisualisationPlu
+                        _audioVisualisationPlugin = await Task.Run(() => AudioVisualisationPluginHelper.FromStream(stream));
+                    }
+                }
+
+                if (ContainsBackground)
+                {
+                    var path = "AnyListenBackground" + BackgroundName;
+                    var backgroundZipEntry = zf.GetEntry(BackgroundName);
+                    using (var zipStream = zf.GetInputStream(backgroundZipEntry))
+                    {
+                        var buffer = new byte[4096];
+                        var file = new FileInfo(path);
+                        if (file.Exists) file.Delete();
+                        using (var streamWriter = File.Create(file.FullName))
+                        {
+                            StreamUtils.Copy(zipStream, streamWriter, buffer);
+   
