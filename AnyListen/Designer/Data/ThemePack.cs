@@ -99,4 +99,21 @@ namespace AnyListen.Designer.Data
                         using (var streamWriter = File.Create(file.FullName))
                         {
                             StreamUtils.Copy(zipStream, streamWriter, buffer);
-   
+                        }
+                        _backgroundPath = file.FullName;
+                    }
+                }
+
+                if (ContainsAppTheme)
+                {
+                    using (var stream = zf.GetInputStream(zf.GetEntry(ThemePackConsts.AppThemeName)))
+                    {
+                        _appThemeResourceDictionary = (ResourceDictionary)XamlReader.Load(stream);
+                    }
+                } 
+                
+                if (ContainsAccentColor)
+                {
+                    using (var stream = zf.GetInputStream(zf.GetEntry(ThemePackConsts.AccentColorName)))
+                    {
+                        _accentColorResourceDictionary = (ResourceDictionary)XamlReader.Load(str
