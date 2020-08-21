@@ -116,4 +116,30 @@ namespace AnyListen.Designer.Data
                 {
                     using (var stream = zf.GetInputStream(zf.GetEntry(ThemePackConsts.AccentColorName)))
                     {
-                        _accentColorResourceDictionary = (ResourceDictionary)XamlReader.Load(str
+                        _accentColorResourceDictionary = (ResourceDictionary)XamlReader.Load(stream);
+                    }
+                }
+            }
+        }
+
+        public void Unload()
+        {
+            if (!string.IsNullOrEmpty(_backgroundPath))
+            {
+                var fiBackground = new FileInfo(_backgroundPath);
+                if (fiBackground.Exists) fiBackground.Delete();
+            }
+        }
+
+        #region IAudioVisualisationContainer
+
+        private IAudioVisualisationPlugin _audioVisualisationPlugin;
+        IAudioVisualisationPlugin IAudioVisualisationContainer.Visualisation => _audioVisualisationPlugin;
+
+        string IAudioVisualisationContainer.Name => DefaultText;
+
+        #endregion
+
+        #region IAccentColor
+
+        private ResourceDictionary _accentColorResourceDictionary;
