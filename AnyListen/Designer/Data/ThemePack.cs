@@ -143,3 +143,28 @@ namespace AnyListen.Designer.Data
         #region IAccentColor
 
         private ResourceDictionary _accentColorResourceDictionary;
+
+        string IAccentColor.Name => DefaultText;
+
+        string IAccentColor.TranslatedName => DefaultText;
+
+        void IAccentColor.ApplyTheme()
+        {
+            ApplicationThemeManager.Instance.LoadResource("accentcolor", _accentColorResourceDictionary);
+        }
+
+        ResourceDictionary IAccentColor.ResourceDictionary => _accentColorResourceDictionary;
+
+        #endregion
+
+        #region IAppTheme
+
+        private ResourceDictionary _appThemeResourceDictionary;
+
+        string IAppTheme.Name => DefaultText;
+
+        string IAppTheme.TranslatedName => DefaultText;
+
+        void IAppTheme.ApplyTheme()
+        {
+            ApplicationThemeManager.Instance.LoadResource("apptheme", _appThemeResourceDictionar
