@@ -167,4 +167,29 @@ namespace AnyListen.Designer.Data
 
         void IAppTheme.ApplyTheme()
         {
-            ApplicationThemeManager.Instance.LoadResource("apptheme", _appThemeResourceDictionar
+            ApplicationThemeManager.Instance.LoadResource("apptheme", _appThemeResourceDictionary);
+        }
+
+        ResourceDictionary IAppTheme.ResourceDictionary => _appThemeResourceDictionary;
+
+        #endregion
+
+        #region IApplicationBackground
+
+        private string _backgroundPath;
+        Uri IApplicationBackground.GetBackground()
+        {
+            return new Uri(_backgroundPath, UriKind.Absolute);
+        }
+
+        bool IApplicationBackground.IsAnimated => GeneralHelper.IsVideo(BackgroundName);
+
+        bool IApplicationBackground.IsAvailable => true;
+
+        string IApplicationBackground.DisplayText => DefaultText;
+
+        #endregion
+
+        public string DefaultText => Application.Current.Resources["FromThemePack"].ToString();
+    }
+}
