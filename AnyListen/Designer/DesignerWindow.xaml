@@ -1,0 +1,6 @@
+﻿<controls:MetroWindow x:Class="AnyListen.Designer.DesignerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModels="clr-namespace:AnyListen.Designer"
+        Title="{StaticResource Designer}" MinHeight="700" MinWidth="1200" Height="640" Width="1000" GlowBrush="{StaticResource AccentColorBrush}" DataContext="{x:Static viewModels:DesignerViewModel.Instance}" WindowStartupLocation=
