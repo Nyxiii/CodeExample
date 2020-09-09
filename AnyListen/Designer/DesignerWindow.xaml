@@ -16,4 +16,16 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <DockPanel>
-                <Button Width="30" Height="30" Visibility="{Binding CanGoBack,Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoB
+                <Button Width="30" Height="30" Visibility="{Binding CanGoBack,Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoBack}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="Transparent">
+                                            <Viewbox>
+                                                <Path Data="{StaticResource VectorBackArrow}" x:Name="Path" Fill="DarkGray"/>
+                                            </Viewbox>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMous
