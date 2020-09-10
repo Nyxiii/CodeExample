@@ -28,4 +28,15 @@
                                             </Viewbox>
                                         </Grid>
                                         <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMous
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Path" Property="Fill" Value="#FFBBBBBB"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Path" Property="Fill" Value="#FFDADADA"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.
