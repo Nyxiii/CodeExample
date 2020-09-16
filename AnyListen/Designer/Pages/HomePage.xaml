@@ -5,4 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:AnyListen.Designer" DataContext="{x:Static viewModels:DesignerViewModel.Instance}"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1000" Background="Tra
+             d:DesignHeight="600" d:DesignWidth="1000" Background="Transparent">
+    <UserControl.Resources>
+        <Style x:Key="LinkButton"
+           TargetType="Button">
+            <Setter Property="Cursor"
+                Value="Hand" />
+            <Setter Property="Foreground"
+                Value="{StaticResource AccentColorBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock><ContentPresenter /></TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                     Value="true">
+                    <Setter Property="Foregr
