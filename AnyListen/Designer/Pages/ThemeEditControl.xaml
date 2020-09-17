@@ -51,3 +51,8 @@
                     <DataTemplate DataType="{x:Type themes:ThemeBoolean}">
                         <controls:ToggleSwitchButton VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding BooleanValue}"/>
                     </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+    </Grid>
+</UserControl>
