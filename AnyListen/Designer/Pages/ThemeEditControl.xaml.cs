@@ -20,4 +20,8 @@ namespace AnyListen.Designer.Pages
         }
         
         public ThemeEditControl()
-   
+        {
+            InitializeComponent();
+        }
+    }
+}
