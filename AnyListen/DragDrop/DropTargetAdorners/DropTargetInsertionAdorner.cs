@@ -26,4 +26,19 @@ namespace AnyListen.DragDrop.DropTargetAdorners
 
                 if (this.DropInfo.VisualTargetItem != null)
                 {
-                    itemParent = ItemsControl.ItemsControlFromItemContai
+                    itemParent = ItemsControl.ItemsControlFromItemContainer(this.DropInfo.VisualTargetItem);
+                }
+                else
+                {
+                    itemParent = itemsControl;
+                }
+
+                var index = Math.Min(this.DropInfo.InsertIndex, itemParent.Items.Count - 1);
+
+                var lastItemInGroup = false;
+                var targetGroup = this.DropInfo.TargetGroup;
+                if (targetGroup != null && targetGroup.IsBottomLevel && this.DropInfo.InsertPosition.HasFlag(RelativeInsertPosition.AfterTargetItem))
+                {
+                    var indexOf = targetGroup.Items.IndexOf(this.DropInfo.TargetItem);
+                    lastItemInGroup = indexOf == targetGroup.ItemCount - 1;
+                    if (lastItemInGroup && this.DropInfo
