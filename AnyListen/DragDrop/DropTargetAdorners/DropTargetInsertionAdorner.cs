@@ -57,4 +57,18 @@ namespace AnyListen.DragDrop.DropTargetAdorners
                     if (this.DropInfo.VisualTargetOrientation == Orientation.Vertical)
                     {
                         if (this.DropInfo.InsertIndex == itemParent.Items.Count || lastItemInGroup)
-        
+                        {
+                            itemRect.Y += itemContainer.RenderSize.Height;
+                        }
+
+                        point1 = new Point(itemRect.X, itemRect.Y);
+                        point2 = new Point(itemRect.Right, itemRect.Y);
+                    }
+                    else
+                    {
+                        var itemRectX = itemRect.X;
+
+                        if (this.DropInfo.VisualTargetFlowDirection == FlowDirection.LeftToRight && this.DropInfo.InsertIndex == itemParent.Items.Count)
+                        {
+                            itemRectX += itemContainer.RenderSize.Width;
+                       
