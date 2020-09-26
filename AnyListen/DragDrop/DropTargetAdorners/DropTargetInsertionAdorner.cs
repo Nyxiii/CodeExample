@@ -41,4 +41,20 @@ namespace AnyListen.DragDrop.DropTargetAdorners
                 {
                     var indexOf = targetGroup.Items.IndexOf(this.DropInfo.TargetItem);
                     lastItemInGroup = indexOf == targetGroup.ItemCount - 1;
-                    if (lastItemInGroup && this.DropInfo
+                    if (lastItemInGroup && this.DropInfo.InsertIndex != itemParent.Items.Count)
+                    {
+                        index--;
+                    }
+                }
+
+                var itemContainer = (UIElement)itemParent.ItemContainerGenerator.ContainerFromIndex(index);
+
+                if (itemContainer != null)
+                {
+                    var itemRect = new Rect(itemContainer.TranslatePoint(new Point(), this.AdornedElement), itemContainer.RenderSize);
+                    Point point1, point2;
+
+                    if (this.DropInfo.VisualTargetOrientation == Orientation.Vertical)
+                    {
+                        if (this.DropInfo.InsertIndex == itemParent.Items.Count || lastItemInGroup)
+        
