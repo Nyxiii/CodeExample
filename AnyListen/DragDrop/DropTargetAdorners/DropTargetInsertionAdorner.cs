@@ -71,4 +71,25 @@ namespace AnyListen.DragDrop.DropTargetAdorners
                         if (this.DropInfo.VisualTargetFlowDirection == FlowDirection.LeftToRight && this.DropInfo.InsertIndex == itemParent.Items.Count)
                         {
                             itemRectX += itemContainer.RenderSize.Width;
-                       
+                        }
+                        else if (this.DropInfo.VisualTargetFlowDirection == FlowDirection.RightToLeft && this.DropInfo.InsertIndex != itemParent.Items.Count)
+                        {
+                            itemRectX += itemContainer.RenderSize.Width;
+                        }
+
+                        point1 = new Point(itemRectX, itemRect.Y);
+                        point2 = new Point(itemRectX, itemRect.Bottom);
+                    }
+
+                    drawingContext.DrawLine(m_Pen, point1, point2);
+
+                }
+            }
+        }
+
+        static DropTargetInsertionAdorner()
+        {
+            // Create the pen and triangle in a static constructor and freeze them to improve performance.
+            const int triangleSize = 5;
+
+    
