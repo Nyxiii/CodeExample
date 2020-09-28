@@ -14,4 +14,22 @@ namespace AnyListen.DragDrop
     {
         void IDropTarget.DragOver(IDropInfo dropInfo)
         {
-            if (((dropInfo.Data is PlayableBase || dropInfo.Data is IEnumerable<PlayableBase>) && dropInfo.TargetItem is IPlaylist && dropInfo.DragInfo.SourceCollection != Mai
+            if (((dropInfo.Data is PlayableBase || dropInfo.Data is IEnumerable<PlayableBase>) && dropInfo.TargetItem is IPlaylist && dropInfo.DragInfo.SourceCollection != MainViewModel.Instance.MusicManager.FavoritePlaylist.ViewSource))
+            {
+                dropInfo.DropTargetAdorner = typeof (DropTargetHighlightAdorner);
+                dropInfo.Effects = DragDropEffects.Move;
+            }
+            else if (dropInfo.Data is NormalPlaylist)
+            {
+                dropInfo.DropTargetAdorner = typeof(DropTargetInsertionAdorner);
+                dropInfo.Effects = DragDropEffects.Move;
+            }
+        }
+
+        void IDropTarget.Drop(IDropInfo dropInfo)
+        {
+            var playlist = (IPlaylist)dropInfo.TargetItem;
+            if (dropInfo.Data is PlayableBase)
+            {
+                var track = (PlayableBase)dropInfo.Data;
+                playlist.AddTrack(track);
