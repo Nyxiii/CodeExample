@@ -111,4 +111,6 @@ namespace AnyListen.DragDrop.DropTargetAdorners
         }
 
         private static readonly Pen m_Pen;
-        pri
+        private static readonly PathGeometry m_Triangle;
+    }
+}
