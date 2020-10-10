@@ -33,3 +33,17 @@ namespace AnyListen.DragDrop
             {
                 var track = (PlayableBase)dropInfo.Data;
                 playlist.AddTrack(track);
+                ((ObservableCollection<PlayableBase>)((CollectionView)dropInfo.DragInfo.SourceCollection).SourceCollection).Remove(track);
+            }
+            else if (dropInfo.Data is IEnumerable<PlayableBase>)
+            {
+                var tracks = (IEnumerable<PlayableBase>)dropInfo.Data;
+                foreach (var track in tracks)
+                {
+                    playlist.AddTrack(track);
+                    ((ObservableCollection<PlayableBase>)((CollectionView)dropInfo.DragInfo.SourceCollection).SourceCollection).Remove(track);
+                }
+            }
+            else if (dropInfo.Data is NormalPlaylist)
+            {
+                var playlistToMove = (NormalPlaylist
