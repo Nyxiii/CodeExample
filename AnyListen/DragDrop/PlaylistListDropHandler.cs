@@ -46,4 +46,21 @@ namespace AnyListen.DragDrop
             }
             else if (dropInfo.Data is NormalPlaylist)
             {
-                var playlistToMove = (NormalPlaylist
+                var playlistToMove = (NormalPlaylist)dropInfo.Data;
+                var collection = (ObservableCollection<NormalPlaylist>)dropInfo.DragInfo.SourceCollection;
+                int newIndex;
+                var currentIndex = collection.IndexOf(playlistToMove);
+
+                if (dropInfo.InsertIndex > collection.Count - 1)
+                {
+                    newIndex = collection.Count - 1;
+                }
+                else
+                {
+                    newIndex = dropInfo.InsertIndex;
+                    if (newIndex > 0 && newIndex > currentIndex) newIndex--;
+                }
+               
+                if (currentIndex == newIndex) return;
+                collection.Move(currentIndex, newIndex);
+                MainViewModel.
