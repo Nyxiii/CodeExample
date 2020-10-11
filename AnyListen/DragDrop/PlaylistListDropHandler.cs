@@ -63,4 +63,8 @@ namespace AnyListen.DragDrop
                
                 if (currentIndex == newIndex) return;
                 collection.Move(currentIndex, newIndex);
-                MainViewModel.
+                MainViewModel.Instance.MusicManager.SelectedPlaylist = collection[newIndex];
+            }
+        }
+    }
+}
