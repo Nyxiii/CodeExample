@@ -33,4 +33,15 @@ namespace AnyListen.GUI.Behaviors
 
         private static void AudioVisualisationForSmartWindowChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            AudioVisualisationChanged(dependencyObject, dependencyPropertyChangedEven
+            AudioVisualisationChanged(dependencyObject, dependencyPropertyChangedEventArgs, false);
+        }
+
+        private static void AudioVisualisationChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs, bool advancedVisualisation)
+        {
+            var control = dependencyObject as ContentControl;
+            if (control == null) throw new ArgumentException();
+            var audioVisualisation = dependencyPropertyChangedEventArgs.NewValue as IAudioVisualisationPlugin;
+            if (audioVisualisation == null) throw new ArgumentException();
+
+            var visualisation = advancedVisualisation ? audioVisualisation.AdvancedWindowVisualisation : audioVisualisation.SmartWindowVisualisation;
+        
