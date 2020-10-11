@@ -14,4 +14,14 @@ namespace AnyListen.GUI.Behaviors
             AudioVisualisationChanged(dependencyObject, dependencyPropertyChangedEventArgs, true);
         }
 
-        public static
+        public static readonly DependencyProperty AudioVisualisationForAdvancedWindowProperty = DependencyProperty.RegisterAttached(
+            "AudioVisualisationForAdvancedWindow", typeof(IAudioVisualisationPlugin), typeof(AudioVisualisationBehavior), new PropertyMetadata(default(IAudioVisualisationPlugin), AudioVisualisationForAdvancedWindowChanged));
+
+        public static void SetAudioVisualisationForAdvancedWindow(DependencyObject element, IAudioVisualisationPlugin value)
+        {
+            element.SetValue(AudioVisualisationForAdvancedWindowProperty, value);
+        }
+
+        public static IAudioVisualisationPlugin GetAudioVisualisationForAdvancedWindow(DependencyObject element)
+        {
+            return (IAudioVisualisationPlugin
