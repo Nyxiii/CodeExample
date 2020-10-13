@@ -44,4 +44,18 @@ namespace AnyListen.GUI.Behaviors
             if (audioVisualisation == null) throw new ArgumentException();
 
             var visualisation = advancedVisualisation ? audioVisualisation.AdvancedWindowVisualisation : audioVisualisation.SmartWindowVisualisation;
-        
+            visualisation.ColorInformation = GetColorInformation();
+            visualisation.SpectrumProvider = MainViewModel.Instance.MusicManager.CSCoreEngine;
+
+            control.Content = visualisation.VisualElement;
+            control.Tag = visualisation;
+        }
+
+        private static ColorInformation GetColorInformation()
+        {
+            return new ColorInformation
+            {
+                AccentColor = (Color)Application.Current.Resources["AccentColor"],
+                WhiteColor = (Color)Application.Current.Resources["WhiteColor"],
+                BlackColor = (Color)Application.Current.Resources["BlackColor"],
+                GrayColor = (Color)Application.Current.Resources["Gray7"]
