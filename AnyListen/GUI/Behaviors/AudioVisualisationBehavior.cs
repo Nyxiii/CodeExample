@@ -59,3 +59,17 @@ namespace AnyListen.GUI.Behaviors
                 WhiteColor = (Color)Application.Current.Resources["WhiteColor"],
                 BlackColor = (Color)Application.Current.Resources["BlackColor"],
                 GrayColor = (Color)Application.Current.Resources["Gray7"]
+            };
+        }
+
+        public static void SetAudioVisualisationForSmartWindow(DependencyObject element, IAudioVisualisationPlugin value)
+        {
+            element.SetValue(AudioVisualisationForSmartWindowProperty, value);
+        }
+
+        public static IAudioVisualisationPlugin GetAudioVisualisationForSmartWindow(DependencyObject element)
+        {
+            return (IAudioVisualisationPlugin)element.GetValue(AudioVisualisationForSmartWindowProperty);
+        }
+    }
+}
