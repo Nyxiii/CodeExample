@@ -37,4 +37,23 @@ namespace AnyListen.GUI.Behaviors
                 textBlock.Inlines.Add(hyperlink);
                 counter++;
             }
-   
+            contentControl.Content = textBlock;
+        }
+
+        public static void SetFormattedContent(DependencyObject element, string value)
+        {
+            element.SetValue(FormattedContentProperty, value);
+        }
+
+        public static string GetFormattedContent(DependencyObject element)
+        {
+            return (string)element.GetValue(FormattedContentProperty);
+        }
+
+
+        public static readonly DependencyProperty FormatValuesProperty = DependencyProperty.RegisterAttached(
+            "FormatValues", typeof (string[]), typeof (ContentControlBehavior), new PropertyMetadata(default(string[])));
+
+        public static void SetFormatValues(DependencyObject element, string[] value)
+        {
+            element.SetValue(FormatValu
