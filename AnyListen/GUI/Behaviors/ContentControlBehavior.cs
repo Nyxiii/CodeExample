@@ -9,4 +9,15 @@ namespace AnyListen.GUI.Behaviors
 {
     static class ContentControlBehavior
     {
-        publi
+        public static readonly DependencyProperty FormattedContentProperty = DependencyProperty.RegisterAttached(
+            "FormattedContent", typeof (string), typeof (ContentControlBehavior),
+            new PropertyMetadata(default(string), PropertyChangedCallback));
+
+        private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(dependencyObject)) return;
+            var contentControl = dependencyObject as ContentControl;
+            if (contentControl == null) return;
+
+            var textBlock = new TextBlock();
+            var values = GetFormatVal
