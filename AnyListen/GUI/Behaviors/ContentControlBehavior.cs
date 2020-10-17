@@ -56,4 +56,12 @@ namespace AnyListen.GUI.Behaviors
 
         public static void SetFormatValues(DependencyObject element, string[] value)
         {
-            element.SetValue(FormatValu
+            element.SetValue(FormatValuesProperty, value);
+        }
+
+        public static string[] GetFormatValues(DependencyObject element)
+        {
+            return (string[])element.GetValue(FormatValuesProperty);
+        }
+    }
+}
