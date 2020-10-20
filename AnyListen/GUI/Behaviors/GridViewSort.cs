@@ -179,3 +179,183 @@ namespace AnyListen.GUI.Behaviors
         private static readonly DependencyProperty SortedColumnHeaderProperty =
             DependencyProperty.RegisterAttached("SortedColumnHeader", typeof(GridViewColumnHeader),
                 typeof(GridViewSort), new UIPropertyMetadata(null));
+
+        #endregion
+
+        #region Column header click event handler
+
+        private static void ColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            if (headerClicked != null && headerClicked.Column != null)
+            {
+                string propertyName = GetPropertyName(headerClicked.Column);
+                if (!string.IsNullOrEmpty(propertyName))
+                {
+                    ListView listView = GetAncestor<ListView>(headerClicked);
+                    if (listView != null)
+                    {
+                        ICommand command = GetCommand(listView);
+                        if (command != null)
+                        {
+                            if (command.CanExecute(propertyName))
+                            {
+                                command.Execute(propertyName);
+                            }
+                        }
+                        else if (GetAutoSort(listView))
+                        {
+                            ApplySort(listView.Items, propertyName, listView, headerClicked);
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Helper methods
+
+        public static T GetAncestor<T>(DependencyObject reference) where T : DependencyObject
+        {
+            var parent = VisualTreeHelper.GetParent(reference);
+            while (!(parent is T))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            return (T)parent;
+        }
+
+        public static void ApplySort(ICollectionView view, string propertyName, ListView listView,
+            GridViewColumnHeader sortedColumnHeader)
+        {
+            ListSortDirection direction = ListSortDirection.Ascending;
+            if (view.SortDescriptions.Count > 0)
+            {
+                SortDescription currentSort = view.SortDescriptions[0];
+                if (currentSort.PropertyName == propertyName)
+                {
+                    if (currentSort.Direction == ListSortDirection.Ascending)
+                        direction = ListSortDirection.Descending;
+                    else
+                        direction = ListSortDirection.Ascending;
+                }
+                view.SortDescriptions.Clear();
+
+                GridViewColumnHeader currentSortedColumnHeader = GetSortedColumnHeader(listView);
+                if (currentSortedColumnHeader != null)
+                {
+                    RemoveSortGlyph(currentSortedColumnHeader);
+                }
+            }
+            if (!string.IsNullOrEmpty(propertyName))
+            {
+                view.SortDescriptions.Add(new SortDescription(propertyName, direction));
+                if (GetShowSortGlyph(listView))
+                    AddSortGlyph(
+                        sortedColumnHeader,
+                        direction,
+                        direction == ListSortDirection.Ascending
+                            ? GetSortGlyphAscending(listView)
+                            : GetSortGlyphDescending(listView));
+                SetSortedColumnHeader(listView, sortedColumnHeader);
+            }
+        }
+
+        private static void AddSortGlyph(GridViewColumnHeader columnHeader, ListSortDirection direction,
+            ImageSource sortGlyph)
+        {
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(columnHeader);
+            adornerLayer.Add(
+                new SortGlyphAdorner(
+                    columnHeader,
+                    direction,
+                    sortGlyph
+                    ));
+        }
+
+        private static void RemoveSortGlyph(GridViewColumnHeader columnHeader)
+        {
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(columnHeader);
+            Adorner[] adorners = adornerLayer.GetAdorners(columnHeader);
+            if (adorners != null)
+            {
+                foreach (Adorner adorner in adorners)
+                {
+                    if (adorner is SortGlyphAdorner)
+                        adornerLayer.Remove(adorner);
+                }
+            }
+        }
+
+        #endregion
+
+        #region SortGlyphAdorner nested class
+
+        private class SortGlyphAdorner : Adorner
+        {
+            private readonly GridViewColumnHeader _columnHeader;
+            private readonly ListSortDirection _direction;
+            private readonly ImageSource _sortGlyph;
+
+            public SortGlyphAdorner(GridViewColumnHeader columnHeader, ListSortDirection direction,
+                ImageSource sortGlyph)
+                : base(columnHeader)
+            {
+                _columnHeader = columnHeader;
+                _direction = direction;
+                _sortGlyph = sortGlyph;
+            }
+
+            private Geometry GetDefaultGlyph()
+            {
+                double x1 = _columnHeader.ActualWidth - 13;
+                double x2 = x1 + 10;
+                double x3 = x1 + 5;
+                double y1 = _columnHeader.ActualHeight / 2 - 3;
+                double y2 = y1 + 5;
+
+                if (_direction == ListSortDirection.Ascending)
+                {
+                    double tmp = y1;
+                    y1 = y2;
+                    y2 = tmp;
+                }
+
+                PathSegmentCollection pathSegmentCollection = new PathSegmentCollection();
+                pathSegmentCollection.Add(new LineSegment(new Point(x2, y1), true));
+                pathSegmentCollection.Add(new LineSegment(new Point(x3, y2), true));
+
+                PathFigure pathFigure = new PathFigure(
+                    new Point(x1, y1),
+                    pathSegmentCollection,
+                    true);
+
+                PathFigureCollection pathFigureCollection = new PathFigureCollection();
+                pathFigureCollection.Add(pathFigure);
+
+                PathGeometry pathGeometry = new PathGeometry(pathFigureCollection);
+                return pathGeometry;
+            }
+
+            protected override void OnRender(DrawingContext drawingContext)
+            {
+                base.OnRender(drawingContext);
+
+                if (_sortGlyph != null)
+                {
+                    double x = _columnHeader.ActualWidth - 13;
+                    double y = _columnHeader.ActualHeight / 2 - 5;
+                    Rect rect = new Rect(x, y, 10, 10);
+                    drawingContext.DrawImage(_sortGlyph, rect);
+                }
+                else
+                {
+                    drawingContext.DrawGeometry(Brushes.LightGray, new Pen(Brushes.Gray, 1.0), GetDefaultGlyph());
+                }
+            }
+        }
+
+        #endregion
+    }
+}
