@@ -19,4 +19,21 @@ namespace AnyListen.GUI.Behaviors
             Storyboard.SetTarget(da, control);
             Storyboard.SetTarget(ta, control);
             Storyboard.SetTargetProperty(da, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTargetProperty(ta, new
+            Storyboard.SetTargetProperty(ta, new PropertyPath(FrameworkElement.MarginProperty));
+
+            storyboard.Children.Add(da);
+            storyboard.Children.Add(ta);
+            storyboard.Begin(control);
+        }
+
+        public static void SetAnimationTrigger(DependencyObject element, object value)
+        {
+            element.SetValue(AnimationTriggerProperty, value);
+        }
+
+        public static object GetAnimationTrigger(DependencyObject element)
+        {
+            return element.GetValue(AnimationTriggerProperty);
+        }
+    }
+}
