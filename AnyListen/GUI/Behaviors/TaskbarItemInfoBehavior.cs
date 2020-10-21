@@ -26,4 +26,17 @@ namespace AnyListen.GUI.Behaviors
             return (double)element.GetValue(MaximumProperty);
         }
 
-        public static readonly DependencyProperty Progr
+        public static readonly DependencyProperty ProgressProperty = DependencyProperty.RegisterAttached(
+            "Progress", typeof(double), typeof(TaskbarItemInfoBehavior), new PropertyMetadata(default(double), ProgressUpdate));
+
+        public static void SetProgress(DependencyObject element, double value)
+        {
+            element.SetValue(ProgressProperty, value);
+        }
+
+        public static double GetProgress(DependencyObject element)
+        {
+            return (double)element.GetValue(ProgressProperty);
+        }
+    }
+}
