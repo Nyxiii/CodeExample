@@ -51,4 +51,26 @@ namespace AnyListen.GUI.Behaviors
         abstract class FormatRule
         {
             public abstract string RegexPattern { get; }
-            public abstract IList<Run> GetRun(Match regexMatc
+            public abstract IList<Run> GetRun(Match regexMatch);
+        }
+
+        class HeaderFormatRule : FormatRule
+        {
+            public override IList<Run> GetRun(Match regexMatch)
+            {
+                var result = new List<Run>();
+                var run = new Run(regexMatch.Groups["text"].Value) { FontSize = 16, FontWeight = FontWeights.Bold };
+                result.Add(run);
+                return result;
+            }
+
+            public override string RegexPattern => "^##(?<text>(.*?))$";
+        }
+
+        class EnumerationRule : FormatRule
+        {
+            public override string RegexPattern => "^- (?<text>(.*?))$";
+
+            public override IList<Run> GetRun(Match regexMatch)
+            {
+                return new List<Run> { new Run("• " + r
