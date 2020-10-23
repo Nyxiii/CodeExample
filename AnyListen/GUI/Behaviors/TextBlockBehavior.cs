@@ -32,4 +32,23 @@ namespace AnyListen.GUI.Behaviors
             var txt = element as TextBlock;
             if (txt == null) throw new ArgumentException();
             DependencyPropertyDescriptor.FromProperty(TextBlock.TextProperty, typeof(TextBlock)).RemoveValueChanged(txt, TextChangedHandler);
-            DependencyPropertyDescriptor.FromPr
+            DependencyPropertyDescriptor.FromProperty(TextBlock.TextProperty, typeof(TextBlock)).AddValueChanged(txt, TextChangedHandler);
+            TextChangedHandler(element, EventArgs.Empty);
+        }
+
+        private static void TextChangedHandler(object sender, EventArgs eventArgs)
+        {
+            var txt = (TextBlock)sender;
+            if (string.IsNullOrEmpty(txt.Text))
+                txt.Text = GetPlaceHolderText(txt);
+        }
+
+        public static string GetPlaceHolderText(DependencyObject element)
+        {
+            return (string)element.GetValue(PlaceHolderTextProperty);
+        }
+
+        abstract class FormatRule
+        {
+            public abstract string RegexPattern { get; }
+            public abstract IList<Run> GetRun(Match regexMatc
