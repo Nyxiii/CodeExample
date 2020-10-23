@@ -20,4 +20,16 @@ namespace AnyListen.GUI.Behaviors
         {
             var element = obj as TextBlock;
             if (element == null) throw new ArgumentException();
-            element.Text =
+            element.Text = e.NewValue.ToString().ToUpper();
+        }
+
+        public static readonly DependencyProperty PlaceHolderTextProperty = DependencyProperty.RegisterAttached(
+            "PlaceHolderText", typeof(string), typeof(TextBlockBehavior), new PropertyMetadata(default(string)));
+
+        public static void SetPlaceHolderText(DependencyObject element, string value)
+        {
+            element.SetValue(PlaceHolderTextProperty, value);
+            var txt = element as TextBlock;
+            if (txt == null) throw new ArgumentException();
+            DependencyPropertyDescriptor.FromProperty(TextBlock.TextProperty, typeof(TextBlock)).RemoveValueChanged(txt, TextChangedHandler);
+            DependencyPropertyDescriptor.FromPr
