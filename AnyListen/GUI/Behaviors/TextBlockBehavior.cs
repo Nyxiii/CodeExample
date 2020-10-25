@@ -90,4 +90,17 @@ namespace AnyListen.GUI.Behaviors
         public static readonly DependencyProperty FormattedTextProperty = DependencyProperty.RegisterAttached(
             "FormattedText", typeof(string), typeof(TextBlockBehavior), new PropertyMetadata(default(string), PropertyChangedCallback));
 
-        private static void PropertyChangedCallback(DependencyObject dependencyObject
+        private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var textBlock = dependencyObject as TextBlock;
+            if (textBlock == null) throw new ArgumentException();
+            var rules = new List<FormatRule> { new HeaderFormatRule(), new EnumerationRule(), new ItalicRule() };
+
+            var inlines = textBlock.Inlines;
+            inlines.Clear();
+
+            foreach (var line in dependencyPropertyChangedEventArgs.NewValue.ToString().Split(new[] { "\r\n", "\n" }, StringSplitOptions.None))
+            {
+                var tmpLine = line;
+                bool success = false;
+                foreach (var collection in from rule in rules let regex = new Regex(rule.RegexPattern) let match = regex.Match(tmpLine) where
