@@ -73,4 +73,21 @@ namespace AnyListen.GUI.Behaviors
 
             public override IList<Run> GetRun(Match regexMatch)
             {
-                return new List<Run> { new Run("• " + r
+                return new List<Run> { new Run("• " + regexMatch.Groups["text"].Value) };
+            }
+        }
+
+        class ItalicRule : FormatRule
+        {
+            public override string RegexPattern => @"^\[i\](?<text>(.*?))$";
+
+            public override IList<Run> GetRun(Match regexMatch)
+            {
+                return new List<Run> { new Run(regexMatch.Groups["text"].Value) { FontStyle = FontStyles.Italic } };
+            }
+        }
+
+        public static readonly DependencyProperty FormattedTextProperty = DependencyProperty.RegisterAttached(
+            "FormattedText", typeof(string), typeof(TextBlockBehavior), new PropertyMetadata(default(string), PropertyChangedCallback));
+
+        private static void PropertyChangedCallback(DependencyObject dependencyObject
