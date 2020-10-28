@@ -103,4 +103,25 @@ namespace AnyListen.GUI.Behaviors
             {
                 var tmpLine = line;
                 bool success = false;
-                foreach (var collection in from rule in rules let regex = new Regex(rule.RegexPattern) let match = regex.Match(tmpLine) where
+                foreach (var collection in from rule in rules let regex = new Regex(rule.RegexPattern) let match = regex.Match(tmpLine) where match.Success select rule.GetRun(match))
+                {
+                    inlines.AddRange(collection);
+                    success = true;
+                    break;
+                }
+                if (!success) inlines.Add(new Run(tmpLine));
+                inlines.Add(Environment.NewLine);
+            }
+        }
+
+        public static void SetFormattedText(DependencyObject element, string value)
+        {
+            element.SetValue(FormattedTextProperty, value);
+        }
+
+        public static string GetFormattedText(DependencyObject element)
+        {
+            return (string)element.GetValue(FormattedTextProperty);
+        }
+    }
+}
