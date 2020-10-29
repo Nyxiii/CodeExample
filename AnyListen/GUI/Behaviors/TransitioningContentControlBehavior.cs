@@ -28,3 +28,20 @@ namespace AnyListen.GUI.Behaviors
                     VerticalAlignment = VerticalAlignment.Center,
                     Foreground = (Brush)Application.Current.Resources["BlackBrush"]
                 };
+        }
+
+        public static void SetDisplayText(DependencyObject element, object value)
+        {
+            element.SetValue(DisplayTextProperty, value);
+        }
+
+        public static object GetDisplayText(DependencyObject element)
+        {
+            return element.GetValue(DisplayTextProperty);
+        }
+
+        public static readonly DependencyProperty DisplayImageProperty = DependencyProperty.RegisterAttached(
+            "DisplayImage", typeof (BitmapSource), typeof (TransitioningContentControlBehavior),
+            new PropertyMetadata(default(BitmapSource), DisplayImagePropertyChangedCallback));
+
+        private static void DisplayImagePropertyChangedCallback(DependencyObject dependencyObje
