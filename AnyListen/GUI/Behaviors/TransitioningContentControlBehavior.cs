@@ -44,4 +44,19 @@ namespace AnyListen.GUI.Behaviors
             "DisplayImage", typeof (BitmapSource), typeof (TransitioningContentControlBehavior),
             new PropertyMetadata(default(BitmapSource), DisplayImagePropertyChangedCallback));
 
-        private static void DisplayImagePropertyChangedCallback(DependencyObject dependencyObje
+        private static void DisplayImagePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var control = dependencyObject as TransitioningContentControl;
+            if (control == null) throw new ArgumentException();
+            control.Content = new Image { Source = (BitmapImage)dependencyPropertyChangedEventArgs.NewValue };
+        }
+
+        public static void SetDisplayImage(DependencyObject element, BitmapSource value)
+        {
+            element.SetValue(DisplayImageProperty, value);
+        }
+
+        public static BitmapSource GetDisplayImage(DependencyObject element)
+        {
+            return (BitmapSource)element.GetValue(DisplayImageProperty);
+ 
