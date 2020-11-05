@@ -61,4 +61,21 @@ namespace AnyListen.GUI.Behaviors
         public static readonly DependencyProperty AnimationTypeProperty = DependencyProperty.RegisterAttached(
             "AnimationType",
             typeof(AnimationType),
-            ty
+            typeof(VisibilityAnimation),
+            new FrameworkPropertyMetadata(AnimationType.None, OnAnimationTypePropertyChanged));
+
+        /// <summary>
+        /// AnimationType property changed
+        /// </summary>
+        /// <param name="dependencyObject">Dependency object</param>
+        /// <param name="e">e</param>
+        private static void OnAnimationTypePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            FrameworkElement frameworkElement = dependencyObject as FrameworkElement;
+
+            if (frameworkElement == null)
+            {
+                return;
+            }
+
+            // If AnimationType is set to True on th
