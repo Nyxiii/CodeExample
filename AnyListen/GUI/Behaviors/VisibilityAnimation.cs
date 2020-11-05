@@ -27,4 +27,23 @@ namespace AnyListen.GUI.Behaviors
 
         /// <summary>
         /// Animation duration
-    
+        /// </summary>
+        private const int AnimationDuration = 300;
+
+        /// <summary>
+        /// List of hooked objects
+        /// </summary>
+        private static readonly Dictionary<FrameworkElement, bool> _hookedElements = new Dictionary<FrameworkElement, bool>();
+
+        /// <summary>
+        /// Get AnimationType attached property
+        /// </summary>
+        /// <param name="obj">Dependency object</param>
+        /// <returns>AnimationType value</returns>
+        public static AnimationType GetAnimationType(DependencyObject obj)
+        {
+            return (AnimationType)obj.GetValue(AnimationTypeProperty);
+        }
+
+        /// <summary>
+        /// Set AnimationType attached property
