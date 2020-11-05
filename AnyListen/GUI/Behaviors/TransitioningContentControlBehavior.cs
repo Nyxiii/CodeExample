@@ -59,4 +59,6 @@ namespace AnyListen.GUI.Behaviors
         public static BitmapSource GetDisplayImage(DependencyObject element)
         {
             return (BitmapSource)element.GetValue(DisplayImageProperty);
- 
+        }
+    }
+}
