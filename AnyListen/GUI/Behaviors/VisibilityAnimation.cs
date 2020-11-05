@@ -47,3 +47,18 @@ namespace AnyListen.GUI.Behaviors
 
         /// <summary>
         /// Set AnimationType attached property
+        /// </summary>
+        /// <param name="obj">Dependency object</param>
+        /// <param name="value">New value for AnimationType</param>
+        public static void SetAnimationType(DependencyObject obj, AnimationType value)
+        {
+            obj.SetValue(AnimationTypeProperty, value);
+        }
+
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for AnimationType.  This enables animation, styling, binding, etc...
+        /// </summary>
+        public static readonly DependencyProperty AnimationTypeProperty = DependencyProperty.RegisterAttached(
+            "AnimationType",
+            typeof(AnimationType),
+            ty
