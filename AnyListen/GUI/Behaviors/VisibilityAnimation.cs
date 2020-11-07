@@ -78,4 +78,26 @@ namespace AnyListen.GUI.Behaviors
                 return;
             }
 
-            // If AnimationType is set to True on th
+            // If AnimationType is set to True on this framework element, 
+            if (GetAnimationType(frameworkElement) != AnimationType.None)
+            {
+                // Add this framework element to hooked list
+                HookVisibilityChanges(frameworkElement);
+            }
+            else
+            {
+                // Otherwise, remove it from the hooked list
+                UnHookVisibilityChanges(frameworkElement);
+            }
+        }
+
+        /// <summary>
+        /// Add framework element to list of hooked objects
+        /// </summary>
+        /// <param name="frameworkElement">Framework element</param>
+        private static void HookVisibilityChanges(FrameworkElement frameworkElement)
+        {
+            _hookedElements.Add(frameworkElement, false);
+        }
+
+        /// <su
