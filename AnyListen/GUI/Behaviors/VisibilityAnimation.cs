@@ -100,4 +100,22 @@ namespace AnyListen.GUI.Behaviors
             _hookedElements.Add(frameworkElement, false);
         }
 
-        /// <su
+        /// <summary>
+        /// Remove framework element from list of hooked objects
+        /// </summary>
+        /// <param name="frameworkElement">Framework element</param>
+        private static void UnHookVisibilityChanges(FrameworkElement frameworkElement)
+        {
+            if (_hookedElements.ContainsKey(frameworkElement))
+            {
+                _hookedElements.Remove(frameworkElement);
+            }
+        }
+
+        /// <summary>
+        /// VisibilityAnimation static ctor
+        /// </summary>
+        static VisibilityAnimation()
+        {
+            // Here we "register" on Visibility property "before change" event
+            var desc = DependencyPropertyDescriptor.FromProperty(UIElement.Visibil
