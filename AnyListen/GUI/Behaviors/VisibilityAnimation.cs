@@ -118,4 +118,24 @@ namespace AnyListen.GUI.Behaviors
         static VisibilityAnimation()
         {
             // Here we "register" on Visibility property "before change" event
-            var desc = DependencyPropertyDescriptor.FromProperty(UIElement.Visibil
+            var desc = DependencyPropertyDescriptor.FromProperty(UIElement.VisibilityProperty, typeof(FrameworkElement));
+            desc.DesignerCoerceValueCallback += CoerceVisibility;
+        }
+
+        /// <summary>
+        /// Visibility changed
+        /// </summary>
+        /// <param name="dependencyObject">Dependency object</param>
+        /// <param name="e">e</param>
+        private static void VisibilityChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            // Ignore
+        }
+
+        protected static double oldheight = -1;
+        protected static int counter;
+        /// <summary>
+        /// Coerce visibility
+        /// </summary>
+        /// <param name="dependencyObject">Dependency object</param>
+        /// <param name="bas
