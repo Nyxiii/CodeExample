@@ -138,4 +138,20 @@ namespace AnyListen.GUI.Behaviors
         /// Coerce visibility
         /// </summary>
         /// <param name="dependencyObject">Dependency object</param>
-        /// <param name="bas
+        /// <param name="baseValue">Base value</param>
+        /// <returns>Coerced value</returns>
+        private static object CoerceVisibility(DependencyObject dependencyObject, object baseValue)
+        {
+            // Make sure object is a framework element
+            FrameworkElement frameworkElement = dependencyObject as FrameworkElement;
+            if (frameworkElement == null)
+            {
+                return baseValue;
+            }
+
+            // Cast to type safe value
+            Visibility visibility = (Visibility)baseValue;
+
+            // If Visibility value hasn't change, do nothing.
+            // This can happen if the Visibility property is set using data binding and the binding source has changed 
+            // but
