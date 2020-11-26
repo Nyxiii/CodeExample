@@ -154,4 +154,25 @@ namespace AnyListen.GUI.Behaviors
 
             // If Visibility value hasn't change, do nothing.
             // This can happen if the Visibility property is set using data binding and the binding source has changed 
-            // but
+            // but the new visibility value hasn't changed.
+            if (visibility == frameworkElement.Visibility)
+            {
+                return baseValue;
+            }
+
+            // If element is not hooked by our attached property, stop here
+            if (!IsHookedElement(frameworkElement))
+            {
+                return baseValue;
+            }
+
+            if (counter == 0 && (visibility == Visibility.Collapsed || visibility == Visibility.Hidden))
+            {
+                return baseValue;
+            }
+
+            // Update animation flag
+            // If animation already started - don't restart it (otherwise, infinite loop)
+            if (UpdateAnimationStartedFlag(frameworkElement))
+            {
+            
