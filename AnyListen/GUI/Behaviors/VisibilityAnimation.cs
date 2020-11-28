@@ -175,4 +175,19 @@ namespace AnyListen.GUI.Behaviors
             // If animation already started - don't restart it (otherwise, infinite loop)
             if (UpdateAnimationStartedFlag(frameworkElement))
             {
-            
+                return baseValue;
+            }
+
+            // If we get here, it means we have to start fade in or fade out animation. 
+            // In any case return value of this method will be Visibility.Visible, to allow the animation.
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                Duration = new Duration(TimeSpan.FromMilliseconds(AnimationDuration))
+            };
+
+            // When animation completes, set the visibility value to the requested value (baseValue)
+            doubleAnimation.Completed += (sender, eventArgs) =>
+            {
+                if (visibility == Visibility.Visible)
+                {
+                    // In case we change into Visibility.Visibl
