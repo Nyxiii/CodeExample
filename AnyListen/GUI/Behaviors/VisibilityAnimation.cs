@@ -190,4 +190,17 @@ namespace AnyListen.GUI.Behaviors
             {
                 if (visibility == Visibility.Visible)
                 {
-                    // In case we change into Visibility.Visibl
+                    // In case we change into Visibility.Visible, the correct value is already set
+                    // So just update the animation started flag
+                    UpdateAnimationStartedFlag(frameworkElement);
+                }
+                else
+                {
+                    // This will trigger value coercion again 
+                    // but UpdateAnimationStartedFlag() function will reture true this time, 
+                    // thus animation will not be triggered. 
+                    if (BindingOperations.IsDataBound(frameworkElement, UIElement.VisibilityProperty))
+                    {
+                        // Set visiblity using bounded value
+                        Binding bindingValue = BindingOperations.GetBinding(frameworkElement, UIElement.VisibilityProperty);
+ 
