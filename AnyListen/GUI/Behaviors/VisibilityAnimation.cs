@@ -203,4 +203,21 @@ namespace AnyListen.GUI.Behaviors
                     {
                         // Set visiblity using bounded value
                         Binding bindingValue = BindingOperations.GetBinding(frameworkElement, UIElement.VisibilityProperty);
- 
+                        BindingOperations.SetBinding(frameworkElement, UIElement.VisibilityProperty, bindingValue);
+                    }
+                    else
+                    {
+                        // No binding, just assign the value
+                        frameworkElement.Visibility = visibility;
+                    }
+                }
+                counter++;
+            };
+
+            if (visibility == Visibility.Collapsed || visibility == Visibility.Hidden)
+            {
+                // Fade out by animating opacity
+                oldheight = frameworkElement.Height;
+                doubleAnimation.From = oldheight;
+                doubleAnimation.To = 0.0;
+         
