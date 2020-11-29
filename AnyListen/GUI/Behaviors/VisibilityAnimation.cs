@@ -220,4 +220,22 @@ namespace AnyListen.GUI.Behaviors
                 oldheight = frameworkElement.Height;
                 doubleAnimation.From = oldheight;
                 doubleAnimation.To = 0.0;
-         
+            }
+            else
+            {
+                if (oldheight == -1) oldheight = frameworkElement.Height;
+                // Fade in by animating height
+                doubleAnimation.From = 0.0;
+                doubleAnimation.To = oldheight;
+            }
+
+            // Start animation
+            frameworkElement.BeginAnimation(FrameworkElement.HeightProperty, doubleAnimation);
+
+            // Make sure the element remains visible during the animation
+            // The original requested value will be set in the completed event of the animation
+            return Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Check if framework element is hooked with AnimationType propert
