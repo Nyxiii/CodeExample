@@ -238,4 +238,20 @@ namespace AnyListen.GUI.Behaviors
         }
 
         /// <summary>
-        /// Check if framework element is hooked with AnimationType propert
+        /// Check if framework element is hooked with AnimationType property
+        /// </summary>
+        /// <param name="frameworkElement">Framework element to check</param>
+        /// <returns>Is the framework element hooked?</returns>
+        private static bool IsHookedElement(FrameworkElement frameworkElement)
+        {
+            return _hookedElements.ContainsKey(frameworkElement);
+        }
+
+        /// <summary>
+        /// Update animation started flag or a given framework element
+        /// </summary>
+        /// <param name="frameworkElement">Given framework element</param>
+        /// <returns>Old value of animation started flag</returns>
+        private static bool UpdateAnimationStartedFlag(FrameworkElement frameworkElement)
+        {
+           
