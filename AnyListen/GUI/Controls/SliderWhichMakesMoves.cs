@@ -9,4 +9,29 @@ namespace AnyListen.GUI.Controls
         private Thumb _thumb;
 
 
-        publi
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (_thumb != null)
+            {
+                _thumb.MouseEnter -= thumb_MouseEnter;
+            }
+
+            _thumb = (GetTemplateChild("PART_Track") as Track).Thumb;
+
+            if (_thumb != null)
+            {
+                _thumb.MouseEnter += thumb_MouseEnter;
+            }
+        }
+
+        private void thumb_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                // the left button is pressed on mouse enter
+
+                // so the thumb must have been moved under the mouse
+
+                // in response to a click on t
