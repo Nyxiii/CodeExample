@@ -34,4 +34,14 @@ namespace AnyListen.GUI.Controls
 
                 // so the thumb must have been moved under the mouse
 
-                // in response to a click on t
+                // in response to a click on the track.
+
+                // Generate a MouseLeftButtonDown event.
+
+                MouseButtonEventArgs args = new MouseButtonEventArgs(
+                    e.MouseDevice, e.Timestamp, MouseButton.Left) {RoutedEvent = MouseLeftButtonDownEvent};
+                (sender as Thumb).RaiseEvent(args);
+            }
+        }
+    }
+}
