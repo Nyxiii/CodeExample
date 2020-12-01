@@ -254,4 +254,10 @@ namespace AnyListen.GUI.Behaviors
         /// <returns>Old value of animation started flag</returns>
         private static bool UpdateAnimationStartedFlag(FrameworkElement frameworkElement)
         {
-           
+            bool animationStarted = _hookedElements[frameworkElement];
+            _hookedElements[frameworkElement] = !animationStarted;
+
+            return animationStarted;
+        }
+    }
+}
