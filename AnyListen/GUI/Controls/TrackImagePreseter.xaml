@@ -14,4 +14,13 @@
         <Border Margin="3" Background="{DynamicResource PicturePreviewBackgroundBrush}">
             <Grid>
                 <Grid>
-                    <Path Data="{StaticResource VectorMusic}" Fill="{DynamicResource PicturePreviewForegroundBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="
+                    <Path Data="{StaticResource VectorMusic}" Fill="{DynamicResource PicturePreviewForegroundBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill" Margin="45">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=UserControl,Path=TrackToRepresent.Image}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=UserControl,Path=TrackToRepresent.IsLoadingImage}" Value="True">
+                                        <Setter
