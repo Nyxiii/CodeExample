@@ -23,4 +23,15 @@
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ElementName=UserControl,Path=TrackToRepresent.IsLoadingImage}" Value="True">
-                                        <Setter
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Grid>
+                <controls:TransitioningContentControl Transition="Default" behaviors:TransitioningContentControlBehavior.DisplayImage="{Binding ElementName=UserControl,Path=TrackToRepresent.Image}">
+                    <controls:TransitioningContentControl.Resources>
+                        <Style TargetType="Image">
+                            <Setter Property="Stretch" Value="UniformToFill"/>
+                           
