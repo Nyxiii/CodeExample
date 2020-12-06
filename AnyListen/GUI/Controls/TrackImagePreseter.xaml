@@ -44,4 +44,9 @@
                             </Style.Triggers>
                         </Style>
                     </controls:TransitioningContentControl.Resources>
-                </controls:Trans
+                </controls:TransitioningContentControl>
+                <controls:ProgressRing IsActive="{Binding ElementName=UserControl,Path=TrackToRepresent.IsLoadingImage}" />
+            </Grid>
+        </Border>
+    </Border>
+</UserControl>
