@@ -11,4 +11,13 @@ namespace AnyListen.GUI.Controls
 
         public Geometry VectorGraphic
         {
-            get { return (Geo
+            get { return (Geometry) GetValue(VectorGraphicProperty); }
+            set { SetValue(VectorGraphicProperty, value); }
+        }
+
+        public VectorMenuItem()
+        {
+            Style = Application.Current.Resources["ImageMenuItemStyle"] as Style;
+        }
+    }
+}
