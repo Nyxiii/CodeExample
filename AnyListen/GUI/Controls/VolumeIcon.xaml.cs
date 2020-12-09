@@ -53,4 +53,16 @@ namespace AnyListen.GUI.Controls
                 if (_currentDisplayState != value)
                 {
                     _currentDisplayState = value;
-                    if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Curr
+                    if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("CurrentDisplayState"));
+                }
+            }
+        }
+
+        public enum DisplayState
+        {
+            Mute, Medium, Loud
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+}
