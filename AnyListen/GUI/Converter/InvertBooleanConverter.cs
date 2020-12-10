@@ -10,4 +10,9 @@ namespace AnyListen.GUI.Converter
             return !bool.Parse(value.ToString());
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.Cu
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !bool.Parse(value.ToString());
+        }
+    }
+}
