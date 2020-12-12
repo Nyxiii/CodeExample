@@ -6,3 +6,17 @@ using AnyListen.Music.Playlist;
 
 namespace AnyListen.GUI.Converter
 {
+    public class PlaylistInfoConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var playlist = (IPlaylist)value;
+            if (playlist == null) return null;
+            switch (parameter.ToString())
+            {
+                case "alltrackscount":
+                    return playlist.Tracks.Count;
+                case "alltracksduration":
+                    var allDuration = TimeSpan.Zero;
+                    allDuration = playlist.Tracks.Aggregate(allDuration, (current, track) => current + track.DurationTimespan);
+                    return allDuration.ToString(@"hh\:
