@@ -19,4 +19,15 @@ namespace AnyListen.GUI.Converter
                 case "alltracksduration":
                     var allDuration = TimeSpan.Zero;
                     allDuration = playlist.Tracks.Aggregate(allDuration, (current, track) => current + track.DurationTimespan);
-                    return allDuration.ToString(@"hh\:
+                    return allDuration.ToString(@"hh\:mm\:ss");
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+}
