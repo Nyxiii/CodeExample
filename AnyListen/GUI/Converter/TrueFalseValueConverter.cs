@@ -9,4 +9,15 @@ namespace AnyListen.GUI.Converter
         public object TrueValue { get; set; }
         public object FalseValue { get; set; }
 
-        public object Convert(object value, Type targetType, obje
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value) { return TrueValue; }
+            return FalseValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+}
