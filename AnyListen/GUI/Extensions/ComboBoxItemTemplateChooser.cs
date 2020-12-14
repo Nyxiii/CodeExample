@@ -11,4 +11,24 @@ namespace AnyListen.GUI.Extensions
         public static DependencyProperty SelectedTemplateProperty =
             DependencyProperty.RegisterAttached("SelectedTemplate",
                 typeof(DataTemplate),
-                typeof(Comb
+                typeof(ComboBoxItemTemplateChooser),
+                new UIPropertyMetadata(null));
+
+        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
+        public static DataTemplate GetSelectedTemplate(ComboBox obj)
+        {
+            return (DataTemplate)obj.GetValue(SelectedTemplateProperty);
+        }
+        public static void SetSelectedTemplate(ComboBox obj, DataTemplate value)
+        {
+            obj.SetValue(SelectedTemplateProperty, value);
+        }
+
+        #endregion // SelectedTemplate
+
+        #region DropDownTemplate
+
+        public static DependencyProperty DropDownTemplateProperty =
+            DependencyProperty.RegisterAttached("DropDownTemplate",
+                typeof (DataTemplate),
+                typeof (
