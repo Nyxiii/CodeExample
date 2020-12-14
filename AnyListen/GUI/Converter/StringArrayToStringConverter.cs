@@ -13,4 +13,10 @@ namespace AnyListen.GUI.Converter
             return string.Join(", ", (string[])value);
         }
 
-        public obje
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || string.IsNullOrWhiteSpace(value.ToString())) return null;
+            return value.ToString().Split(new string[] { ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
+        }
+    }
+}
