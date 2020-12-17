@@ -52,4 +52,11 @@ namespace AnyListen.GUI.Extensions
             var comboBoxItem = container.GetVisualParent<ComboBoxItem>();
             if (comboBoxItem == null)
             {
- 
+                parentComboBox = container.GetVisualParent<ComboBox>();
+                return GetSelectedTemplate(parentComboBox);
+            }
+            parentComboBox = ItemsControl.ItemsControlFromItemContainer(comboBoxItem) as ComboBox;
+            return GetDropDownTemplate(parentComboBox);
+        }
+    }
+}
