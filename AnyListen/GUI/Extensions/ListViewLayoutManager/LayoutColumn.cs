@@ -44,3 +44,12 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             if (value != null && value.GetType() == dp.PropertyType)
             {
                 return (double)value;
+            }
+
+            return null;
+        } // GetColumnWidth
+
+    } // class LayoutColumn
+
+} // namespace Itenso.Windows.Controls.ListViewLayout
+// -- EOF -------------------------------------------------------------------
