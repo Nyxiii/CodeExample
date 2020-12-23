@@ -11,4 +11,22 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Inpu
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace AnyListen.GUI.Extensions.ListViewLayoutManager
+{
+
+    // ------------------------------------------------------------------------
+    public class ListViewLayoutManager
+    {
+
+        // ----------------------------------------------------------------------
+        public static readonly DependencyProperty EnabledProperty = DependencyProperty.RegisterAttached(
+            "Enabled",
+            typeof(bool),
+            typeof(ListViewLayoutManager),
+            new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLayoutManagerEnabledChanged)));
+
+        // ----------------------------------------------------------------------
+        public ListViewLayoutManager(L
