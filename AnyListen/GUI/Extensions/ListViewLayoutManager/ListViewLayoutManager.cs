@@ -48,3 +48,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         // ----------------------------------------------------------------------
         public ScrollBarVisibility VerticalScrollBarVisibility
         {
+            get { return verticalScrollBarVisibility; }
+            set { verticalScrollBarVisibility = value; }
+        } // VerticalScrollBarVisibility
+
+        // ----------------------------------------------------------------------
+        public static void SetEnabled(DependencyObject dependencyObject, bool enabled)
+        {
+            dependencyObject.SetValue(EnabledProperty, enabled);
+        } // SetEnabled
+
+        // ----------------------------------------------------------------------
+        public void Refresh()
+        {
+            InitColumns();
+            DoResizeColumns();
+        } // Refresh
+
+        // ----------------------------------------------------------------------
+    
