@@ -29,4 +29,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLayoutManagerEnabledChanged)));
 
         // ----------------------------------------------------------------------
-        public ListViewLayoutManager(L
+        public ListViewLayoutManager(ListView listView)
+        {
+            if (listView == null)
+            {
+                throw new ArgumentNullException("listView");
+            }
+
+            this.listView = listView;
+            this.listView.Loaded += new RoutedEventHandler(ListViewLoaded);
+            this.listView.Unloaded += new RoutedEventHandler(ListViewUnloaded);
+        } // ListViewLayoutManager
+
+        // ----------------------------------------------------------------------
+        public ListView ListView => listView;
+        // ListView
+
+        // ----------------------------------------------------------------------
+        public ScrollBarVisibility VerticalScrollBarVisibility
+        {
