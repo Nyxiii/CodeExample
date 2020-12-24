@@ -79,4 +79,17 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                         Thumb thumb = childVisual as Thumb;
                         if (ProportionalColumn.IsProportionalColumn(gridViewColumn) ||
                             FixedColumn.IsFixedColumn(gridViewColumn) || IsFillColumn(gridViewColumn))
-                      
+                        {
+                            thumb.IsHitTestVisible = false;
+                        }
+                        else
+                        {
+                            thumb.PreviewMouseMove += new MouseEventHandler(ThumbPreviewMouseMove);
+                            thumb.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ThumbPreviewMouseLeftButtonDown);
+                            DependencyPropertyDescriptor.FromProperty(
+                                GridViewColumn.WidthProperty,
+                                typeof(GridViewColumn)).AddValueChanged(gridViewColumn, GridColumnWidthChanged);
+                        }
+                    }
+                }
+                else if (childVisual is GridViewColumnHe
