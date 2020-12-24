@@ -103,4 +103,21 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                     scrollViewer.ScrollChanged += new ScrollChangedEventHandler(ScrollViewerScrollChanged);
                     // assume we do the regulation of the horizontal scrollbar
                     scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-                    scrollViewer.VerticalScrollBarVisib
+                    scrollViewer.VerticalScrollBarVisibility = verticalScrollBarVisibility;
+                }
+
+                RegisterEvents(childVisual);  // recursive
+            }
+        } // RegisterEvents
+
+        // ----------------------------------------------------------------------
+        private void UnregisterEvents(DependencyObject start)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(start); i++)
+            {
+                Visual childVisual = VisualTreeHelper.GetChild(start, i) as Visual;
+                if (childVisual is Thumb)
+                {
+                    GridViewColumn gridViewColumn = FindParentColumn(childVisual);
+                    if (gridViewColumn != null)
+               
