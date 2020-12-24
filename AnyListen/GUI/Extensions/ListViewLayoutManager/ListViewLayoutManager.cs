@@ -66,4 +66,17 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         } // Refresh
 
         // ----------------------------------------------------------------------
-    
+        private void RegisterEvents(DependencyObject start)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(start); i++)
+            {
+                Visual childVisual = VisualTreeHelper.GetChild(start, i) as Visual;
+                if (childVisual is Thumb)
+                {
+                    GridViewColumn gridViewColumn = FindParentColumn(childVisual);
+                    if (gridViewColumn != null)
+                    {
+                        Thumb thumb = childVisual as Thumb;
+                        if (ProportionalColumn.IsProportionalColumn(gridViewColumn) ||
+                            FixedColumn.IsFixedColumn(gridViewColumn) || IsFillColumn(gridViewColumn))
+                      
