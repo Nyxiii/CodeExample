@@ -92,4 +92,15 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                         }
                     }
                 }
-                else if (childVisual is GridViewColumnHe
+                else if (childVisual is GridViewColumnHeader)
+                {
+                    GridViewColumnHeader columnHeader = childVisual as GridViewColumnHeader;
+                    columnHeader.SizeChanged += new SizeChangedEventHandler(GridColumnHeaderSizeChanged);
+                }
+                else if (scrollViewer == null && childVisual is ScrollViewer)
+                {
+                    scrollViewer = childVisual as ScrollViewer;
+                    scrollViewer.ScrollChanged += new ScrollChangedEventHandler(ScrollViewerScrollChanged);
+                    // assume we do the regulation of the horizontal scrollbar
+                    scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                    scrollViewer.VerticalScrollBarVisib
