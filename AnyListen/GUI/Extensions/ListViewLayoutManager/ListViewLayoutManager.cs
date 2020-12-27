@@ -120,4 +120,16 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 {
                     GridViewColumn gridViewColumn = FindParentColumn(childVisual);
                     if (gridViewColumn != null)
-               
+                    {
+                        Thumb thumb = childVisual as Thumb;
+                        if (ProportionalColumn.IsProportionalColumn(gridViewColumn) ||
+                            FixedColumn.IsFixedColumn(gridViewColumn) || IsFillColumn(gridViewColumn))
+                        {
+                            thumb.IsHitTestVisible = true;
+                        }
+                        else
+                        {
+                            thumb.PreviewMouseMove -= new MouseEventHandler(ThumbPreviewMouseMove);
+                            thumb.PreviewMouseLeftButtonDown -= new MouseButtonEventHandler(ThumbPreviewMouseLeftButtonDown);
+                            DependencyPropertyDescriptor.FromProperty(
+                                GridViewColumn.WidthProperty,
