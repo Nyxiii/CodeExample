@@ -133,3 +133,16 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                             thumb.PreviewMouseLeftButtonDown -= new MouseButtonEventHandler(ThumbPreviewMouseLeftButtonDown);
                             DependencyPropertyDescriptor.FromProperty(
                                 GridViewColumn.WidthProperty,
+                                typeof(GridViewColumn)).RemoveValueChanged(gridViewColumn, GridColumnWidthChanged);
+                        }
+                    }
+                }
+                else if (childVisual is GridViewColumnHeader)
+                {
+                    GridViewColumnHeader columnHeader = childVisual as GridViewColumnHeader;
+                    columnHeader.SizeChanged -= new SizeChangedEventHandler(GridColumnHeaderSizeChanged);
+                }
+                else if (scrollViewer == null && childVisual is ScrollViewer)
+                {
+                    scrollViewer = childVisual as ScrollViewer;
+                  
