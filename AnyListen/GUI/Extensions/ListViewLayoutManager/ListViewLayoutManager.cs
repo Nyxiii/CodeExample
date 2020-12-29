@@ -145,4 +145,24 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 else if (scrollViewer == null && childVisual is ScrollViewer)
                 {
                     scrollViewer = childVisual as ScrollViewer;
-                  
+                    scrollViewer.ScrollChanged -= new ScrollChangedEventHandler(ScrollViewerScrollChanged);
+                }
+
+                UnregisterEvents(childVisual);  // recursive
+            }
+        } // UnregisterEvents
+
+        // ----------------------------------------------------------------------
+        private GridViewColumn FindParentColumn(DependencyObject element)
+        {
+            if (element == null)
+            {
+                return null;
+            }
+
+            while (element != null)
+            {
+                GridViewColumnHeader gridViewColumnHeader = element as GridViewColumnHeader;
+                if (gridViewColumnHeader != null)
+                {
+                    return (gr
