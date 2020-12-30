@@ -165,4 +165,21 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 GridViewColumnHeader gridViewColumnHeader = element as GridViewColumnHeader;
                 if (gridViewColumnHeader != null)
                 {
-                    return (gr
+                    return (gridViewColumnHeader).Column;
+                }
+                element = VisualTreeHelper.GetParent(element);
+            }
+
+            return null;
+        } // FindParentColumn
+
+        // ----------------------------------------------------------------------
+        private GridViewColumnHeader FindColumnHeader(DependencyObject start, GridViewColumn gridViewColumn)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(start); i++)
+            {
+                Visual childVisual = VisualTreeHelper.GetChild(start, i) as Visual;
+                if (childVisual is GridViewColumnHeader)
+                {
+                    GridViewColumnHeader gridViewHeader = childVisual as GridViewColumnHeader;
+        
