@@ -182,4 +182,27 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 if (childVisual is GridViewColumnHeader)
                 {
                     GridViewColumnHeader gridViewHeader = childVisual as GridViewColumnHeader;
-        
+                    if (gridViewHeader.Column == gridViewColumn)
+                    {
+                        return gridViewHeader;
+                    }
+                }
+                GridViewColumnHeader childGridViewHeader = FindColumnHeader(childVisual, gridViewColumn);  // recursive
+                if (childGridViewHeader != null)
+                {
+                    return childGridViewHeader;
+                }
+            }
+            return null;
+        } // FindColumnHeader
+
+        // ----------------------------------------------------------------------
+        private void InitColumns()
+        {
+            GridView view = listView.View as GridView;
+            if (view == null)
+            {
+                return;
+            }
+
+   
