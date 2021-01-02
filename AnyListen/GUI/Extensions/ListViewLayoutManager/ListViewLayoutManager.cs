@@ -223,4 +223,20 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 if (columnHeader == null)
                 {
                     continue;
-  
+                }
+
+                double actualWidth = columnHeader.ActualWidth;
+                if (minWidth.HasValue)
+                {
+                    columnHeader.MinWidth = minWidth.Value;
+                    if (!double.IsInfinity(actualWidth) && actualWidth < columnHeader.MinWidth)
+                    {
+                        gridViewColumn.Width = columnHeader.MinWidth;
+                    }
+                }
+                if (maxWidth.HasValue)
+                {
+                    columnHeader.MaxWidth = maxWidth.Value;
+                    if (!double.IsInfinity(actualWidth) && actualWidth > columnHeader.MaxWidth)
+                    {
+                        gridViewColumn.Width = columnHeader.Max
