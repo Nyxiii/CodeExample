@@ -205,4 +205,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 return;
             }
 
-   
+            foreach (GridViewColumn gridViewColumn in view.Columns)
+            {
+                if (!RangeColumn.IsRangeColumn(gridViewColumn))
+                {
+                    continue;
+                }
+
+                double? minWidth = RangeColumn.GetRangeMinWidth(gridViewColumn);
+                double? maxWidth = RangeColumn.GetRangeMaxWidth(gridViewColumn);
+                if (!minWidth.HasValue && !maxWidth.HasValue)
+                {
+                    continue;
+                }
+
+                GridViewColumnHeader columnHeader = FindColumnHeader(listView, gridViewColumn);
+                if (columnHeader == null)
+                {
+                    continue;
+  
