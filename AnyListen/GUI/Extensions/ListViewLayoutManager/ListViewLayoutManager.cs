@@ -239,4 +239,29 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                     columnHeader.MaxWidth = maxWidth.Value;
                     if (!double.IsInfinity(actualWidth) && actualWidth > columnHeader.MaxWidth)
                     {
-                        gridViewColumn.Width = columnHeader.Max
+                        gridViewColumn.Width = columnHeader.MaxWidth;
+                    }
+                }
+            }
+        } // InitColumns
+
+        // ----------------------------------------------------------------------
+        protected virtual void ResizeColumns()
+        {
+            GridView view = listView.View as GridView;
+            if (view == null || view.Columns.Count == 0)
+            {
+                return;
+            }
+
+            // listview width
+            double actualWidth = double.PositiveInfinity;
+            if (scrollViewer != null)
+            {
+                actualWidth = scrollViewer.ViewportWidth;
+            }
+            if (double.IsInfinity(actualWidth))
+            {
+                actualWidth = listView.ActualWidth;
+            }
+            if (double.IsI
