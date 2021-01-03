@@ -264,4 +264,24 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             {
                 actualWidth = listView.ActualWidth;
             }
-            if (double.IsI
+            if (double.IsInfinity(actualWidth) || actualWidth <= 0)
+            {
+                return;
+            }
+
+            double resizeableRegionCount = 0;
+            double otherColumnsWidth = 0;
+            // determine column sizes
+            foreach (GridViewColumn gridViewColumn in view.Columns)
+            {
+                if (ProportionalColumn.IsProportionalColumn(gridViewColumn))
+                {
+                    double? proportionalWidth = ProportionalColumn.GetProportionalWidth(gridViewColumn);
+                    if (proportionalWidth != null)
+                    {
+                        resizeableRegionCount += proportionalWidth.Value;
+                    }
+                }
+                else
+                {
+                    other
