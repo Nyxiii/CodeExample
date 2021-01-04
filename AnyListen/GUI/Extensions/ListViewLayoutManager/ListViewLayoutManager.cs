@@ -284,4 +284,23 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 }
                 else
                 {
-                    other
+                    otherColumnsWidth += gridViewColumn.ActualWidth;
+                }
+            }
+
+            if (resizeableRegionCount <= 0)
+            {
+                // no proportional columns present: commit the regulation to the scroll viewer
+                if (scrollViewer != null)
+                {
+                    scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+                }
+
+                // search the first fill column
+                GridViewColumn fillColumn = null;
+                for (int i = 0; i < view.Columns.Count; i++)
+                {
+                    GridViewColumn gridViewColumn = view.Columns[i];
+                    if (IsFillColumn(gridViewColumn))
+                    {
+                        fillColumn = gridV
