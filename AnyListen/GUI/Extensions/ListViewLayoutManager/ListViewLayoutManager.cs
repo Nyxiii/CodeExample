@@ -303,4 +303,20 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                     GridViewColumn gridViewColumn = view.Columns[i];
                     if (IsFillColumn(gridViewColumn))
                     {
-                        fillColumn = gridV
+                        fillColumn = gridViewColumn;
+                        break;
+                    }
+                }
+
+                if (fillColumn != null)
+                {
+                    double otherColumnsWithoutFillWidth = otherColumnsWidth - fillColumn.ActualWidth;
+                    double fillWidth = actualWidth - otherColumnsWithoutFillWidth;
+                    if (fillWidth > 0)
+                    {
+                        double? minWidth = RangeColumn.GetRangeMinWidth(fillColumn);
+                        double? maxWidth = RangeColumn.GetRangeMaxWidth(fillColumn);
+
+                        bool setWidth = !(minWidth.HasValue && fillWidth < minWidth.Value);
+                        if (maxWidth.HasValue && fillWidth > maxWidth.Value)
+                
