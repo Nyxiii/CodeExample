@@ -319,4 +319,26 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
 
                         bool setWidth = !(minWidth.HasValue && fillWidth < minWidth.Value);
                         if (maxWidth.HasValue && fillWidth > maxWidth.Value)
-                
+                        {
+                            setWidth = false;
+                        }
+                        if (setWidth)
+                        {
+                            if (scrollViewer != null)
+                            {
+                                scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                            }
+                            fillColumn.Width = fillWidth;
+                        }
+                    }
+                }
+                return;
+            }
+
+            double resizeableColumnsWidth = actualWidth - otherColumnsWidth;
+            if (resizeableColumnsWidth <= 0)
+            {
+                return; // missing space
+            }
+
+      
