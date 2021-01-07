@@ -356,4 +356,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             }
         } // ResizeColumns
 
-        // --------------------
+        // ----------------------------------------------------------------------
+        // returns the delta
+        private double SetRangeColumnToBounds(GridViewColumn gridViewColumn)
+        {
+            double startWidth = gridViewColumn.Width;
+
+            double? minWidth = RangeColumn.GetRangeMinWidth(gridViewColumn);
+            double? maxWidth = RangeColumn.GetRangeMaxWidth(gridViewColumn);
+
+            if ((minWidth.HasValue && maxWidth.HasValue) && (minWidth > maxWidth))
+            {
+                return 0; // invalid case
+            }
+
+            if (minWidth.HasValue && gridViewColumn.Width < minWidth.Value)
+            {
+                gridViewColumn.Width = minWidth.Value;
+            }
+            else if 
