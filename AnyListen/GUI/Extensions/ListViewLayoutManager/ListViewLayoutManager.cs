@@ -341,4 +341,19 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 return; // missing space
             }
 
-      
+            // resize columns
+            double resizeableRegionWidth = resizeableColumnsWidth / resizeableRegionCount;
+            foreach (GridViewColumn gridViewColumn in view.Columns)
+            {
+                if (ProportionalColumn.IsProportionalColumn(gridViewColumn))
+                {
+                    double? proportionalWidth = ProportionalColumn.GetProportionalWidth(gridViewColumn);
+                    if (proportionalWidth != null)
+                    {
+                        gridViewColumn.Width = proportionalWidth.Value * resizeableRegionWidth;
+                    }
+                }
+            }
+        } // ResizeColumns
+
+        // --------------------
