@@ -374,4 +374,26 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             {
                 gridViewColumn.Width = minWidth.Value;
             }
-            else if 
+            else if (maxWidth.HasValue && gridViewColumn.Width > maxWidth.Value)
+            {
+                gridViewColumn.Width = maxWidth.Value;
+            }
+
+            return gridViewColumn.Width - startWidth;
+        } // SetRangeColumnToBounds
+
+        // ----------------------------------------------------------------------
+        private bool IsFillColumn(GridViewColumn gridViewColumn)
+        {
+            if (gridViewColumn == null)
+            {
+                return false;
+            }
+
+            GridView view = listView.View as GridView;
+            if (view == null || view.Columns.Count == 0)
+            {
+                return false;
+            }
+
+            bool? isFillColumn = RangeColumn.GetRang
