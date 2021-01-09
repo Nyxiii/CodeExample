@@ -396,4 +396,30 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 return false;
             }
 
-            bool? isFillColumn = RangeColumn.GetRang
+            bool? isFillColumn = RangeColumn.GetRangeIsFillColumn(gridViewColumn);
+            return isFillColumn.HasValue && isFillColumn.Value;
+        } // IsFillColumn
+
+        // ----------------------------------------------------------------------
+        private void DoResizeColumns()
+        {
+            if (resizing)
+            {
+                return;
+            }
+
+            resizing = true;
+            try
+            {
+                ResizeColumns();
+            }
+            finally
+            {
+                resizing = false;
+            }
+        } // DoResizeColumns
+
+        // ----------------------------------------------------------------------
+        private void ListViewLoaded(object sender, RoutedEventArgs e)
+        {
+            RegisterEv
