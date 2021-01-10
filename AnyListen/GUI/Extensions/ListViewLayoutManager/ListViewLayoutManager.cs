@@ -422,4 +422,24 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         // ----------------------------------------------------------------------
         private void ListViewLoaded(object sender, RoutedEventArgs e)
         {
-            RegisterEv
+            RegisterEvents(listView);
+            InitColumns();
+            DoResizeColumns();
+            loaded = true;
+        } // ListViewLoaded
+
+        // ----------------------------------------------------------------------
+        private void ListViewUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (!loaded)
+            {
+                return;
+            }
+            UnregisterEvents(listView);
+            loaded = false;
+        } // ListViewUnloaded
+
+        // ----------------------------------------------------------------------
+        private void ThumbPreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            Thumb thumb = se
