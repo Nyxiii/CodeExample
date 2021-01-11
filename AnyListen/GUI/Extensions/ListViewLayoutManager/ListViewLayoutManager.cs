@@ -442,4 +442,26 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         // ----------------------------------------------------------------------
         private void ThumbPreviewMouseMove(object sender, MouseEventArgs e)
         {
-            Thumb thumb = se
+            Thumb thumb = sender as Thumb;
+            if (thumb == null)
+            {
+                return;
+            }
+            GridViewColumn gridViewColumn = FindParentColumn(thumb);
+            if (gridViewColumn == null)
+            {
+                return;
+            }
+
+            // suppress column resizing for proportional, fixed and range fill columns
+            if (ProportionalColumn.IsProportionalColumn(gridViewColumn) ||
+                FixedColumn.IsFixedColumn(gridViewColumn) ||
+                IsFillColumn(gridViewColumn))
+            {
+                thumb.Cursor = null;
+                return;
+            }
+
+            // check range column bounds
+            if (thumb.IsMouseCaptured && RangeColumn.IsRangeColumn(gridViewColumn))
+   
