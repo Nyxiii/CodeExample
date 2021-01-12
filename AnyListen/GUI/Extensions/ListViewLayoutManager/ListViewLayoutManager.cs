@@ -464,4 +464,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
 
             // check range column bounds
             if (thumb.IsMouseCaptured && RangeColumn.IsRangeColumn(gridViewColumn))
-   
+            {
+                double? minWidth = RangeColumn.GetRangeMinWidth(gridViewColumn);
+                double? maxWidth = RangeColumn.GetRangeMaxWidth(gridViewColumn);
+
+                if ((minWidth.HasValue && maxWidth.HasValue) && (minWidth > maxWidth))
+                {
+                    return; // invalid case
+                }
+
+                if (resizeCursor == null)
+                {
+                    resizeCursor = thumb.Cursor; // save the resize cursor
+                }
+
+                if (minWidth.HasValue && gridViewColumn.Width <= minWidth.Value)
+                {
+                    thumb.Cursor = Cursors.No;
+                }
+                else if (maxWidth.HasValue && gridViewColumn.Width >= 
