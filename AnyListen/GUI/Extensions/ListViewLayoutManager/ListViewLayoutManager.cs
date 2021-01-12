@@ -482,4 +482,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 {
                     thumb.Cursor = Cursors.No;
                 }
-                else if (maxWidth.HasValue && gridViewColumn.Width >= 
+                else if (maxWidth.HasValue && gridViewColumn.Width >= maxWidth.Value)
+                {
+                    thumb.Cursor = Cursors.No;
+                }
+                else
+                {
+                    thumb.Cursor = resizeCursor; // between valid min/max
+                }
+            }
+        } // ThumbPreviewMouseMove
+
+        // ----------------------------------------------------------------------
+        private void ThumbPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Thumb thumb = sender as Thumb;
+            GridViewColumn gridViewColumn = FindParentColumn(thumb);
+
+            // suppress column resizing for proportional, fixed and range fill columns
+            if (ProportionalColumn.IsProportionalColumn(gri
