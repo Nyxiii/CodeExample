@@ -500,4 +500,25 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             GridViewColumn gridViewColumn = FindParentColumn(thumb);
 
             // suppress column resizing for proportional, fixed and range fill columns
-            if (ProportionalColumn.IsProportionalColumn(gri
+            if (ProportionalColumn.IsProportionalColumn(gridViewColumn) ||
+                FixedColumn.IsFixedColumn(gridViewColumn) ||
+                IsFillColumn(gridViewColumn))
+            {
+                e.Handled = true;
+            }
+        } // ThumbPreviewMouseLeftButtonDown
+
+        // ----------------------------------------------------------------------
+        private void GridColumnWidthChanged(object sender, EventArgs e)
+        {
+            if (!loaded)
+            {
+                return;
+            }
+
+            GridViewColumn gridViewColumn = sender as GridViewColumn;
+
+            // suppress column resizing for proportional and fixed columns
+            if (ProportionalColumn.IsProportionalColumn(gridViewColumn) || FixedColumn.IsFixedColumn(gridViewColumn))
+            {
+                re
