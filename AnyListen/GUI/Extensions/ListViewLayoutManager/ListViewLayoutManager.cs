@@ -521,4 +521,25 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             // suppress column resizing for proportional and fixed columns
             if (ProportionalColumn.IsProportionalColumn(gridViewColumn) || FixedColumn.IsFixedColumn(gridViewColumn))
             {
-                re
+                return;
+            }
+
+            // ensure range column within the bounds
+            if (RangeColumn.IsRangeColumn(gridViewColumn))
+            {
+                // special case: auto column width - maybe conflicts with min/max range
+                if (gridViewColumn != null && gridViewColumn.Width.Equals(double.NaN))
+                {
+                    autoSizedColumn = gridViewColumn;
+                    return; // handled by the change header size event
+                }
+
+                // ensure column bounds
+                if (Math.Abs(SetRangeColumnToBounds(gridViewColumn) - 0) > zeroWidthRange)
+                {
+                    return;
+                }
+            }
+
+            DoResizeColumns();
+        } // GridColumnWidthCh
