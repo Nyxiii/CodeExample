@@ -542,4 +542,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             }
 
             DoResizeColumns();
-        } // GridColumnWidthCh
+        } // GridColumnWidthChanged
+
+        // ----------------------------------------------------------------------
+        // handle autosized column
+        private void GridColumnHeaderSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (autoSizedColumn == null)
+            {
+                return;
+            }
+
+            GridViewColumnHeader gridViewColumnHeader = sender as GridViewColumnHeader;
+            if (gridViewColumnHeader != null && gridViewColumnHeader.Column == autoSizedColumn)
+            {
+                if (gridViewColumnHeader.Width.Equals(double.NaN))
+                {
+                    // sync column with 
+                    gridViewColumnHeader.Column.Width = gridViewColumnHeader.ActualWidth;
+                  
