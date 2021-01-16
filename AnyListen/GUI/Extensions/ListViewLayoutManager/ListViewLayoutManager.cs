@@ -560,4 +560,21 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
                 {
                     // sync column with 
                     gridViewColumnHeader.Column.Width = gridViewColumnHeader.ActualWidth;
-                  
+                    DoResizeColumns();
+                }
+
+                autoSizedColumn = null;
+            }
+        } // GridColumnHeaderSizeChanged
+
+        // ----------------------------------------------------------------------
+        private void ScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (loaded && Math.Abs(e.ViewportWidthChange - 0) > zeroWidthRange)
+            {
+                DoResizeColumns();
+            }
+        } // ScrollViewerScrollChanged
+
+        // ----------------------------------------------------------------------
+        private static void OnLayoutManagerEnabledChanged(DependencyObject dependencyObject, DependencyProperty
