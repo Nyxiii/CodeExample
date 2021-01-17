@@ -577,4 +577,24 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         } // ScrollViewerScrollChanged
 
         // ----------------------------------------------------------------------
-        private static void OnLayoutManagerEnabledChanged(DependencyObject dependencyObject, DependencyProperty
+        private static void OnLayoutManagerEnabledChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ListView listView = dependencyObject as ListView;
+            if (listView != null)
+            {
+                bool enabled = (bool)e.NewValue;
+                if (enabled)
+                {
+                    new ListViewLayoutManager(listView);
+                }
+            }
+        } // OnLayoutManagerEnabledChanged
+
+        // ----------------------------------------------------------------------
+        // members
+        private readonly ListView listView;
+        private ScrollViewer scrollViewer;
+        private bool loaded;
+        private bool resizing;
+        private Cursor resizeCursor;
+        private ScrollBarVisibility verticalScr
