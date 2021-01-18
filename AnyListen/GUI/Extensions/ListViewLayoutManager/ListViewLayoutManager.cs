@@ -597,4 +597,12 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         private bool loaded;
         private bool resizing;
         private Cursor resizeCursor;
-        private ScrollBarVisibility verticalScr
+        private ScrollBarVisibility verticalScrollBarVisibility = ScrollBarVisibility.Auto;
+        private GridViewColumn autoSizedColumn;
+
+        private const double zeroWidthRange = 0.1;
+
+    } // class ListViewLayoutManager
+
+} // namespace Itenso.Windows.Controls.ListViewLayout
+// -- EOF -------------------------------------------------------------------
