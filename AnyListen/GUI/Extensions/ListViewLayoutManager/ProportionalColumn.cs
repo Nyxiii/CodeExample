@@ -7,4 +7,25 @@
 // --------------------------------------------------------------------------
 
 using System.Windows;
-using S
+using System.Windows.Controls;
+
+namespace AnyListen.GUI.Extensions.ListViewLayoutManager
+{
+
+    // ------------------------------------------------------------------------
+    public sealed class ProportionalColumn : LayoutColumn
+    {
+
+        // ----------------------------------------------------------------------
+        public static readonly DependencyProperty WidthProperty =
+            DependencyProperty.RegisterAttached(
+                "Width",
+                typeof(double),
+                typeof(ProportionalColumn));
+
+        // ----------------------------------------------------------------------
+        private ProportionalColumn()
+        {
+        } // ProportionalColumn
+
+        // ------------------------------------
