@@ -28,4 +28,23 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         {
         } // ProportionalColumn
 
-        // ------------------------------------
+        // ----------------------------------------------------------------------
+        public static double GetWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(WidthProperty);
+        } // GetWidth
+
+        // ----------------------------------------------------------------------
+        public static void SetWidth(DependencyObject obj, double width)
+        {
+            obj.SetValue(WidthProperty, width);
+        } // SetWidth
+
+        // ----------------------------------------------------------------------
+        public static bool IsProportionalColumn(GridViewColumn column)
+        {
+            if (column == null)
+            {
+                return false;
+            }
+            return HasPropertyVal
