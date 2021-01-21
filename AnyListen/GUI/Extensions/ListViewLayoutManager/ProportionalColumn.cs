@@ -47,4 +47,23 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             {
                 return false;
             }
-            return HasPropertyVal
+            return HasPropertyValue(column, WidthProperty);
+        } // IsProportionalColumn
+
+        // ----------------------------------------------------------------------
+        public static double? GetProportionalWidth(GridViewColumn column)
+        {
+            return GetColumnWidth(column, WidthProperty);
+        } // GetProportionalWidth
+
+        // ----------------------------------------------------------------------
+        public static GridViewColumn ApplyWidth(GridViewColumn gridViewColumn, double width)
+        {
+            SetWidth(gridViewColumn, width);
+            return gridViewColumn;
+        } // ApplyWidth
+
+    } // class ProportionalColumn
+
+} // namespace Itenso.Windows.Controls.ListViewLayout
+// -- EOF -------------------------
