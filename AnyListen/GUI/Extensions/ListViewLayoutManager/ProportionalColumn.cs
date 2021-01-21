@@ -66,4 +66,4 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
     } // class ProportionalColumn
 
 } // namespace Itenso.Windows.Controls.ListViewLayout
-// -- EOF -------------------------
+// -- EOF -------------------------------------------------------------------
