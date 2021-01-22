@@ -35,4 +35,24 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         public static readonly DependencyProperty IsFillColumnProperty =
             DependencyProperty.RegisterAttached(
                 "IsFillColumn",
-                typeof(bo
+                typeof(bool),
+                typeof(RangeColumn));
+
+        // ----------------------------------------------------------------------
+        private RangeColumn()
+        {
+        } // RangeColumn
+
+        // ----------------------------------------------------------------------
+        public static double GetMinWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MinWidthProperty);
+        } // GetMinWidth
+
+        // ----------------------------------------------------------------------
+        public static void SetMinWidth(DependencyObject obj, double minWidth)
+        {
+            obj.SetValue(MinWidthProperty, minWidth);
+        } // SetMinWidth
+
+        // ---------------------------------------
