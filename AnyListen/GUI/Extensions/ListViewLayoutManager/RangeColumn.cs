@@ -18,4 +18,21 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
     {
 
         // ----------------------------------------------------------------------
-        public static rea
+        public static readonly DependencyProperty MinWidthProperty =
+            DependencyProperty.RegisterAttached(
+                "MinWidth",
+                typeof(double),
+                typeof(RangeColumn));
+
+        // ----------------------------------------------------------------------
+        public static readonly DependencyProperty MaxWidthProperty =
+            DependencyProperty.RegisterAttached(
+                "MaxWidth",
+                typeof(double),
+                typeof(RangeColumn));
+
+        // ----------------------------------------------------------------------
+        public static readonly DependencyProperty IsFillColumnProperty =
+            DependencyProperty.RegisterAttached(
+                "IsFillColumn",
+                typeof(bo
