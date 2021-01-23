@@ -55,4 +55,22 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             obj.SetValue(MinWidthProperty, minWidth);
         } // SetMinWidth
 
-        // ---------------------------------------
+        // ----------------------------------------------------------------------
+        public static double GetMaxWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MaxWidthProperty);
+        } // GetMaxWidth
+
+        // ----------------------------------------------------------------------
+        public static void SetMaxWidth(DependencyObject obj, double maxWidth)
+        {
+            obj.SetValue(MaxWidthProperty, maxWidth);
+        } // SetMaxWidth
+
+        // ----------------------------------------------------------------------
+        public static bool GetIsFillColumn(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsFillColumnProperty);
+        } // GetIsFillColumn
+
+        // ---------------------
