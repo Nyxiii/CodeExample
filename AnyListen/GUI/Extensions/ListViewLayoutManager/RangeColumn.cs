@@ -73,4 +73,20 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             return (bool)obj.GetValue(IsFillColumnProperty);
         } // GetIsFillColumn
 
-        // ---------------------
+        // ----------------------------------------------------------------------
+        public static void SetIsFillColumn(DependencyObject obj, bool isFillColumn)
+        {
+            obj.SetValue(IsFillColumnProperty, isFillColumn);
+        } // SetIsFillColumn
+
+        // ----------------------------------------------------------------------
+        public static bool IsRangeColumn(GridViewColumn column)
+        {
+            if (column == null)
+            {
+                return false;
+            }
+            return
+                HasPropertyValue(column, MinWidthProperty) ||
+                HasPropertyValue(column, MaxWidthProperty) ||
+                HasPropertyValue(column, IsFillColumnPrope
