@@ -89,4 +89,23 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             return
                 HasPropertyValue(column, MinWidthProperty) ||
                 HasPropertyValue(column, MaxWidthProperty) ||
-                HasPropertyValue(column, IsFillColumnPrope
+                HasPropertyValue(column, IsFillColumnProperty);
+        } // IsRangeColumn
+
+        // ----------------------------------------------------------------------
+        public static double? GetRangeMinWidth(GridViewColumn column)
+        {
+            return GetColumnWidth(column, MinWidthProperty);
+        } // GetRangeMinWidth
+
+        // ----------------------------------------------------------------------
+        public static double? GetRangeMaxWidth(GridViewColumn column)
+        {
+            return GetColumnWidth(column, MaxWidthProperty);
+        } // GetRangeMaxWidth
+
+        // ----------------------------------------------------------------------
+        public static bool? GetRangeIsFillColumn(GridViewColumn column)
+        {
+            if (column == null)
+        
