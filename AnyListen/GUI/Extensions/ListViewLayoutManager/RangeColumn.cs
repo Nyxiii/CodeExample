@@ -108,4 +108,23 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
         public static bool? GetRangeIsFillColumn(GridViewColumn column)
         {
             if (column == null)
-        
+            {
+                throw new ArgumentNullException("column");
+            }
+            object value = column.ReadLocalValue(IsFillColumnProperty);
+            if (value != null && value.GetType() == IsFillColumnProperty.PropertyType)
+            {
+                return (bool)value;
+            }
+
+            return null;
+        } // GetRangeIsFillColumn
+
+        // ----------------------------------------------------------------------
+        public static GridViewColumn ApplyWidth(GridViewColumn gridViewColumn, double minWidth,
+            double width, double maxWidth)
+        {
+            return ApplyWidth(gridViewColumn, minWidth, width, maxWidth, false);
+        } // ApplyWidth
+
+        // ---------------
