@@ -127,4 +127,18 @@ namespace AnyListen.GUI.Extensions.ListViewLayoutManager
             return ApplyWidth(gridViewColumn, minWidth, width, maxWidth, false);
         } // ApplyWidth
 
-        // ---------------
+        // ----------------------------------------------------------------------
+        public static GridViewColumn ApplyWidth(GridViewColumn gridViewColumn, double minWidth,
+            double width, double maxWidth, bool isFillColumn)
+        {
+            SetMinWidth(gridViewColumn, minWidth);
+            gridViewColumn.Width = width;
+            SetMaxWidth(gridViewColumn, maxWidth);
+            SetIsFillColumn(gridViewColumn, isFillColumn);
+            return gridViewColumn;
+        } // ApplyWidth
+
+    } // class RangeColumn
+
+} // namespace Itenso.Windows.Controls.ListViewLayout
+// -- EOF -------------------------------------------------------------------
