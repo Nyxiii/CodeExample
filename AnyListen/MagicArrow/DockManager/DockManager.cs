@@ -140,3 +140,114 @@ namespace AnyListen.MagicArrow.DockManager
             else
             {
                 if (!_firedUndocked)
+                {
+                    _firedUndocked = true;
+                    OnUndocked();
+                }
+                if (IsAtTop)
+                {
+                    IsAtTop = false;
+                    CloseWindowIfExists();
+                }
+                if (IsAtRightOrLeftBorder)
+                {
+                    IsAtRightOrLeftBorder = false;
+                    CloseWindowIfExists();
+                }
+            }
+        }
+
+        #region DockWindow Management
+
+        public bool IsAtRightOrLeftBorder { get; set; }
+        public bool IsAtTop { get; set; }
+        public string DisplayingScreen { get; set; }
+
+        private DockRangeWindow _window;
+        private void CloseWindowIfExists()
+        {
+            if (_window != null) { _window.Close(); _window = null; }
+        }
+
+        private void OpenWindow(WindowPositionSide side, WpfScreen screen)
+        {
+            if (side == WindowPositionSide.None) return;
+            CloseWindowIfExists();
+
+            double dockwindowLeft, dockwindowWidth;
+
+            switch (side)
+            {
+                case WindowPositionSide.Left:
+                    dockwindowLeft = WpfScreen.MostLeftX;
+                    dockwindowWidth = 300;
+                    break;
+                case WindowPositionSide.Right:
+                    dockwindowLeft = WpfScreen.MostRightX - 300;
+                    dockwindowWidth = 300;
+                    break;
+                case WindowPositionSide.Top:
+                    return;
+                default:
+                    throw new ArgumentOutOfRangeException("side");
+            }
+
+            _window = new DockRangeWindow(screen.WorkingArea.Top, dockwindowLeft, screen.WorkingArea.Height, dockwindowWidth);
+            _window.Show();
+        }
+
+        #endregion
+
+        public void DragStop()
+        {
+            if (!IsEnabled) return;
+            IsEnabled = false;
+            HookManager.MouseMove -= HookManager_MouseMove;
+            CloseWindowIfExists();
+            OnDragStopped();
+            if (NewSide.HasValue)
+            {
+                switch (NewSide)
+                {
+                    case WindowPositionSide.Left:
+                    case WindowPositionSide.Right:
+                        CurrentSide = NewSide == WindowPositionSide.Left ? DockingSide.Left : DockingSide.Right;
+                        ApplyCurrentSide();
+                        OnDocked();
+                        return;
+                    case WindowPositionSide.Top:
+                        _basewindow.WindowState = WindowState.Maximized;
+                        break;
+                    case WindowPositionSide.None:
+                        break;
+                }
+            }
+            CurrentSide = DockingSide.None;
+        }
+
+        public void ApplyCurrentSide()
+        {
+            if (CurrentSide == DockingSide.Left || CurrentSide == DockingSide.Right)
+            {
+                _basewindow.Left = CurrentSide == DockingSide.Left ? WpfScreen.MostLeftX : WpfScreen.MostRightX - 300;
+                var screen = WpfScreen.GetScreenFrom(new Point(_basewindow.Left, 0));
+                _basewindow.Top = screen.WorkingArea.Top;
+                WindowHeight = screen.WorkingArea.Height;
+            }
+        }
+
+        public void Save()
+        {
+            if (AnyListenSettings.Instance.CurrentState.ApplicationState == null)
+                AnyListenSettings.Instance.CurrentState.ApplicationState = new DockingApplicationState();
+            AnyListenSettings.Instance.CurrentState.ApplicationState.CurrentSide = CurrentSide;
+        }
+
+        public void Dispose()
+        {
+            HookManager.MouseMove -= HookManager_MouseMove;
+        }
+    }
+
+    public enum WindowPositionSide { Left, Right, Top, None }
+}
