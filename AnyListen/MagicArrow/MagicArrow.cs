@@ -22,4 +22,30 @@ namespace AnyListen.MagicArrow
         private StrokeWindow _strokeWindow;
         private bool _magicArrowIsShown;
         private bool _isInZone;
-        private bool _mouseWas
+        private bool _mouseWasOver;
+
+        public MagicArrow()
+        {
+            _windowHider = new WindowHider();
+        }
+
+        public void Dispose()
+        {
+            StopMagic();
+            DockManager.Dispose();
+            _activewindowhook.Dispose();
+            Unregister();
+        }
+
+        public event EventHandler MoveOut; //When moving out
+        public event EventHandler MoveIn;
+        public event DragEventHandler FilesDropped;
+
+        public Window BaseWindow { get; set; }
+        public bool MovedOut { get; set; }
+        public MagicArrowWindow MagicWindow { get; set; }
+        public DockManager.DockManager DockManager { get; set; }
+
+        public void Register(Window window)
+        {
+            if (BaseWindow != null) throw new InvalidOper
