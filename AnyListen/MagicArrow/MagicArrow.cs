@@ -48,4 +48,22 @@ namespace AnyListen.MagicArrow
 
         public void Register(Window window)
         {
-            if (BaseWindow != null) throw new InvalidOper
+            if (BaseWindow != null) throw new InvalidOperationException("Only one window can be registered");
+            BaseWindow = window;
+            Application.Current.Deactivated += Application_Deactivated;
+            DockManager = new DockManager.DockManager(BaseWindow);
+            _activewindowhook = new ActiveWindowHook();
+            _activewindowhook.ActiveWindowChanged += activewindowhook_ActiveWindowChanged;
+        }
+
+        public void Unregister()
+        {
+            Application.Current.Deactivated -= Application_Deactivated;
+            BaseWindow = null;
+        }
+
+        public void BringToFront()
+        {
+            if (MovedOut) { MoveWindowBackInScreen(); }
+
+            Window mai
