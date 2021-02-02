@@ -66,4 +66,18 @@ namespace AnyListen.MagicArrow
         {
             if (MovedOut) { MoveWindowBackInScreen(); }
 
-            Window mai
+            Window mainwindow = Application.Current.MainWindow;
+            mainwindow.Topmost = true; //else the application wouldnt get focused
+            mainwindow.Activate();
+
+            mainwindow.Focus();
+            mainwindow.Topmost = false;
+        }
+
+        void Application_Deactivated(object sender, EventArgs e)
+        {
+            var first = DockManager.CurrentSide != DockingSide.None;
+            var secound = _movedOutSide == Side.Left
+                ? BaseWindow.Left >= WpfScreen.MostLeftX
+                : BaseWindow.Left <= WpfScreen.MostRightX;
+            if (first && secound) //(BaseWindow.ActualHeight == WpfScreen.GetScreenFrom(new Point(BaseWindow.Left, 0)).WorkingArea.Height && (BaseWindow.Left == 0 || BaseWindow.Left
