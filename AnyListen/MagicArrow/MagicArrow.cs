@@ -80,4 +80,22 @@ namespace AnyListen.MagicArrow
             var secound = _movedOutSide == Side.Left
                 ? BaseWindow.Left >= WpfScreen.MostLeftX
                 : BaseWindow.Left <= WpfScreen.MostRightX;
-            if (first && secound) //(BaseWindow.ActualHeight == WpfScreen.GetScreenFrom(new Point(BaseWindow.Left, 0)).WorkingArea.Height && (BaseWindow.Left == 0 || BaseWindow.Left
+            if (first && secound) //(BaseWindow.ActualHeight == WpfScreen.GetScreenFrom(new Point(BaseWindow.Left, 0)).WorkingArea.Height && (BaseWindow.Left == 0 || BaseWindow.Left == maxwidth - 300) && BaseWindow.Top == 0)
+            {
+                //The window is at a good site
+                MoveWindowOutOfScreen(BaseWindow.Left == WpfScreen.MostLeftX ? Side.Left : Side.Right);
+            }
+        }
+
+        void activewindowhook_ActiveWindowChanged(object sender, IntPtr hwnd)
+        {
+            if (!MovedOut) return;
+            if (WindowHelper.WindowIsFullscreen(hwnd))
+            {
+                if (!_strokeWindow.IsInvisible) _strokeWindow.MoveInvisible();
+                Debug.Print("{0}: Its a fullscreen window",DateTime.Now.ToString());
+            }
+            else
+            {
+                if (_strokeWindow.IsInvisible) _strokeWindow.MoveVisible();
+                Debug.Print("{0
