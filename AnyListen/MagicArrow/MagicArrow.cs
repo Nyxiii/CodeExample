@@ -98,4 +98,22 @@ namespace AnyListen.MagicArrow
             else
             {
                 if (_strokeWindow.IsInvisible) _strokeWindow.MoveVisible();
-                Debug.Print("{0
+                Debug.Print("{0}: It isnt a fullscreen window", DateTime.Now.ToString());
+            }
+            if (!_strokeWindow.IsInvisible)
+            {
+                _strokeWindow.Topmost = false;
+                _strokeWindow.Topmost = true;
+            }
+        }
+
+        protected async void MoveWindowOutOfScreen(Side side)
+        {
+            BaseWindow.Topmost = true;
+            if (MoveOut != null) MoveOut(this, EventArgs.Empty);
+            if (side == Side.Left)
+            {
+                for (var i = 0; i > -32; i--)
+                {
+                    await Task.Delay(1);
+                    BaseWindow.Left = i * 10 + WpfScreen.MostL
