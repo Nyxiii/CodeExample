@@ -116,4 +116,27 @@ namespace AnyListen.MagicArrow
                 for (var i = 0; i > -32; i--)
                 {
                     await Task.Delay(1);
-                    BaseWindow.Left = i * 10 + WpfScreen.MostL
+                    BaseWindow.Left = i * 10 + WpfScreen.MostLeftX;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 32; i++)
+                {
+                    await Task.Delay(1);
+                    BaseWindow.Left = WpfScreen.MostRightX - BaseWindow.Width + i * 10;
+                }
+            }
+
+            MovedOut = true;
+            BaseWindow.ShowInTaskbar = false;
+            _windowHider.HideWindowFromAltTab(BaseWindow);
+            _movedOutSide = side;
+            StartMagic();
+        }
+
+        protected void MoveWindowBackInScreen()
+        {
+            if (MoveIn != null) MoveIn(this, EventArgs.Empty);
+            double newleft;
+            if (_movedOutSide == Side.Left) { n
