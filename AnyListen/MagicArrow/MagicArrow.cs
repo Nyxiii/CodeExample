@@ -139,4 +139,12 @@ namespace AnyListen.MagicArrow
         {
             if (MoveIn != null) MoveIn(this, EventArgs.Empty);
             double newleft;
-            if (_movedOutSide == Side.Left) { n
+            if (_movedOutSide == Side.Left) { newleft = WpfScreen.MostLeftX; } else { newleft = WpfScreen.MostRightX - BaseWindow.Width; }
+            BaseWindow.Left = _movedOutSide == Side.Left ? newleft + 10 : newleft - 10;
+
+            Storyboard moveWindowBackInScreenStoryboard = new Storyboard();
+            DoubleAnimation inanimation = new DoubleAnimation(BaseWindow.Left, newleft, TimeSpan.FromMilliseconds(150), FillBehavior.Stop);
+            inanimation.Completed += (s, e) => { BaseWindow.Topmost = false; BaseWindow.Left = newleft; };
+            moveWindowBackInScreenStoryboard.Children.Add(inanimation);
+            Storyboard.SetTargetName(inanimation, BaseWindow.Name);
+            Storyboard.SetTargetProperty(moveWindowBackInScreenStoryboard, new PropertyPath(Window.LeftProp
