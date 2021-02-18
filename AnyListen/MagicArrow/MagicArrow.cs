@@ -147,4 +147,29 @@ namespace AnyListen.MagicArrow
             inanimation.Completed += (s, e) => { BaseWindow.Topmost = false; BaseWindow.Left = newleft; };
             moveWindowBackInScreenStoryboard.Children.Add(inanimation);
             Storyboard.SetTargetName(inanimation, BaseWindow.Name);
-            Storyboard.SetTargetProperty(moveWindowBackInScreenStoryboard, new PropertyPath(Window.LeftProp
+            Storyboard.SetTargetProperty(moveWindowBackInScreenStoryboard, new PropertyPath(Window.LeftProperty));
+
+            moveWindowBackInScreenStoryboard.Begin(BaseWindow);
+
+            MovedOut = false;
+            BaseWindow.Topmost = true;
+            _windowHider.ShowWindowInAltTab(BaseWindow);
+            BaseWindow.Activate();
+            BaseWindow.ShowInTaskbar = true;
+            
+            StopMagic();
+        }
+        protected void StopMagic()
+        {
+            if (_strokeWindow != null)
+            {
+                _strokeWindow.Close();
+                _strokeWindow = null;
+            }
+            _activewindowhook.Unhook();
+        }
+
+        protected void StartMagic()
+        {
+            var screen = GetScreenFromSide(_movedOutSide);
+            _strokeWindow = new StrokeWindow(screen.W
