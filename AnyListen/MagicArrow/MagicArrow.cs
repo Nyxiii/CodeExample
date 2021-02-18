@@ -172,4 +172,18 @@ namespace AnyListen.MagicArrow
         protected void StartMagic()
         {
             var screen = GetScreenFromSide(_movedOutSide);
-            _strokeWindow = new StrokeWindow(screen.W
+            _strokeWindow = new StrokeWindow(screen.WorkingArea.Height, _movedOutSide == Side.Left ? WpfScreen.MostLeftX : WpfScreen.MostRightX, screen.WorkingArea.Top, _movedOutSide);
+            _strokeWindow.Show();
+            _strokeWindow.MouseMove += StrokeWindowMouseMove;
+            _strokeWindow.MouseLeave += StrokeWindowMouseLeave;
+            _strokeWindow.MouseDown += StrokeWindowMouseDown;
+            _activewindowhook.Hook();
+            _activewindowhook.RaiseOne(); //If the current window is fullscreen, the event wouldn't be raised (because nothing changed)
+            _mouseWasOver = false;
+        }
+
+        void StrokeWindowMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (MagicWindow != null)
+            {
+                var cursorposition = Cur
