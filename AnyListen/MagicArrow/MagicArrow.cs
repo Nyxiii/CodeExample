@@ -186,4 +186,17 @@ namespace AnyListen.MagicArrow
         {
             if (MagicWindow != null)
             {
-                var cursorposition = Cur
+                var cursorposition = Cursor.Position;
+                if (cursorposition.Y > MagicWindow.Top && cursorposition.Y < MagicWindow.Top + MagicWindow.Height && (_movedOutSide == Side.Left ? cursorposition.X < MagicWindow.Width + WpfScreen.MostLeftX : cursorposition.X > WpfScreen.MostRightX - MagicWindow.Width))
+                {
+                    MoveWindowBackInScreen();
+                    _isInZone = false;
+                    HideMagicArrow();
+                }
+            }
+        }
+
+        void StrokeWindowMouseMove(object sender, MouseEventArgs e)
+        {
+            Views.Test.TestWindow.AddMessage("Stroke: Mouse Move");
+            if (!_magicArrowIsShown && !_isInZone && StrokeWindow.PositionIsOk(_movedOutSide, Cursor.Position.X, WpfScreen.MostLeftX - 2, W
