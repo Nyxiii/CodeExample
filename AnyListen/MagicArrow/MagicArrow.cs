@@ -199,4 +199,24 @@ namespace AnyListen.MagicArrow
         void StrokeWindowMouseMove(object sender, MouseEventArgs e)
         {
             Views.Test.TestWindow.AddMessage("Stroke: Mouse Move");
-            if (!_magicArrowIsShown && !_isInZone && StrokeWindow.PositionIsOk(_movedOutSide, Cursor.Position.X, WpfScreen.MostLeftX - 2, W
+            if (!_magicArrowIsShown && !_isInZone && StrokeWindow.PositionIsOk(_movedOutSide, Cursor.Position.X, WpfScreen.MostLeftX - 2, WpfScreen.MostRightX))
+            {
+                _isInZone = true;
+                Point p = e.GetPosition(_strokeWindow);
+                var screen = WpfScreen.GetScreenFrom(p);
+                ShowMagicArrow(p.Y + screen.WorkingArea.Top, _movedOutSide);
+            }
+            _mouseWasOver = true;
+        }
+
+        void StrokeWindowMouseLeave(object sender, MouseEventArgs e)
+        {
+            Views.Test.TestWindow.AddMessage("Stroke: Mouse Leave");
+            if (!_magicArrowIsShown)
+            {
+                HideMagicArrow();
+                _isInZone = false;
+            }
+            else
+            {
+                if (!MagicWindow.IsMouseOver)
