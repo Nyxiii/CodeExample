@@ -220,3 +220,19 @@ namespace AnyListen.MagicArrow
             else
             {
                 if (!MagicWindow.IsMouseOver)
+                {
+                    HideMagicArrow();
+                }
+                //int cursorX = Cursor.Position.X;
+                //if (_movedOutSide == Side.Left ? cursorX > 2 - WpfScreen.MostLeftX : cursorX < WpfScreen.MostRightX - 3 || WpfScreen.GetScreenFrom(new Point(cursorX, 0)).WorkingArea.Height > cursorX)
+            }
+        }
+
+        protected void ShowMagicArrow(double top, Side side)
+        {
+            Views.Test.TestWindow.AddMessage("Show Magic Arrow");
+            _magicArrowIsShown = true;
+            if (!AnyListenSettings.Instance.Config.ShowMagicArrowBelowCursor)
+            {
+                if (top + 40 > GetScreenFromSide(_movedOutSide).WorkingArea.Height - 10)
+             
