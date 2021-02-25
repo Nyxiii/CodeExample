@@ -235,4 +235,20 @@ namespace AnyListen.MagicArrow
             if (!AnyListenSettings.Instance.Config.ShowMagicArrowBelowCursor)
             {
                 if (top + 40 > GetScreenFromSide(_movedOutSide).WorkingArea.Height - 10)
-             
+                {
+                    top -= 40;
+                }
+                else { top += 40; }
+            }
+            MagicWindow = new MagicArrowWindow(top, side == Side.Left ? WpfScreen.MostLeftX - 10 : WpfScreen.MostRightX, side == Side.Left ? WpfScreen.MostLeftX : WpfScreen.MostRightX - 10, side);
+            MagicWindow.MoveVisible += (s, e) =>
+            {
+                MoveWindowBackInScreen();
+                _isInZone = false;
+                HideMagicArrow();
+            };
+            MagicWindow.MouseLeave += MagicWindow_MouseLeave;
+            MagicWindow.Show();
+            MagicWindow.Topmost = true;
+            MagicWindow.FilesDropped += (s, e) => { if (FilesDropped != null) FilesDropped(this, e); };
+            Task.Run(async 
