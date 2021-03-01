@@ -266,4 +266,20 @@ namespace AnyListen.MagicArrow
                     else
                     {
 
-                        Views.Test.TestWindow.AddMess
+                        Views.Test.TestWindow.AddMessage(
+                            $"-> MAP: {""}; _movedOutSide: {_movedOutSide}; cursorX: {cursorX}; MLX: {WpfScreen.MostLeftX}");
+                    }
+                }
+            });
+        }
+
+        void MagicWindow_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Views.Test.TestWindow.AddMessage("Magic Arrow: Mouse Leave");
+            if (StrokeWindow.PositionIsOk(_movedOutSide, Cursor.Position.X, 2 - WpfScreen.MostLeftX, WpfScreen.MostRightX))
+            {
+                if (_strokeWindow != null)
+                    _strokeWindow.SetLeft(_movedOutSide == Side.Left ? WpfScreen.MostLeftX : WpfScreen.MostRightX - 1, _movedOutSide);
+                HideMagicArrow();
+            }
+            else { _strokeWindow.SetLeft(_movedOutSide
