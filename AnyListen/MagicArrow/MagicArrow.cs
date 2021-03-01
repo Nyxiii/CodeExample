@@ -251,4 +251,19 @@ namespace AnyListen.MagicArrow
             MagicWindow.Show();
             MagicWindow.Topmost = true;
             MagicWindow.FilesDropped += (s, e) => { if (FilesDropped != null) FilesDropped(this, e); };
-            Task.Run(async 
+            Task.Run(async () =>
+            {
+                while (_magicArrowIsShown)
+                {
+                    await Task.Delay(1000);
+                    Views.Test.TestWindow.AddMessage("Check Magic Arrow");
+                    int cursorX = Cursor.Position.X;
+                    if (((_movedOutSide == Side.Left && cursorX > 4 - WpfScreen.MostLeftX) ||
+                        (_movedOutSide == Side.Right && cursorX < WpfScreen.MostRightX - 4)) && !MagicWindow.IsMouseOver)
+                    {
+                        Application.Current.Dispatcher.Invoke(HideMagicArrow);
+                    }
+                    else
+                    {
+
+                        Views.Test.TestWindow.AddMess
