@@ -302,4 +302,10 @@ namespace AnyListen.MagicArrow
         {
             return
                 WpfScreen.GetScreenFrom(side == Side.Left
-            
+                    ? new Point(WpfScreen.MostLeftX, 0)
+                    : new Point(WpfScreen.MostRightX, 0));
+        }
+    }
+
+    public enum Side { Left, Right }
+}
