@@ -282,4 +282,24 @@ namespace AnyListen.MagicArrow
                     _strokeWindow.SetLeft(_movedOutSide == Side.Left ? WpfScreen.MostLeftX : WpfScreen.MostRightX - 1, _movedOutSide);
                 HideMagicArrow();
             }
-            else { _strokeWindow.SetLeft(_movedOutSide
+            else { _strokeWindow.SetLeft(_movedOutSide == Side.Left ? WpfScreen.MostLeftX : WpfScreen.MostRightX - 1, _movedOutSide); }
+        }
+
+        protected void HideMagicArrow()
+        {
+            Views.Test.TestWindow.AddMessage("Hide Magic Arrow");
+            _magicArrowIsShown = false;
+            _isInZone = false;
+            if (MagicWindow != null && MagicWindow.Visibility == Visibility.Visible)
+            {
+                MagicWindow.MouseLeave -= MagicWindow_MouseLeave;
+                MagicWindow.Close();
+                MagicWindow = null;
+            }
+        }
+
+        protected WpfScreen GetScreenFromSide(Side side)
+        {
+            return
+                WpfScreen.GetScreenFrom(side == Side.Left
+            
