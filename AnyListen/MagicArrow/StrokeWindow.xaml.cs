@@ -36,4 +36,30 @@ namespace AnyListen.MagicArrow
 
         public void SetLeft(double left, Side side)
         {
-            if (side == Side.Left) { Left = left - (20 - StrokeWidth); } else { Left = left - S
+            if (side == Side.Left) { Left = left - (20 - StrokeWidth); } else { Left = left - StrokeWidth; }
+        }
+
+        public void MoveInvisible()
+        {
+            _currentleft = Left;
+            Left = -100;
+            IsInvisible = true;
+        }
+
+        public void MoveVisible()
+        {
+            Left = _currentleft;
+            IsInvisible = false;
+        }
+
+        private void StrokeWindow_SourceInitialized(object sender, System.EventArgs e)
+        {
+            WindowHelper.HideFromAltTab(this);
+        }
+
+        public static bool PositionIsOk(Side side, double position, double width, double screenwidth)
+        {
+            return side == Side.Left ? position >= width : position <= screenwidth - width - 1;
+        }
+    }
+}
