@@ -27,4 +27,37 @@ namespace AnyListen.Music.AudioEngine
                 if (currentvolume < 0 || currentvolume > 1) break;
                 try
                 {
-                    soun
+                    soundout.Volume = currentvolume;
+                }
+                catch (ObjectDisposedException)
+                {
+                    break;
+                }
+            }
+            IsFading = false;
+        }
+
+        #region Cancel
+        protected virtual void OnCancelled()
+        {
+            if (!_isDisposed) _canceledWaiter.Set();
+        }
+
+        public void WaitForCancel()
+        {
+            if (IsFading)
+            {
+                try
+                {
+                    _canceledWaiter.WaitOne(50);
+                }
+                catch (ObjectDisposedException)
+                {
+                    //ignore
+                }
+            }
+        }
+
+        public void CancelFading()
+        {
+     
