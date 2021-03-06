@@ -60,4 +60,30 @@ namespace AnyListen.Music.AudioEngine
 
         public void CancelFading()
         {
-     
+            if (!IsFading) return;
+            _cancel = true;
+        }
+
+        #endregion
+
+        #region Public Fading
+        public async Task FadeIn(ISoundOut soundOut, float toVolume)
+        {
+            await Fade(0, toVolume, TimeSpan.FromMilliseconds(300), true, soundOut);
+        }
+
+        public async Task FadeOut(ISoundOut soundOut, float fromVolume)
+        {
+            await Fade(fromVolume, 0, TimeSpan.FromMilliseconds(300), false, soundOut);
+        }
+
+        public async void CrossfadeIn(ISoundOut soundOut, float toVolume)
+        {
+            await Fade(0, toVolume, TimeSpan.FromSeconds(OutDuration), true, soundOut);
+        }
+
+        #endregion
+
+        #region Constructor and Deconstructor
+
+        private bool _i
