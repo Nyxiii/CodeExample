@@ -86,4 +86,32 @@ namespace AnyListen.Music.AudioEngine
 
         #region Constructor and Deconstructor
 
-        private bool _i
+        private bool _isDisposed;
+        public void Dispose()
+        {
+            _canceledWaiter.Dispose();
+            _isDisposed = true;
+        }
+
+        public VolumeFading()
+        {
+            _canceledWaiter = new AutoResetEvent(false);
+        }
+        #endregion
+    }
+
+    public class Crossfade
+    {
+        public bool IsCrossfading { get; set; }
+        private bool _cancel;
+        public async void FadeOut(double seconds, ISoundOut soundOut)
+        {
+            IsCrossfading = true;
+            var steps = seconds / 0.2;
+            var soundstep = soundOut.Volume / (float)steps;
+
+            for (int i = 0; i < steps; i++)
+            {
+                if (_cancel) { _cancel = false; break; }
+                await Task.Delay(200);
+  
