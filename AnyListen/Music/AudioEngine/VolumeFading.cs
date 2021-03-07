@@ -114,4 +114,29 @@ namespace AnyListen.Music.AudioEngine
             {
                 if (_cancel) { _cancel = false; break; }
                 await Task.Delay(200);
-  
+                try
+                {
+                    var value = soundOut.Volume - soundstep;
+                    if (0 > value) break;
+                    soundOut.Volume -= soundstep;
+                }
+                catch (ObjectDisposedException)
+                {
+                    IsCrossfading = false;
+                    break;
+                }
+            }
+
+            IsCrossfading = false;
+            if (soundOut.PlaybackState != PlaybackState.Stopped) soundOut.Stop();
+            soundOut.WaveSource.Dispose();
+            soundOut.Dispose();
+        }
+
+        public void CancelFading()
+        {
+            if (!IsCrossfading) return;
+            _cancel = true;
+        }
+    }
+}
