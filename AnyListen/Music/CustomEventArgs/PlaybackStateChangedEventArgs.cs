@@ -11,3 +11,6 @@ namespace AnyListen.Music.CustomEventArgs
         public PlayStateChangedEventArgs(PlaybackState newstate)
         {
             NewPlaybackState = newstate;
+        }
+    }
+}
