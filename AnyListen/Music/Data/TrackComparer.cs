@@ -18,4 +18,13 @@ namespace AnyListen.Music.Data
             if (ReferenceEquals(track, null)) return 0;
 
             //Get hash code for the Title field if it is not null. 
-            int hashProductName = track.Title == null ? 0
+            int hashProductName = track.Title == null ? 0 : track.Title.GetHashCode();
+
+            //Get hash code for the Duration field. 
+            int hashProductCode = track.Duration.GetHashCode();
+
+            //Calculate the hash code for the product. 
+            return hashProductName ^ hashProductCode;
+        }
+    }
+}
