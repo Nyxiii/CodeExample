@@ -27,4 +27,24 @@ namespace AnyListen.Music.Download
             }
         }
         
-        private bool _isDown
+        private bool _isDownloaded;
+        public bool IsDownloaded
+        {
+            get { return _isDownloaded; }
+            set
+            {
+                SetProperty(value, ref _isDownloaded);
+            }
+        }
+
+        public string Trackname { get; set; }
+        public DownloadMethod DownloadMethod { get; set; }
+        public string DownloadParameter { get; set; }
+        public IMusicInformation MusicInformation { get; set; }
+        public string DownloadFilename { get; set; }
+
+        public bool CanDownload => true;
+    }
+
+    public enum DownloadMethod { AnyListen }
+}
