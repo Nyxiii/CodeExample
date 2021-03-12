@@ -44,4 +44,26 @@ namespace AnyListen.Music.Download
         {
             switch (Format)
             {
-                cas
+                case AudioFormat.Copy:
+                    return defaultExtension;
+                case AudioFormat.MP3:
+                    return ".mp3";
+                case AudioFormat.AAC:
+                    return ".aac";
+                case AudioFormat.WMA:
+                    return ".wma";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void SetDefault()
+        {
+            IsConverterEnabled = false;
+            Bitrate = AudioBitrate.B256;
+            Format = AudioFormat.Copy;
+            AddTags = true;
+            DownloadFolder2Serialize = string.Empty;
+        }
+
+        public DownloadSettings Clone
