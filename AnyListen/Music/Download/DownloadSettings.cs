@@ -66,4 +66,16 @@ namespace AnyListen.Music.Download
             DownloadFolder2Serialize = string.Empty;
         }
 
-        public DownloadSettings Clone
+        public DownloadSettings Clone()
+        {
+            return new DownloadSettings
+            {
+                IsConverterEnabled = IsConverterEnabled,
+                AddTags = AddTags,
+                Bitrate = Bitrate,
+                DownloadFolder2Serialize = DownloadFolder2Serialize,
+                Format = Format
+            };
+        }
+    }
+}
