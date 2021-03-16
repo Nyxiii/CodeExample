@@ -38,4 +38,30 @@ namespace AnyListen.Music.Download
         public class GroovesharkResult
         {
             [JsonProperty("display_id")]
-            public string Displ
+            public string DisplayId { get; set; }
+
+            [JsonProperty("extractor")]
+            public string Extractor { get; set; }
+
+            [JsonProperty("http_post_data")]
+            public string HttpPostData { get; set; }
+
+            [JsonProperty("format")]
+            public string Format { get; set; }
+
+            [JsonProperty("requested_subtitles")]
+            public object RequestedSubtitles { get; set; }
+
+            [JsonProperty("http_method")]
+            public string HttpMethod { get; set; }
+
+            [JsonProperty("duration")]
+            public int Duration { get; set; }
+
+            [JsonProperty("format_id")]
+            public string FormatId { get; set; }
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+         
