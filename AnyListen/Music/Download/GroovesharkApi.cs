@@ -64,4 +64,26 @@ namespace AnyListen.Music.Download
             [JsonProperty("id")]
             public string Id { get; set; }
 
-         
+            [JsonProperty("playlist")]
+            public object Playlist { get; set; }
+
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            [JsonProperty("extractor_key")]
+            public string ExtractorKey { get; set; }
+
+            [JsonProperty("http_headers")]
+            public HttpHeaders HttpHeaders { get; set; }
+
+            [JsonProperty("playlist_index")]
+            public object PlaylistIndex { get; set; }
+
+            [JsonProperty("ext")]
+            public string Extension { get; set; }
+
+            [JsonProperty("webpage_url")]
+            public string Web
