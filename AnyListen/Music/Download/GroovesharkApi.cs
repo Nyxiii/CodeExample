@@ -105,4 +105,8 @@ namespace AnyListen.Music.Download
             using (var wc = new WebClient {Proxy = null})
             {
                 _isProxyRequired = (await wc.DownloadStringTaskAsync("http://grooveshark.com/")).Contains("heartbroken");
-                return _isProxyRequired
+                return _isProxyRequired.Value;
+            }
+        }
+    }
+}
