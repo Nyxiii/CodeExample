@@ -86,4 +86,23 @@ namespace AnyListen.Music.Download
             public string Extension { get; set; }
 
             [JsonProperty("webpage_url")]
-            public string Web
+            public string WebpageUrl { get; set; }
+
+            [JsonProperty("_filename")]
+            public string Filename { get; set; }
+
+            [JsonProperty("fulltitle")]
+            public string FullTitle { get; set; }
+
+            [JsonProperty("webpage_url_basename")]
+            public string WebpageUrlBasename { get; set; }
+        }
+
+        private static bool? _isProxyRequired;
+        public async static Task<bool> IsProxyRequired()
+        {
+            if (_isProxyRequired.HasValue) return _isProxyRequired.Value;
+            using (var wc = new WebClient {Proxy = null})
+            {
+                _isProxyRequired = (await wc.DownloadStringTaskAsync("http://grooveshark.com/")).Contains("heartbroken");
+                return _isProxyRequired
