@@ -35,4 +35,25 @@ namespace AnyListen.Music.Download
             var p = new Process
             {
                 StartInfo =
-   
+                {
+                    CreateNoWindow = true,
+                    FileName = AnyListenSettings.Paths.FFmpegPath,
+                    Arguments = GetParameter(fileName, newFileName, bitrate, format),
+                    UseShellExecute = false
+                }
+            };
+
+            p.Start();
+            await Task.Run(() => p.WaitForExit());
+            var newFile = new FileInfo(newFileName);
+
+            if (!newFile.Exists || newFile.Length == 0)
+            {
+                if (newFile.Exists) newFile.Delete();
+                fileToConvert.MoveTo(newFileName); //If the convert failed, we just use the "old" file
+            }
+
+            fileToConvert.Delete();
+        }
+
+        private static 
