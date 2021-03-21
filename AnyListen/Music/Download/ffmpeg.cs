@@ -56,4 +56,21 @@ namespace AnyListen.Music.Download
             fileToConvert.Delete();
         }
 
-        private static 
+        private static string GetParameter(string inputFile, string outputFile, AudioBitrate bitrate, AudioFormat format)
+        {
+            return
+                $"-i \"{inputFile}\" -c:a {GetAudioLibraryFromFormat(format)} -vn -b:a {bitrate.ToString().Remove(0, 1)}k \"{outputFile}\"";
+        }
+
+        public static string GetAudioLibraryFromFormat(AudioFormat format)
+        {
+            switch (format)
+            {
+                case AudioFormat.Copy:
+                    return "copy";
+                case AudioFormat.MP3:
+                    return "libmp3lame"; //works
+                case AudioFormat.AAC:
+                    return "libfdk_aac";
+                case AudioFormat.WMA:
+                    return "wmav2"
