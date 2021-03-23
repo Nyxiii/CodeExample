@@ -73,4 +73,39 @@ namespace AnyListen.Music.Download
                 case AudioFormat.AAC:
                     return "libfdk_aac";
                 case AudioFormat.WMA:
-                    return "wmav2"
+                    return "wmav2";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+
+    }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public enum AudioFormat
+    {
+        Copy,
+        MP3,
+        AAC,
+        WMA
+    }
+
+    public enum AudioBitrate
+    {
+        [Description("64 kbit/s")]
+        B64,
+        [Description("96 kbit/s")]
+        B96,
+        [Description("128 kbit/s")]
+        B128,
+        [Description("160 kbit/s")]
+        B160,
+        [Description("192 kbit/s")]
+        B192,
+        [Description("256 kbit/s")]
+        B256,
+        [Description("320 kbit/s")]
+        B320
+    }
+}
