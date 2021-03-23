@@ -27,3 +27,13 @@ namespace AnyListen.Music.MusicEqualizer
         {
             this.Label = label;
         }
+
+        public EqualizerBand()
+        {
+
+        }
+
+        [XmlIgnore]
+        public string Label { get; set; }
+    }
+}
