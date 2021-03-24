@@ -18,3 +18,28 @@ namespace AnyListen.Music.MusicEqualizer
             if (Bands != null) { Bands.Clear(); } else { Bands = new ObservableCollection<EqualizerBand>(); }
 
             for (int i = 0; i < 10; i++)
+            {
+                Bands.Add(new EqualizerBand(Bandlabels[i]));
+            }
+            Loaded();
+        }
+
+        public void Loaded()
+        {
+            foreach (EqualizerBand b in Bands)
+            {
+                b.EqualizerChanged += (s, e) =>
+                {
+                    if (EqualizerChanged != null)
+                        EqualizerChanged(this, new EqualizerChangedEventArgs(Bands.IndexOf(b), b.Value));
+                };
+                b.Label = Bandlabels[Bands.IndexOf(b)];
+            }
+        }
+
+        private RelayCommand _resetequalizer;
+        public RelayCommand ResetEqualizer
+        {
+            get
+            {
+                return _re
