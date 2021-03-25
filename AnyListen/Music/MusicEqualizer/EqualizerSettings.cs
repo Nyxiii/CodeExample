@@ -42,4 +42,27 @@ namespace AnyListen.Music.MusicEqualizer
         {
             get
             {
-                return _re
+                return _resetequalizer ?? (_resetequalizer = new RelayCommand(parameter =>
+                {
+                    foreach (EqualizerBand band in Bands)
+                    {
+                        band.Value = 0;
+                    }
+                }));
+            }
+        }
+
+        private ObservableCollection<EqualizerBand> _bands;
+        public ObservableCollection<EqualizerBand> Bands
+        {
+            get { return _bands; }
+            set
+            {
+                SetProperty(value, ref _bands);
+            }
+        }
+
+        private RelayCommand _loadpresetbass;
+        public RelayCommand LoadPresetBass
+        {
+            get { return _loadpresetbass ?? (_lo
