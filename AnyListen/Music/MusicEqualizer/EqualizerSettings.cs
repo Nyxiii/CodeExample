@@ -65,4 +65,20 @@ namespace AnyListen.Music.MusicEqualizer
         private RelayCommand _loadpresetbass;
         public RelayCommand LoadPresetBass
         {
-            get { return _loadpresetbass ?? (_lo
+            get { return _loadpresetbass ?? (_loadpresetbass = new RelayCommand(parameter => { LoadPreset(50, 35, 20, 5, -10, -10, 0, -2, 0, 2); })); }
+        }
+
+        private RelayCommand _loadpresetbassexteme;
+        public RelayCommand LoadPresetBassExteme
+        {
+            get { return _loadpresetbassexteme ?? (_loadpresetbassexteme = new RelayCommand(parameter => { LoadPreset(90, 85, 65, 30, 0, -5, -5, 0, 2, 0); })); }
+        }
+
+        private RelayCommand _loadpresetbassandheights;
+        public RelayCommand LoadPresetBassAndHeights
+        {
+            get { return _loadpresetbassandheights ?? (_loadpresetbassandheights = new RelayCommand(parameter => { LoadPreset(20, 20, 10, 0, -10, -10, 0, 5, 20, 20); })); }
+        }
+
+        private RelayCommand _loadpresetheights;
+        pub
