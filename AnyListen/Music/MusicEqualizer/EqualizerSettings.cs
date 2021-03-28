@@ -81,4 +81,21 @@ namespace AnyListen.Music.MusicEqualizer
         }
 
         private RelayCommand _loadpresetheights;
-        pub
+        public RelayCommand LoadPresetHeights
+        {
+            get { return _loadpresetheights ?? (_loadpresetheights = new RelayCommand(parameter => { LoadPreset(-10, -10, -10, -10, -5, -5, 0, 25, 50, 75); })); }
+        }
+
+        private RelayCommand _loadpresetclassic;
+        public RelayCommand LoadPresetClassic
+        {
+            get { return _loadpresetclassic ?? (_loadpresetclassic = new RelayCommand(parameter => { LoadPreset(0, 0, 0, 0, 0, 0, -10, -10, -10, -20); })); }
+        }
+
+        private RelayCommand _loadpresetdance;
+        public RelayCommand LoadPresetDance
+        {
+            get { return _loadpresetdance ?? (_loadpresetdance = new RelayCommand(parameter => { LoadPreset(30, 15, 10, 0, 0, -10, -5, -5, 0, 0); })); }
+        }
+
+        private Rel
