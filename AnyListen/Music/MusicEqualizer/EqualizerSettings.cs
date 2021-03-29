@@ -113,4 +113,19 @@ namespace AnyListen.Music.MusicEqualizer
         private RelayCommand _loadpresetpop;
         public RelayCommand LoadPresetPop
         {
-            get { return _loadpresetpop ?? (_loadpresetpop = new RelayCommand(parameter => 
+            get { return _loadpresetpop ?? (_loadpresetpop = new RelayCommand(parameter => { LoadPreset(5, 20, 25, 20, 5, 0, 0, 0, 5, 10); })); }
+        }
+
+        private RelayCommand _loadpresetsoftbass;
+        public RelayCommand LoadPresetSoftBass
+        {
+            get { return _loadpresetsoftbass ?? (_loadpresetsoftbass = new RelayCommand(parameter => { LoadPreset(10, 10, 10, 0, -10, -10, 0, 0, 0, 0); })); }
+        }
+
+        private RelayCommand _loadpresetsoftheights;
+        public RelayCommand LoadPresetSoftHeights
+        {
+            get { return _loadpresetsoftheights ?? (_loadpresetsoftheights = new RelayCommand(parameter => { LoadPreset(0, 0, -20, -20, -20, -20, -10, 0, 10, 20); })); }
+        }
+
+        protected void LoadPreset(double zero, double one, double two, double three, double four,
