@@ -98,4 +98,19 @@ namespace AnyListen.Music.MusicEqualizer
             get { return _loadpresetdance ?? (_loadpresetdance = new RelayCommand(parameter => { LoadPreset(30, 15, 10, 0, 0, -10, -5, -5, 0, 0); })); }
         }
 
-        private Rel
+        private RelayCommand _loadpresetrock;
+        public RelayCommand LoadPresetRock
+        {
+            get { return _loadpresetrock ?? (_loadpresetrock = new RelayCommand(parameter => { LoadPreset(25, 10, 5, -10, -5, 5, 10, 20, 20, 20); })); }
+        }
+
+        private RelayCommand _loadpresettechno;
+        public RelayCommand LoadPresetTechno
+        {
+            get { return _loadpresettechno ?? (_loadpresettechno = new RelayCommand(parameter => { LoadPreset(20, 20, 0, -10, -5, 0, 10, 40, 40, 40); })); }
+        }
+
+        private RelayCommand _loadpresetpop;
+        public RelayCommand LoadPresetPop
+        {
+            get { return _loadpresetpop ?? (_loadpresetpop = new RelayCommand(parameter => 
