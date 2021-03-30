@@ -246,3 +246,170 @@ namespace AnyListen.Music
 
         public async void PlayTrack(PlayableBase track, IPlaylist playlist)
         {
+            CSCoreEngine.StopPlayback();
+
+            if (Queue.HasTracks && Queue.FirstOrDefault(t => t.TrackId == track.AuthenticationCode) != null)
+                Queue.RemoveTrack(track);
+
+            if (await CSCoreEngine.OpenTrack(track))
+            {
+                CSCoreEngine.TogglePlayPause();
+                CurrentPlaylist = playlist;
+            }
+        }
+
+        public async void GoForward()
+        {
+            if (CurrentPlaylist == null || CurrentPlaylist.Tracks.Count == 0) return;
+            PlayableBase nextTrack;
+
+            if (Queue.HasTracks)
+            {
+                var tuple = Queue.PlayNextTrack();
+                nextTrack = tuple.Item1;
+                CurrentPlaylist = tuple.Item2;
+            }
+            else
+            {
+                int currenttrackindex = CurrentPlaylist.Tracks.IndexOf(CSCoreEngine.CurrentTrack);
+                int nexttrackindex = currenttrackindex;
+                if (CheckIfTracksExists(CurrentPlaylist))
+                {
+                    if (IsShuffleEnabled)
+                    {
+                        nextTrack = CurrentPlaylist.GetRandomTrack(CSCoreEngine.CurrentTrack);
+                        if (nextTrack == null) return;
+                    }
+                    else
+                    {
+                        while (true)
+                        {
+                            nexttrackindex++;
+                            if (CurrentPlaylist.Tracks.Count - 1 < nexttrackindex)
+                                nexttrackindex = 0;
+                            if (CurrentPlaylist.Tracks[nexttrackindex].TrackExists)
+                                break;
+                        }
+                        nextTrack = CurrentPlaylist.Tracks[nexttrackindex];
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (nextTrack.TrackExists)
+            {
+                if (await CSCoreEngine.OpenTrack(nextTrack))
+                    CSCoreEngine.TogglePlayPause();
+            }
+        }
+
+        private bool CheckIfTracksExists(IPlaylist list)
+        {
+            int counter = 0;
+            bool result = false;
+            foreach (PlayableBase t in list.Tracks)
+            {
+                t.RefreshTrackExists();
+                if (t.TrackExists) { counter++; if (counter == 2) result = true; } //Don't cancel because all tracks need to refresh
+            }
+            return result;
+        }
+
+        private bool _openedTrackWithStandardBackward;
+        public async void GoBackward()
+        {
+            if (CurrentPlaylist == null || CurrentPlaylist.Tracks.Count == 0) return;
+            PlayableBase newtrack;
+            if (Lasttracks.Count > 1) //Check if there are more than two tracks, because the current track is the last one in the list
+            {
+                Lasttracks.Remove(Lasttracks.Last(x => x.Track == CSCoreEngine.CurrentTrack));
+                newtrack = Lasttracks.Last().Track;
+                CurrentPlaylist = Lasttracks.Last().Playlist;
+            }
+            else
+            {
+                int currenttrackindex = CurrentPlaylist.Tracks.IndexOf(CSCoreEngine.CurrentTrack);
+                int nexttrackindex = currenttrackindex;
+                if (CheckIfTracksExists(CurrentPlaylist))
+                {
+                    while (true)
+                    {
+                        nexttrackindex--;
+                        if (0 > nexttrackindex)
+                        {
+                            nexttrackindex = CurrentPlaylist.Tracks.Count - 1;
+                        }
+                        if (CurrentPlaylist.Tracks[nexttrackindex].TrackExists)
+                            break;
+                    }
+                }
+                _openedTrackWithStandardBackward = true;
+                newtrack = CurrentPlaylist.Tracks[nexttrackindex];
+            }
+
+            CSCoreEngine.StopPlayback();
+            if (await CSCoreEngine.OpenTrack(newtrack))
+                CSCoreEngine.TogglePlayPause();
+        }
+
+        #endregion
+
+        #region Save and Deconstruction
+        public void SaveToSettings()
+        {
+            var settings = AnyListenSettings.Instance;
+            settings.Playlists.Playlists = Playlists;
+            var currentState = settings.CurrentState;
+            currentState.Volume = CSCoreEngine.Volume;
+            currentState.LastPlaylistIndex = CurrentPlaylist == null ? -1 : PlaylistToIndex(CurrentPlaylist);
+            currentState.LastTrackIndex = (CSCoreEngine.CurrentTrack == null || CurrentPlaylist == null) ? -1 : CurrentPlaylist.Tracks.IndexOf(CSCoreEngine.CurrentTrack);
+            currentState.SelectedPlaylist = PlaylistToIndex(SelectedPlaylist); //Its impossible that no playlist is selected
+            currentState.SelectedTrack = SelectedTrack == null ? -1 : SelectedPlaylist.Tracks.IndexOf(SelectedTrack);
+            currentState.IsLoopEnabled = IsLoopEnabled;
+            currentState.IsShuffleEnabled = IsShuffleEnabled;
+            currentState.TrackPosition = CSCoreEngine.CurrentTrack == null || (CSCoreEngine.CurrentTrack is StreamableBase && ((StreamableBase)CSCoreEngine.CurrentTrack).IsInfinityStream) ? 0 : CSCoreEngine.Position;
+            currentState.EqualizerSettings = CSCoreEngine.EqualizerSettings;
+            currentState.Queue = Queue.Count > 0 ? Queue : null;
+        }
+
+        public IPlaylist IndexToPlaylist(int index)
+        {
+            switch (index)
+            {
+                case -1:
+                    return FavoritePlaylist;
+                case -10:
+                    return Playlists[0];
+                default:
+                    if (index < 0 || index > Playlists.Count - 1) return Playlists[0];
+                    return Playlists[index];
+            }
+        }
+
+        public int PlaylistToIndex(IPlaylist playlist)
+        {
+            var item = playlist as NormalPlaylist;
+            if (item != null) return Playlists.IndexOf(item);
+            if (playlist is FavoriteList) return -1;
+            return -10;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                CSCoreEngine.Dispose();
+            }
+        }
+
+        #endregion
+    }
+}
