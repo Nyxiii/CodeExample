@@ -128,4 +128,18 @@ namespace AnyListen.Music.MusicEqualizer
             get { return _loadpresetsoftheights ?? (_loadpresetsoftheights = new RelayCommand(parameter => { LoadPreset(0, 0, -20, -20, -20, -20, -10, 0, 10, 20); })); }
         }
 
-        protected void LoadPreset(double zero, double one, double two, double three, double four,
+        protected void LoadPreset(double zero, double one, double two, double three, double four, double five, double six, double seven, double eight, double nine)
+        {
+            Bands[0].Value = zero;
+            Bands[1].Value = one;
+            Bands[2].Value = two;
+            Bands[3].Value = three;
+            Bands[4].Value = four;
+            Bands[5].Value = five;
+            Bands[6].Value = six;
+            Bands[7].Value = seven;
+            Bands[8].Value = eight;
+            Bands[9].Value = nine;
+        }
+    }
+}
