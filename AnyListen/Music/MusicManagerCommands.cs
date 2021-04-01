@@ -22,4 +22,21 @@ namespace AnyListen.Music
 
         #endregion
 
-        private Rela
+        private RelayCommand _jumptoplayingtrack;
+        public RelayCommand JumpToPlayingTrack
+        {
+            get
+            {
+                return _jumptoplayingtrack ?? (_jumptoplayingtrack = new RelayCommand(parameter =>
+                {
+                    if (MusicManager.FavoritePlaylist == MusicManager.CurrentPlaylist)
+                        MusicManager.SelectedPlaylist = null;
+
+                    MusicManager.SelectedPlaylist = MusicManager.CurrentPlaylist;
+                    MusicManager.SelectedTrack = null;
+                    MusicManager.SelectedTrack = MusicManager.CSCoreEngine.CurrentTrack;
+                }));
+            }
+        }
+
+        priv
