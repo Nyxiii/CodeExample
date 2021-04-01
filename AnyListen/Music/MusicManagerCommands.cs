@@ -39,4 +39,26 @@ namespace AnyListen.Music
             }
         }
 
-        priv
+        private RelayCommand _opentracklocation;
+        public RelayCommand OpenTrackLocation
+        {
+            get
+            {
+                return _opentracklocation ?? (_opentracklocation = new RelayCommand(parameter =>
+                {
+                    var track = MusicManager.SelectedTrack;
+                    if (track == null) return;
+                    track.RefreshTrackExists();
+                    if (!track.TrackExists) return;
+                    track.OpenTrackLocation();
+                }));
+            }
+        }
+
+        private RelayCommand _gobackward;
+        public RelayCommand GoBackward
+        {
+            get
+            {
+                return _gobackward ??
+           
