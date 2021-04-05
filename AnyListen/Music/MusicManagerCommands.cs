@@ -61,4 +61,26 @@ namespace AnyListen.Music
             get
             {
                 return _gobackward ??
-           
+                       (_gobackward = new RelayCommand(parameter => MusicManager.GoBackward()));
+            }
+        }
+
+        private RelayCommand _goforward;
+        public RelayCommand GoForward
+        {
+            get
+            {
+                return _goforward ??
+                       (_goforward = new RelayCommand(parameter => MusicManager.GoForward()));
+            }
+        }
+
+        private RelayCommand _playselectedtrack;
+        public RelayCommand PlaySelectedTrack
+        {
+            get
+            {
+                return _playselectedtrack ?? (_playselectedtrack = new RelayCommand(parameter =>
+                {
+                    var track = MusicManager.SelectedTrack;
+                
