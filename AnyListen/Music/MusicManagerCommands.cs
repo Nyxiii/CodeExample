@@ -83,4 +83,23 @@ namespace AnyListen.Music
                 return _playselectedtrack ?? (_playselectedtrack = new RelayCommand(parameter =>
                 {
                     var track = MusicManager.SelectedTrack;
-                
+                    if (track == null) return;
+                    if (!track.IsChecked) return;
+
+                    if (track == MusicManager.CSCoreEngine.CurrentTrack)
+                        MusicManager.CSCoreEngine.Position = 0;
+                    track.RefreshTrackExists();
+                    if (track.TrackExists)
+                        MusicManager.PlayTrack(track, MusicManager.SelectedPlaylist);
+                }));
+            }
+        }
+
+        private RelayCommand _toggleplaypause;
+        public RelayCommand TogglePlayPause
+        {
+            get
+            {
+                return _toggleplaypause ?? (_toggleplaypause = new RelayCommand(parameter =>
+                {
+                    if (MusicManager.CSCoreEngine.
