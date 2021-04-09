@@ -118,4 +118,23 @@ namespace AnyListen.Music
                     }
                 }));
             }
-  
+        }
+
+        private RelayCommand _addtrackstoqueue;
+        public RelayCommand AddTracksToQueue
+        {
+            get
+            {
+                return _addtrackstoqueue ?? (_addtrackstoqueue = new RelayCommand(parameter =>
+                {
+                    if (parameter == null) return;
+                    var tracks = ((IList)parameter).Cast<PlayableBase>().Where(x => x.TrackExists).ToList();
+                    foreach (var track in tracks.Where(x => !x.IsOpened))
+                        MusicManager.Queue.AddTrack(track, MusicManager.SelectedPlaylist);
+
+                    MusicManager.OnPropertyChanged("Queue");
+                }));
+            }
+        }
+
+       
