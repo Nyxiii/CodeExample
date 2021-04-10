@@ -137,4 +137,25 @@ namespace AnyListen.Music
             }
         }
 
-       
+        private RelayCommand _removefromqueue;
+        public RelayCommand RemoveFromQueue
+        {
+            get
+            {
+                return _removefromqueue ?? (_removefromqueue = new RelayCommand(parameter =>
+                {
+                    MusicManager.Queue.RemoveTrack(MusicManager.SelectedTrack);
+                    MusicManager.OnPropertyChanged("Queue");
+                }));
+            }
+        }
+
+        private RelayCommand _clearqueue;
+        public RelayCommand ClearQueue
+        {
+            get
+            {
+                return _clearqueue ?? (_clearqueue = new RelayCommand(parameter =>
+                {
+                    MusicManager.Queue.ClearTracks();
+                    MusicManage
