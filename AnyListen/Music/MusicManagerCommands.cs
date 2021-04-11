@@ -158,4 +158,29 @@ namespace AnyListen.Music
                 return _clearqueue ?? (_clearqueue = new RelayCommand(parameter =>
                 {
                     MusicManager.Queue.ClearTracks();
-                    MusicManage
+                    MusicManager.OnPropertyChanged("Queue");
+                }));
+            }
+        }
+
+        private RelayCommand _openFavorites;
+        public RelayCommand OpenFavorites
+        {
+            get
+            {
+                return _openFavorites ?? (_openFavorites = new RelayCommand(parameter =>
+                {
+                    MusicManager.FavoriteListIsSelected = !MusicManager.FavoriteListIsSelected;
+                }));
+            }
+        }
+
+        private RelayCommand _downloadTracks;
+        public RelayCommand DownloadTracks
+        {
+            get
+            {
+                return _downloadTracks ?? (_downloadTracks = new RelayCommand(parameter =>
+                {
+                    if (parameter == null) return;
+        
