@@ -183,4 +183,15 @@ namespace AnyListen.Music
                 return _downloadTracks ?? (_downloadTracks = new RelayCommand(parameter =>
                 {
                     if (parameter == null) return;
-        
+                    var tracks = ((IList)parameter).Cast<PlayableBase>().ToList().OfType<StreamableBase>().Where(x => x.CanDownload).ToList();
+                    if (tracks.Count == 0) return;
+
+                    if (tracks.Count == 1)
+                    {
+                        var track = tracks[0];
+
+                        var downloadDialog = new DownloadTrackWindow(track.DownloadFilename, DownloadManager.GetExtension(track)) { Owner = Application.Current.MainWindow };
+                        if (downloadDialog.ShowDialog() == true)
+                        {
+                            var settings = downloadDialog.DownloadSettings.Clone();
+                            MusicManager.DownloadManager.AddEntry(track, se
