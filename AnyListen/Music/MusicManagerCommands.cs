@@ -206,4 +206,13 @@ namespace AnyListen.Music
                             var settings = downloadDialog.DownloadSettings.Clone();
                             foreach (var track in tracks)
                             {
-                                MusicManager.DownloadManager.AddEntry(track, settings, Path.Combine(downloadDialog.SelectedPath, tr
+                                MusicManager.DownloadManager.AddEntry(track, settings, Path.Combine(downloadDialog.SelectedPath, track.DownloadFilename + settings.GetExtension(track)));
+                            }
+                            MusicManager.DownloadManager.IsOpen = true;
+                        }
+                    }
+                }));
+            }
+        }
+    }
+}
