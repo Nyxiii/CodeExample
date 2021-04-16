@@ -45,4 +45,6 @@ namespace AnyListen.Music.Playlist
            }
        }
 
-       public override bool CanEdit => fals
+       public override bool CanEdit => false;
+    }
+}
