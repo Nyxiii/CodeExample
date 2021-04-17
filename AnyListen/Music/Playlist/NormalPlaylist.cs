@@ -40,4 +40,20 @@ namespace AnyListen.Music.Playlist
         public async Task AddFiles(EventHandler<TrackImportProgressChangedEventArgs> progresschanged, IEnumerable<string> paths)
         {
             var index = 0;
-            var filePath
+            var filePaths = paths as IList<string> ?? paths.ToList();
+            var count = filePaths.Count();
+
+            foreach (var fi in filePaths.Select(path => new FileInfo(path)))
+            {
+                if (fi.Exists)
+                {
+                    try
+                    {
+                        progresschanged?.Invoke(this, new TrackImportProgressChangedEventArgs(index, count, fi.Name));
+                        var t = new LocalTrack { Path = fi.FullName };
+                        if (!await t.LoadInformation()) continue;
+                        t.TimeAdded = DateTime.Now;
+                        t.IsChecked = false;
+                        AddTrack(t);
+                    }
+             
