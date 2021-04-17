@@ -16,4 +16,28 @@ namespace AnyListen.Music.Playlist
         private string _name;
         public override string Name
         {
-       
+            get { return _name; }
+            set
+            {
+                SetProperty(value, ref _name);
+            }
+        }
+
+        public async Task AddFiles(IEnumerable<PlayableBase> tracks)
+        {
+            foreach (var track in tracks)
+            {
+                if (!await track.LoadInformation())
+                    continue;
+                track.TimeAdded = DateTime.Now;
+                track.IsChecked = false;
+                AddTrack(track);
+            }
+
+            AsyncTrackLoader.Instance.RunAsync(this);
+        }
+
+        public async Task AddFiles(EventHandler<TrackImportProgressChangedEventArgs> progresschanged, IEnumerable<string> paths)
+        {
+            var index = 0;
+            var filePath
