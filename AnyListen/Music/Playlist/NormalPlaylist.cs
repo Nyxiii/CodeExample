@@ -56,4 +56,28 @@ namespace AnyListen.Music.Playlist
                         t.IsChecked = false;
                         AddTrack(t);
                     }
-             
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+                ++index;
+            }
+            AsyncTrackLoader.Instance.RunAsync(this);
+        }
+
+        public async Task AddFiles(params string[] paths)
+        {
+            await AddFiles(null, paths);
+        }
+
+        public async Task AddFiles(IEnumerable<string> paths)
+        {
+            await AddFiles(null, paths);
+        }
+
+        public async Task ReloadTrackInformation(EventHandler<TrackImportProgressChangedEventArgs> progresschanged)
+        {
+            foreach (var t in Tracks)
+            {
+                progresschanged?.Invoke(this, 
