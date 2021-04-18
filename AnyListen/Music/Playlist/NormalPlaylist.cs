@@ -80,4 +80,27 @@ namespace AnyListen.Music.Playlist
         {
             foreach (var t in Tracks)
             {
-                progresschanged?.Invoke(this, 
+                progresschanged?.Invoke(this, new TrackImportProgressChangedEventArgs(Tracks.IndexOf(t), Tracks.Count, t.ToString()));
+                if (!t.TrackExists) continue;
+                try
+                {
+                    await t.LoadInformation();
+                }
+                catch (Exception)
+                {
+                    //
+                }
+            }
+        }
+
+        public override void AddTrack(PlayableBase track)
+        {
+            base.AddTrack(track);
+            Tracks.Add(track);
+            ShuffleList?.Add(track);
+
+            track.IsAdded = true;
+            var tmr = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            tmr.Tick += (s, e) =>
+            {
+                trac
