@@ -103,4 +103,28 @@ namespace AnyListen.Music.Playlist
             var tmr = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
             tmr.Tick += (s, e) =>
             {
-                trac
+                track.IsAdded = false;
+                tmr.Stop();
+            };
+            tmr.Start();
+        }
+
+        public async override void RemoveTrack(PlayableBase track)
+        {
+            base.RemoveTrack(track);
+            ShuffleList.Remove(track);
+            track.IsRemoving = true;
+
+            await Task.Delay(500);
+            if (!track.TrackExists)
+            {
+                for (var i = 0; i < Tracks.Count; i++)
+                {
+                    if (Tracks[i].AuthenticationCode != track.AuthenticationCode) continue;
+                    Tracks.RemoveAt(i);
+                    break;
+                }
+            }
+            else { Tracks.Remove(track); }
+            track.IsRemoving = false; //The track could be also in another playlist
+       
