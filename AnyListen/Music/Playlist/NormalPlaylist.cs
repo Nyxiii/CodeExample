@@ -127,4 +127,14 @@ namespace AnyListen.Music.Playlist
             }
             else { Tracks.Remove(track); }
             track.IsRemoving = false; //The track could be also in another playlist
-       
+        }
+
+        public override void Clear()
+        {
+            Tracks.Clear();
+            ShuffleList.Clear();
+        }
+
+        public override bool CanEdit => true;
+    }
+}
