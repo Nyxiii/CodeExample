@@ -13,4 +13,14 @@ namespace AnyListen.Music.Proxy
         }
 
         public HttpProxy(string ip, int port)
- 
+        {
+            Ip = ip;
+            Port = port;
+        }
+
+        public override string ToString()
+        {
+            return $"{Ip}:{Port}";
+        }
+    }
+}
