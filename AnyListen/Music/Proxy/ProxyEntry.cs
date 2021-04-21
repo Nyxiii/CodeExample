@@ -17,4 +17,7 @@ namespace AnyListen.Music.Proxy
         private string _decodedIp;
         public string DecodeIp()
         {
-            return _decodedIp ?? (_decodedIp = Encoding.UTF8.Ge
+            return _decodedIp ?? (_decodedIp = Encoding.UTF8.GetString(Convert.FromBase64String(GeneralHelper.ROT13(Ip))));
+        }
+    }
+}
