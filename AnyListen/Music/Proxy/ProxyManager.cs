@@ -23,4 +23,24 @@ namespace AnyListen.Music.Proxy
 
         public async Task<HttpProxy> GetWebProxy()
         {
-      
+            var proxies = await GetProxies();
+            var sortedList =
+              proxies.OrderByDescending(x => x.Country == "United Kingdom").ThenBy(x => x.Speed).ThenBy(x => x.ResponseTime);
+
+            var proxy = sortedList.FirstOrDefault(x => !InvalidHttpProxies.Contains(x.DecodeIp() + ":" + x.Port));
+            if (proxy == null)
+                throw new Exception("No proxies found");
+
+            return new HttpProxy(proxy.DecodeIp(), proxy.Port);
+        }
+
+        public void AddInvalid(HttpProxy proxy)
+        {
+            InvalidHttpProxies.Add(proxy.ToString());
+        }
+
+        private async Task<List<ProxyEntry>> GetProxies()
+        {
+            var result = new List<ProxyEntry>();
+
+            using (var wc = new WebClient { P
