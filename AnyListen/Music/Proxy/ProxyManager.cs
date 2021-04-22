@@ -50,4 +50,15 @@ namespace AnyListen.Music.Proxy
                 result.AddRange(from Match match in regex.Matches(content.Replace("\n", null).Replace("\r", null))
                     select new ProxyEntry
                     {
-                        Country = match.Groups["country"].Va
+                        Country = match.Groups["country"].Value,
+                        Ip = match.Groups["ip"].Value,
+                        Port = int.Parse(match.Groups["port"].Value),
+                        Speed = int.Parse(match.Groups["speed"].Value),
+                        ResponseTime = double.Parse(match.Groups["responsetime"].Value, CultureInfo.InvariantCulture),
+                        Working = int.Parse(match.Groups["working"].Value)
+                    });
+            }
+            return result;
+        }
+    }
+}
