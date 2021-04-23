@@ -5,4 +5,8 @@ namespace AnyListen.Music.Track
     public interface IDownloadable
     {
         string DownloadParameter { get; }
-        st
+        string DownloadFilename { get; }
+        DownloadMethod DownloadMethod { get; }
+        bool CanDownload { get; }
+    }
+}
