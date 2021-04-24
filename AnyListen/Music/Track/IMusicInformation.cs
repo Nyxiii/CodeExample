@@ -24,3 +24,23 @@ namespace AnyListen.Music.Track
         Rock,
         RapAndHipHop,
         Classical,
+        DanceAndHouse,
+        Instrumental,
+        Metal,
+        Dubstep,
+        IndiePop,
+        Speech,
+        DrumAndBass,
+        Trance,
+        Chanson,
+        Ethnic,
+        AcousticAndVocal,
+        Reggae,
+        Country,
+        EasyListening,
+        JazzAndBlues,
+        ElectropopAndDisco,
+        SoundTrack,
+        Other
+    }
+}
