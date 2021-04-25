@@ -25,4 +25,16 @@ namespace AnyListen.Music.Track
 
         // ReSharper disable once InconsistentNaming
         protected RelayCommand _openLinkCommand;
-        public virtual Rel
+        public virtual RelayCommand OpenLinkCommand
+        {
+            get { return _openLinkCommand ?? (_openLinkCommand = new RelayCommand(parameter => { Process.Start(Link); })); }
+        }
+
+        // ReSharper disable once InconsistentNaming
+        protected RelayCommand _openWebsiteCommand;
+        public virtual RelayCommand OpenWebsiteCommand
+        {
+            get { return _openWebsiteCommand ?? (_openWebsiteCommand = new RelayCommand(parameter => { Process.Start(Website); })); }
+        }
+    }
+}
