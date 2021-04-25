@@ -8,4 +8,21 @@ namespace AnyListen.Music.Track
     {
         public override TrackType TrackType => TrackType.Stream;
 
-        publ
+        public override bool TrackExists => true;
+
+        public abstract GeometryGroup ProviderVector { get; }
+        public string Uploader { get; set; }
+        public abstract string Link { get; }
+        public abstract string Website { get; }
+        public abstract bool IsInfinityStream { get; }
+        public string BitRate { get; set; }
+
+        //IDownloadable
+        public abstract string DownloadParameter { get; }
+        public abstract string DownloadFilename { get; }
+        public abstract Download.DownloadMethod DownloadMethod { get; }
+        public abstract bool CanDownload { get; }
+
+        // ReSharper disable once InconsistentNaming
+        protected RelayCommand _openLinkCommand;
+        public virtual Rel
