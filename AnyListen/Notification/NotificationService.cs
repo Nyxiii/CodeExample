@@ -55,4 +55,28 @@ namespace AnyListen.Notification
                     return;
             }
             messagewindow.Show();
-            _lastwindow = messagew
+            _lastwindow = messagewindow;
+        }
+
+        public void Test(NotificationType type)
+        {
+            PlayableBase trackToUse = _lasttrack ?? new LocalTrack
+            {
+                Artist = "Alkaline",
+                Title = "Sample Track",
+                Duration = "03:26",
+                kHz = 44,
+                Path = Assembly.GetExecutingAssembly().Location,
+                Extension = "MP3"
+            };
+            ShowNotification(trackToUse, type);
+        }
+    }
+
+    public enum NotificationType
+    {
+        None,
+        Top,
+        RightBottom
+    }
+}
