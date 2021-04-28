@@ -39,4 +39,20 @@ namespace AnyListen.Notification
         {
             ConfigSettings config = AnyListenSettings.Instance.Config;
             if (config.Notification == NotificationType.None) return;
-            if (_lastwindow !
+            if (_lastwindow != null && _lastwindow.Visibility == Visibility.Visible) _lastwindow.Close();
+            TimeSpan timetostayopen = TimeSpan.FromMilliseconds(config.NotificationShowTime);
+
+            Window messagewindow;
+            switch (type)
+            {
+                case NotificationType.Top:
+                    messagewindow = new NotificationTopWindow(track, timetostayopen);
+                    break;
+                case NotificationType.RightBottom:
+                    messagewindow = new NotificationRightBottomWindow(track, timetostayopen);
+                    break;
+                default:
+                    return;
+            }
+            messagewindow.Show();
+            _lastwindow = messagew
