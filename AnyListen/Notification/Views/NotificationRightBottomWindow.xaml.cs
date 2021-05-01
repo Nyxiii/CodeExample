@@ -21,4 +21,23 @@ namespace AnyListen.Notification.Views
             Width = SystemParameters.WorkArea.Width / 4;
             Left = SystemParameters.WorkArea.Width - Width;
             Closing += NotificationRightBottomWindow_Closing;
-     
+            MouseMove += NotificationRightBottomWindow_MouseMove;
+            Thread t = new Thread(() =>
+            {
+                Thread.Sleep(timestayopened);
+                if (!_isClosing) Application.Current.Dispatcher.Invoke(MoveOut);
+            }) { IsBackground = true };
+            t.Start();
+        }
+
+        private bool _isClosing;
+        private bool _canClose;
+        void NotificationRightBottomWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_isClosing) MoveOut();
+        }
+
+        void NotificationRightBottomWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (!_isClosing) MoveOut();
+            e.Cancel = !_ca
