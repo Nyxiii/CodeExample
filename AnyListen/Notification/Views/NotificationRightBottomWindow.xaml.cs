@@ -40,4 +40,28 @@ namespace AnyListen.Notification.Views
         void NotificationRightBottomWindow_Closing(object sender, CancelEventArgs e)
         {
             if (!_isClosing) MoveOut();
-            e.Cancel = !_ca
+            e.Cancel = !_canClose;
+        }
+
+        void MoveOut()
+        {
+            _isClosing = true;
+            DoubleAnimation animation = new DoubleAnimation(0.85, 0, TimeSpan.FromMilliseconds(300));
+
+            Storyboard story = new Storyboard();
+            story.Children.Add(animation);
+            Storyboard.SetTarget(animation, this);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(OpacityProperty));
+            story.Completed += story_Completed;
+            story.Begin(this);
+        }
+
+        void story_Completed(object sender, EventArgs e)
+        {
+            _canClose = true;
+            Close();
+        }
+
+        public PlayableBase CurrentTrack { get; set; }
+    }
+}
