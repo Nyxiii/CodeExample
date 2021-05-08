@@ -24,4 +24,20 @@ namespace AnyListen.Notification.WindowMessages
                 if (source == null) return;
                 source.AddHook(WndProc);
             };
-    
+        }
+        
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            switch (msg)
+            {
+                case WM_BRINGTOFRONT:
+                    if (BringWindowToFront != null) BringWindowToFront(this, EventArgs.Empty);
+                    break;
+                case WM_OPENMUSICFILE:
+                    if (PlayMusicFile != null)
+                    {
+                        CopyDataStruct st = (CopyDataStruct)Marshal.PtrToStructure(lParam, typeof(CopyDataStruct));
+                        string strData = Marshal.PtrToStringUni(st.lpData);
+                        PlayMusicFile(this, new PlayTrackEventArgs(strData));
+                    }
+                    brea
