@@ -40,4 +40,25 @@ namespace AnyListen.Notification.WindowMessages
                         string strData = Marshal.PtrToStringUni(st.lpData);
                         PlayMusicFile(this, new PlayTrackEventArgs(strData));
                     }
-                    brea
+                    break;
+            }
+            return IntPtr.Zero;
+        }
+
+        public static void SendMessageToWindow(IntPtr hwnd, int message, string parameter)
+        {
+            CopyDataStruct cds = new CopyDataStruct();
+            try
+            {
+                cds.cbData = (parameter.Length + 1) * 2;
+                cds.lpData = UnsafeNativeMethods.LocalAlloc(0x40, cds.cbData);
+                Marshal.Copy(parameter.ToCharArray(), 0, cds.lpData, parameter.Length);
+                cds.dwData = (IntPtr)1;
+                UnsafeNativeMethods.SendMessage(hwnd, message, IntPtr.Zero, ref cds);
+            }
+            finally
+            {
+                cds.Dispose();
+            }
+        }
+ 
