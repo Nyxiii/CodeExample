@@ -61,4 +61,15 @@ namespace AnyListen.Notification.WindowMessages
                 cds.Dispose();
             }
         }
- 
+    }
+
+    public class PlayTrackEventArgs : EventArgs
+    {
+        public string Filename { get; set; }
+
+        public PlayTrackEventArgs(string filename)
+        {
+            Filename = filename;
+        }
+    }
+}
