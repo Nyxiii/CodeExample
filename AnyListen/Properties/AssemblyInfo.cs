@@ -34,4 +34,22 @@ using System.Resources;
     ResourceDictionaryLocation.None, //Speicherort der designspezifischen Ressourcenwörterbücher
     //(wird verwendet, wenn eine Ressource auf der Seite
     // oder in den Anwendungsressourcen-Wörterbüchern nicht gefunden werden kann.)
-    ResourceDictionaryLocation.SourceAssembly //Speicherort des generischen Ressourcenwörterb
+    ResourceDictionaryLocation.SourceAssembly //Speicherort des generischen Ressourcenwörterbuchs
+    //(wird verwendet, wenn eine Ressource auf der Seite, in der Anwendung oder einem 
+    // designspezifischen Ressourcenwörterbuch nicht gefunden werden kann.)
+)]
+
+
+// Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
+//
+//      Hauptversion
+//      Nebenversion 
+//      Buildnummer
+//      Revision
+//
+// Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
+// übernehmen, indem Sie "*" eingeben:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.5.*")]
+[assembly: AssemblyFileVersion("1.0.5")]
+[assembly: NeutralResourcesLanguageAttribute("")]
