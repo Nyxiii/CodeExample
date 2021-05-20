@@ -26,4 +26,18 @@
         </Setter>
     </Style>
 
-    <Style x:Key="
+    <Style x:Key="SliderRepteatButton1" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource NormalColorBrush}" Background="{DynamicResource NormalColorBrush}" Height="5"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Slider" TargetTyp
