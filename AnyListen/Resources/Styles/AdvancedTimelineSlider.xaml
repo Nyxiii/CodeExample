@@ -55,4 +55,14 @@
                     <Thumb Style="{StaticResource SliderThumb}" x:Name="thumb"/>
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
-         
+                    <RepeatButton Style="{StaticResource SliderRepteatButton}" Command="Slider.IncreaseLarge"/>
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" From="1" To="0" Storyboard.TargetName="thumb" Storyboard.TargetProperty="Opacity"/>
+                            <DoubleAnimation Duration="0:0:0.0001" From="6" To="0" Storyboard.TargetName="thumb" Storyboard.Targe
