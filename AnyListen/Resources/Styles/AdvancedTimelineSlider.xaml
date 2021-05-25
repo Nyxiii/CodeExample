@@ -65,4 +65,17 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation Duration="0:0:0.1" From="1" To="0" Storyboard.TargetName="thumb" Storyboard.TargetProperty="Opacity"/>
-                            <DoubleAnimation Duration="0:0:0.0001" From="6" To="0" Storyboard.TargetName="thumb" Storyboard.Targe
+                            <DoubleAnimation Duration="0:0:0.0001" From="6" To="0" Storyboard.TargetName="thumb" Storyboard.TargetProperty="Width" BeginTime="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" From="0" To="1" Storyboard.TargetName="thumb" Storyboard.TargetProperty="Opacity"/>
+                            <DoubleAnimation Duration="0:0:0.0001" From="0" To="6" Storyboard.TargetName="thumb" Storyboard.TargetProperty="Width"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTempla
