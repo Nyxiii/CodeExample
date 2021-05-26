@@ -78,4 +78,19 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-        </ControlTempla
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AdvancedTimelineSlider" TargetType="Slider">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="MinHeight" Value="21" />
+                <Setter Property="MinWidth" Value="104" />
+                <Setter Property="Template" Value="{StaticResource Slider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
