@@ -43,3 +43,17 @@
                         </Viewbox>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="viewbox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="viewboxnot" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="viewbox" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="viewboxnot" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
