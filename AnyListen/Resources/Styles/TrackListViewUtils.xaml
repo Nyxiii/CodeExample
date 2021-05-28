@@ -4,4 +4,16 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:local="clr-namespace:AnyListen.Music.Track"
                     mc:Ignorable="d">
-    <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}" x:Key="ItemCon
+    <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}" x:Key="ItemContainerStyle" d:DataContext="{d:DesignInstance local:PlayableBase}">
+        <Setter Property="Padding" Value="0,4" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Border.BorderThickness" Value="0,0,0,0.5" />
+        <Setter Property="Border.BorderBrush" Value="LightGray" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsRemoving}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="0" Duration="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
+                        </Storyboard>
+                    </BeginStoryboar
