@@ -16,4 +16,18 @@
                         <Storyboard>
                             <DoubleAnimation To="0" Duration="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
                         </Storyboard>
-                    </BeginStoryboar
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsAdded}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation From="-10,0,10,0" To="0" Duration="0:0:0.5" Storyboard.TargetProperty="Margin" FillBehavior="Stop"/>
+                            <DoubleAnimation From="0.5" To="1" Duration="0:0:0.5" Storyboard.TargetProperty="Opacity" FillBehavior="Stop"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsChecked}" Value="False">
+               
