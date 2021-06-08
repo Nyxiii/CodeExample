@@ -13,4 +13,5 @@
     <SolidColorBrush x:Key="LightColorBrush" Color="{StaticResource LightColor}" options:Freeze="true"/>
     <SolidColorBrush x:Key="BrightColorBrush" Color="{StaticResource BrightColor}" options:Freeze="true"/>
     <SolidColorBrush x:Key="NormalColorBrush" Color="{StaticResource NormalColor}" options:Freeze="true"/>
-    <SolidColorBrush x:Key="DarkColorBrush" Color="{StaticResource
+    <SolidColorBrush x:Key="DarkColorBrush" Color="{StaticResource DarkColor}" options:Freeze="true"/>
+</ResourceDictionary>
