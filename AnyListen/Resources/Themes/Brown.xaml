@@ -8,4 +8,10 @@
     <Color x:Key="LightColor">#CCB58956</Color>
     <Color x:Key="BrightColor">#CCC29765</Color>
     <Color x:Key="NormalColor">#CC996C39</Color>
-    <Color x:Key="DarkColor">#CC4F3618</Co
+    <Color x:Key="DarkColor">#CC4F3618</Color>
+
+    <SolidColorBrush x:Key="LightColorBrush" Color="{StaticResource LightColor}" options:Freeze="true"/>
+    <SolidColorBrush x:Key="BrightColorBrush" Color="{StaticResource BrightColor}" options:Freeze="true"/>
+    <SolidColorBrush x:Key="NormalColorBrush" Color="{StaticResource NormalColor}" options:Freeze="true"/>
+    <SolidColorBrush x:Key="DarkColorBrush" Color="{StaticResource DarkColor}" options:Freeze="true"/>
+</ResourceDictionary>
