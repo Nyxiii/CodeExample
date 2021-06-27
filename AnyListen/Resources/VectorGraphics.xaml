@@ -17,3 +17,11 @@
                    x:Shared="False">
         <!--  https://www.iconfinder.com/icons/208024/audio_refresh_repeat_icon  -->
         <Geometry>F1 M 26.887,17.078 C 27.272,15.848 27.494,14.547 27.494,13.194 C 27.494,5.972 21.664,0.093 14.465,0.000 L 14.465,4.238 C 19.328,4.331 23.258,8.309 23.258,13.194 C 23.258,13.872 23.170,14.526 23.026,15.160 L 19.063,13.194 L 21.823,21.393 L 30.020,18.631 L 26.887,17.078 Z</Geometry>
+        <Geometry>F1 M 6.762,13.638 C 6.762,12.960 6.850,12.306 6.994,11.671 L 10.957,13.638 L 8.197,5.439 L 0.000,8.201 L 3.133,9.754 C 2.749,10.984 2.526,12.285 2.526,13.639 C 2.526,20.862 8.356,26.739 15.556,26.833 L 15.556,22.595 C 10.692,22.502 6.762,18.523 6.762,13.638 Z</Geometry>
+    </GeometryGroup>
+
+    <GeometryGroup x:Key="VectorEqualizer"
+                   options:Freeze="True"
+                   x:Shared="False">
+        <!--  https://www.iconfinder.com/icons/274899/adjustments_change_configuration_control_option_options_preferences_settings_technology_tools_icon  -->
+        <Geometry>F1 M 39.000,69.000 C 36.519,69.000 34.500,71.019 34.500,73.500 C 34.500,75.981 36.519,78
