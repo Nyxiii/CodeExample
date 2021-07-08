@@ -60,4 +60,12 @@
     <Geometry x:Key="VectorAdd"
               options:Freeze="True"
               x:Shared="False">
-        <!--  https://www.icon
+        <!--  https://www.iconfinder.com/icons/183316/add_plus_icon  -->
+        F1 M 8.000,16.000 C 3.582,16.000 0.000,12.418 0.000,8.000 C 0.000,3.582 3.582,0.000 8.000,0.000 C 12.418,0.000 16.000,3.582 16.000,8.000 C 16.000,12.418 12.418,16.000 8.000,16.000 Z M 4.000,7.000 L 4.000,9.000 L 7.000,9.000 L 7.000,12.000 L 9.000,12.000 L 9.000,9.000 L 12.000,9.000 L 12.000,7.000 L 9.000,7.000 L 9.000,4.000 L 7.000,4.000 L 7.000,7.000 L 4.000,7.000 Z
+    </Geometry>
+
+    <Geometry x:Key="VectorRemove"
+              options:Freeze="True"
+              x:Shared="False">
+        <!--  https://www.iconfinder.com/icons/183317/delete_minus_remove_icon  -->
+        F1 M 4.000,7.000 L 4.000,9.000 L 12.000,9.000 L 12.000,7.000 L 4.000,7.000 Z M 8.00
