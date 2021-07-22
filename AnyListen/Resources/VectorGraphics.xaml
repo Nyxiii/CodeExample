@@ -138,4 +138,18 @@
     </Geometry>
 
     <Geometry x:Key="VectorVolumeMedium"
-              options:Fr
+              options:Freeze="True"
+              x:Shared="False">
+        <!--  https://www.iconfinder.com/icons/208031/medium_speaker_volume_icon  -->
+        F1 M 0.000,3.364 C 0.459,6.597 0.459,9.880 0.000,13.113 C 0.621,13.202 1.242,13.290 1.863,13.379 C 2.347,9.969 2.347,6.508 1.863,3.099 C 1.242,3.187 0.621,3.275 0.000,3.364 Z
+    </Geometry>
+
+    <Geometry x:Key="VectorVolumeSpeaker"
+              options:Freeze="True"
+              x:Shared="False">
+        <!--  https://www.iconfinder.com/icons/208031/medium_speaker_volume_icon  -->
+        F1 M 0.000,3.364 L 0.000,12.201 L 4.789,12.201 L 11.978,15.565 L 11.978,12.201 L 11.978,3.364 L 11.978,0.000 L 4.789,3.364 L 0.000,3.364 Z
+    </Geometry>
+
+    <Geometry x:Key="VectorX"
+              option
