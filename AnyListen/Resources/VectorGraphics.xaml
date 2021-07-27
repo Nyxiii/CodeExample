@@ -181,4 +181,14 @@
     </Geometry>
 
     <Geometry x:Key="VectorEditor"
-          
+              options:Freeze="True"
+              x:Shared="False">
+        <!--  https://www.iconfinder.com/icons/284086/edit_editor_pen_pencil_write_icon  -->
+        F1 M 1.040,15.151 L 0.000,21.164 L 6.000,20.111 L 1.040,15.151 Z M 15.899,0.315 L 13.810,2.404 L 18.759,7.353 L 20.848,5.264 C 21.557,4.555 20.848,3.846 20.848,3.846 L 17.316,0.315 C 17.316,0.315 16.608,-0.394 15.899,0.315 Z M 1.735,14.478 L 6.685,19.428 L 17.999,8.114 L 13.049,3.165 L 1.735,14.478 Z
+    </Geometry>
+
+    <GeometryGroup x:Key="VectorRename"
+                   options:Freeze="True"
+                   x:Shared="False">
+        <!--  two words: self made!  -->
+        <Geometry>F1 M 59.910,26.735 L 2.500,26.735 C 1.400,26.735 0.500,25.835 0.500,
