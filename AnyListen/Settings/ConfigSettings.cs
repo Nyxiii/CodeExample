@@ -42,4 +42,30 @@ namespace AnyListen.Settings
         public int FileNameFormat { get; set; }
         public int FileFloderFormat { get; set; }
 
+        //Design
+        public ApplicationDesign ApplicationDesign { get; set; }
+
+        private bool _useThinHeaders;
+        public bool UseThinHeaders
+        {
+            get { return _useThinHeaders; }
+            set
+            {
+                SetProperty(value, ref _useThinHeaders);
+            }
+        }
         
+        private TransitionType _tabControlTransition;
+        public TransitionType TabControlTransition
+        {
+            get { return _tabControlTransition; }
+            set
+            {
+                SetProperty(value, ref _tabControlTransition);
+            }
+        }
+
+        //General
+        public string Language { get; set; }
+        public bool RememberTrackImportPlaylist { get; set; }
+  
