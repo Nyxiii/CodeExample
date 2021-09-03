@@ -68,4 +68,20 @@ namespace AnyListen.Settings
         //General
         public string Language { get; set; }
         public bool RememberTrackImportPlaylist { get; set; }
-  
+        public string PlaylistToImportTrack { get; set; }
+        public bool ShufflePreferFavoriteTracks { get; set; }
+        public bool ShowArtistAndTitle { get; set; }
+        public bool MinimizeToTray { get; set; }
+        public bool ShowNotificationIfMinimizeToTray { get; set; }
+        public bool ShowProgressInTaskbar { get; set; }
+
+        public List<PasswordEntry> Passwords { get; set; }
+
+        //Notifications
+        public NotificationType Notification { get; set; }
+        public bool DisableNotificationInGame { get; set; }
+        public int NotificationShowTime { get; set; }
+
+        //Music
+        public bool LoadAlbumCoverFromInternet { get; set; }
+        public ImageQuality DownloadAlbumCoverQuality { get; se
