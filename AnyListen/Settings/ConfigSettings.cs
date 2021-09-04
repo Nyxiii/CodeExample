@@ -84,4 +84,20 @@ namespace AnyListen.Settings
 
         //Music
         public bool LoadAlbumCoverFromInternet { get; set; }
-        public ImageQuality DownloadAlbumCoverQuality { get; se
+        public ImageQuality DownloadAlbumCoverQuality { get; set; }
+        public bool SaveCoverLocal { get; set; }
+        public bool TrimTrackname { get; set; }
+        public DownloadManager Downloader { get; set; }
+        public DownloadSettings DownloadSettings { get; set; }
+
+        //Updates
+        public bool CheckForAnyListenUpdates { get; set; }
+        public bool CheckForYoutubeDlUpdates { get; set; }
+
+        private List<LanguageInfo> _languages;
+        [XmlIgnore]
+        public List<LanguageInfo> Languages => _languages ?? (_languages = new List<LanguageInfo>
+        {
+            new LanguageInfo("简体中文", "/Resources/Languages/AnyListen.zh-cn.xaml",
+                new Uri("/Resources/Languages/Icons/cn.png", UriKind.Relative), "Shelher", "zh"),
+            new LanguageInfo("Deutsch", "/Resou
