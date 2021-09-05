@@ -100,4 +100,12 @@ namespace AnyListen.Settings
         {
             new LanguageInfo("简体中文", "/Resources/Languages/AnyListen.zh-cn.xaml",
                 new Uri("/Resources/Languages/Icons/cn.png", UriKind.Relative), "Shelher", "zh"),
-            new LanguageInfo("Deutsch", "/Resou
+            new LanguageInfo("Deutsch", "/Resources/Languages/AnyListen.de-de.xaml",
+                new Uri("/Resources/Languages/Icons/de.png", UriKind.Relative), "Alkaline", "de"),
+            new LanguageInfo("English", "/Resources/Languages/AnyListen.en-us.xaml",
+                new Uri("/Resources/Languages/Icons/us.png", UriKind.Relative), "Alkaline", "en"),
+            new LanguageInfo("Nederlands", "/Resources/Languages/AnyListen.nl-nl.xaml",
+                new Uri("/Resources/Languages/Icons/nl.png", UriKind.Relative), "DrawCase", "nl"),
+            new LanguageInfo("Suomi", "/Resources/Languages/AnyListen.fi-fi.xaml",
+                new Uri("/Resources/Languages/Icons/fi.png", UriKind.Relative), "Väinämö Vettenranta", "fi"),
+   
