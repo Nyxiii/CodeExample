@@ -108,4 +108,18 @@ namespace AnyListen.Settings
                 new Uri("/Resources/Languages/Icons/nl.png", UriKind.Relative), "DrawCase", "nl"),
             new LanguageInfo("Suomi", "/Resources/Languages/AnyListen.fi-fi.xaml",
                 new Uri("/Resources/Languages/Icons/fi.png", UriKind.Relative), "Väinämö Vettenranta", "fi"),
-   
+            new LanguageInfo("Russian", "/Resources/Languages/AnyListen.ru-ru.xaml",
+                new Uri("/Resources/Languages/Icons/ru.png", UriKind.Relative), "Barmin Alexander", "ru")
+        });
+
+        public override sealed void SetStandardValues()
+        {
+            SoundOutDeviceID = SoundOutManager.DefaultDevicePlaceholder;
+            DisableNotificationInGame = true;
+            ShowMagicArrowBelowCursor = true;
+            WaveSourceBits = 16;
+            SampleRate = -1;
+            var language = Languages.FirstOrDefault(x => x.Code == Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
+            Language = language == null ? "zh" : language.Code;
+            Notification = NotificationType.Top;
+            ApplicationDesign = ne
