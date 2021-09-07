@@ -122,4 +122,19 @@ namespace AnyListen.Settings
             var language = Languages.FirstOrDefault(x => x.Code == Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
             Language = language == null ? "zh" : language.Code;
             Notification = NotificationType.Top;
-            ApplicationDesign = ne
+            ApplicationDesign = new ApplicationDesign();
+            ApplicationDesign.SetStandard();
+            NotificationShowTime = 5000;
+            RememberTrackImportPlaylist = false;
+            PlaylistToImportTrack = null;
+            LoadAlbumCoverFromInternet = true;
+            DownloadAlbumCoverQuality = ImageQuality.Maximum;
+            SaveCoverLocal = true;
+            TrimTrackname = true;
+            ShowArtistAndTitle = true;
+            SoundOutMode = WasapiOut.IsSupportedOnCurrentPlatform ? SoundOutMode.WASAPI : SoundOutMode.DirectSound;
+            Latency = 100;
+            IsCrossfadeEnabled = false;
+            CrossfadeDuration = 4;
+            UseThinHeaders = true;
+         
