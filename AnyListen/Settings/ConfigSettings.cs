@@ -159,4 +159,20 @@ namespace AnyListen.Settings
         private ResourceDictionary _lastLanguage;
         public void LoadLanguage()
         {
-            i
+            if (_lastLanguage != null) Application.Current.Resources.MergedDictionaries.Remove(_lastLanguage);
+            _lastLanguage = new ResourceDictionary { Source = new Uri(Languages.First(x => x.Code == Language).Path, UriKind.Relative) };
+            Application.Current.Resources.MergedDictionaries.Add(_lastLanguage);
+        }
+
+        public override void Save(string programPath)
+        {
+            Save<ConfigSettings>(Path.Combine(programPath, Filename));
+        }
+
+        public static ConfigSettings Load(string programpath)
+        {
+            var fi = new FileInfo(Path.Combine(programpath, Filename));
+            ConfigSettings result;
+            if (!fi.Exists || string.IsNullOrWhiteSpace(File.ReadAllText(fi.FullName)))
+            {
+             
