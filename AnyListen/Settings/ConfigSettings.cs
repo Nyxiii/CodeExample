@@ -137,4 +137,26 @@ namespace AnyListen.Settings
             IsCrossfadeEnabled = false;
             CrossfadeDuration = 4;
             UseThinHeaders = true;
-         
+            MinimizeToTray = false;
+            ShowNotificationIfMinimizeToTray = true;
+            Downloader = new DownloadManager();
+            TabControlTransition = TransitionType.Left;
+            ShowProgressInTaskbar = true;
+            DownloadSettings = new DownloadSettings();
+            DownloadSettings.SetDefault();
+            CheckForAnyListenUpdates = true;
+            CheckForYoutubeDlUpdates = true;
+            Passwords = new List<PasswordEntry>();
+            FileNameFormat = 1;
+            DownloadBitrate = 1;
+        }
+
+        public ConfigSettings()
+        {
+            SetStandardValues();
+        }
+
+        private ResourceDictionary _lastLanguage;
+        public void LoadLanguage()
+        {
+            i
