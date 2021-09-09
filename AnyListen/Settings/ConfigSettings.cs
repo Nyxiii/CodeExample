@@ -203,4 +203,6 @@ namespace AnyListen.Settings
 
     public enum SoundOutMode
     {
-        Dire
+        DirectSound, WASAPI
+    }
+}
