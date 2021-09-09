@@ -175,4 +175,32 @@ namespace AnyListen.Settings
             ConfigSettings result;
             if (!fi.Exists || string.IsNullOrWhiteSpace(File.ReadAllText(fi.FullName)))
             {
-             
+                result = new ConfigSettings();
+            }
+            else
+            {
+                using (var reader = new StreamReader(Path.Combine(programpath, Filename)))
+                {
+                    var deserializer = new XmlSerializer(typeof(ConfigSettings));
+                    result = (ConfigSettings)deserializer.Deserialize(reader);
+                }
+            }
+            result.LoadLanguage();
+            return result;
+        }
+
+        protected bool CompareTwoValues(object v1, object v2)
+        {
+            if (v1 == null || v2 == null) return false;
+            return v1.Equals(v2);
+        }
+    }
+
+    public enum ImageQuality
+    {
+        Small, Medium, Large, Maximum
+    }
+
+    public enum SoundOutMode
+    {
+        Dire
