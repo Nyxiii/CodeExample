@@ -22,4 +22,30 @@ namespace AnyListen.Settings.Converter
                 case 24:
                     return 2;
                 case 32:
-         
+                    return 3;
+            }
+            throw new ArgumentException();
+        }
+
+        public static int IndexToBitrate(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                   return 8;
+                case 1:
+                    return 16;
+                case 2:
+                    return 24;
+                case 3:
+                    return 32;
+            }
+            throw new ArgumentException();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return IndexToBitrate(int.Parse(value.ToString()));
+        }
+    }
+}
