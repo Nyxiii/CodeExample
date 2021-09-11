@@ -22,4 +22,14 @@ namespace AnyListen.Settings.Converter
             return lcv;
         }
 
-        public object ConvertBack(object value, Type targetType, object parame
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+
+    public interface IGroupable
+    {
+        string Group { get; } 
+    }
+}
