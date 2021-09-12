@@ -36,4 +36,20 @@ namespace AnyListen.Settings.Converter
                     return -1; 
                 case 1:
                     return 44100; 
-                case 2
+                case 2:
+                    return 48000; 
+                case 3:
+                    return 88200; 
+                case 4:
+                    return 96000; 
+                case 5:
+                    return 96000; 
+                case 6:
+                    return 176400; 
+                case 7:
+                    return 192000; 
+            }
+            throw new ArgumentException();
+        }
+    }
+}
