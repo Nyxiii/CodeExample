@@ -27,4 +27,31 @@ namespace AnyListen.Settings
         public int MainTabControlIndex { get; set; }
 
         private bool _equalizerIsOpen;
-        public bool EqualizerIsOp
+        public bool EqualizerIsOpen
+        {
+            get { return _equalizerIsOpen; }
+            set
+            {
+                SetProperty(value, ref _equalizerIsOpen);
+            }
+        }
+
+        public CurrentState()
+        {
+            SetStandardValues();
+        }
+
+        public override sealed void SetStandardValues()
+        {
+            LastPlaylistIndex = -10;
+            LastTrackIndex = -1;
+            TrackPosition = 0;
+            Volume = 1.0f;
+            SelectedPlaylist = 0;
+            SelectedTrack = -1;
+            IsLoopEnabled = false;
+            IsShuffleEnabled = false;
+            ApplicationState = null;
+            EqualizerSettings = new EqualizerSettings();
+            EqualizerSettings.CreateNew();
+     
