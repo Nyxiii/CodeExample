@@ -54,4 +54,24 @@ namespace AnyListen.Settings
             ApplicationState = null;
             EqualizerSettings = new EqualizerSettings();
             EqualizerSettings.CreateNew();
-     
+            MainTabControlIndex = 0;
+        }
+
+        public static CurrentState Load(string programpath)
+        {
+            var fi = new FileInfo(Path.Combine(programpath, Filename));
+            if (!fi.Exists || string.IsNullOrWhiteSpace(File.ReadAllText(fi.FullName))) return new CurrentState();
+
+            using (var reader = new StreamReader(Path.Combine(programpath, Filename)))
+            {
+                var deserializer = new XmlSerializer(typeof(CurrentState));
+                return (CurrentState)deserializer.Deserialize(reader);
+            }
+        }
+
+        public override void Save(string programPath)
+        {
+            Save<CurrentState>(Path.Combine(programPath, Filename));
+        }
+    }
+}
