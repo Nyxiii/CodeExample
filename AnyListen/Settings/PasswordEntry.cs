@@ -19,4 +19,28 @@ namespace AnyListen.Settings
         public string Field12Serialize
         {
             get { return EncryptString(Field1); }
-            set { Fiel
+            set { Field1 = DecryptString(value); }
+        }
+
+        [XmlElement(ElementName = "Field2")]
+        public string Field22Serialize
+        {
+            get { return EncryptString(Field2); }
+            set { Field2 = DecryptString(value); }
+        }
+
+        private string EncryptString(string str)
+        {
+            return
+                Convert.ToBase64String(Encoding.BigEndianUnicode.GetBytes(Rot17.Encrypt(str)))
+                    .ToCharArray()
+                    .Select(x => $"{(int) x:X}")
+                    .Aggregate(new StringBuilder(), (x, y) => x.Append(y))
+                    .ToString();
+        }
+
+        private string DecryptString(string str)
+        {
+            return
+                Rot17.Decrypt(
+             
