@@ -43,4 +43,13 @@ namespace AnyListen.Settings
         {
             return
                 Rot17.Decrypt(
-             
+                    (Encoding.BigEndianUnicode.GetString(
+                        Convert.FromBase64String(
+                            Enumerable.Range(0, str.Length/2)
+                                .Select(i => str.Substring(i*2, 2))
+                                .Select(x => (char) Convert.ToInt32(x, 16))
+                                .Aggregate(new StringBuilder(), (x, y) => x.Append(y))
+                                .ToString()))));
+        }
+    }
+}
