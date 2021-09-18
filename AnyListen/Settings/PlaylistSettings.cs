@@ -29,4 +29,21 @@ namespace AnyListen.Settings
             tempFile.MoveTo(settingsFile.FullName);
         }
 
-        public static PlaylistSettin
+        public static PlaylistSettings Load(string programpath)
+        {
+            var fi = new FileInfo(Path.Combine(programpath, Filename));
+            if (!fi.Exists || string.IsNullOrWhiteSpace(File.ReadAllText(fi.FullName)))
+            {
+                var result = new PlaylistSettings();
+                result.SetStandardValues();
+                return result;
+            }
+
+            using (StreamReader reader = new StreamReader(fi.FullName))
+            {
+                var deserializer = new XmlSerializer(typeof(PlaylistSettings));
+                return (PlaylistSettings)deserializer.Deserialize(reader);
+            }
+        }
+    }
+}
