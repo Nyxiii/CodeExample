@@ -67,3 +67,21 @@ namespace AnyListen.Settings.RegistryManager
             this._standardname = standardname;
             this._header = header;
             this._apppath = apppath;
+            this._iconpath = iconpath;
+        }
+
+        protected bool HavePermissionsOnKey(RegistryPermissionAccess accessLevel, string key)
+        {
+            try
+            {
+                RegistryPermission r = new RegistryPermission(accessLevel, key);
+                r.Demand();
+                return true;
+            }
+            catch (SecurityException)
+            {
+                return false;
+            }
+        }
+    }
+}
