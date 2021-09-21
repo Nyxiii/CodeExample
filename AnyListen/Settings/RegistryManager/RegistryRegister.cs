@@ -14,4 +14,18 @@ namespace AnyListen.Settings.RegistryManager
         /// <param name="name">The name of the subkey</param>
         /// <param name="applicationpath">The path with paramters</param>
         /// <param name="iconpath">The path of the icon</param>
-        /// <returns>Fals
+        /// <returns>False if the user doesn't have access</returns>
+        public static void RegisterExtension(string extension, string header, string name, string applicationpath, string iconpath)
+        {
+            using (RegistryKey extensionkey = GetClassesRoot().OpenSubKey(extension))
+            {
+                string keytoadd = extensionkey.GetValue("", string.Empty).ToString();
+
+                using (RegistryKey rootkey = Registry.ClassesRoot.OpenSubKey(keytoadd))
+                {
+                    using (RegistryKey shellkey = rootkey.OpenSubKey("shell", true))
+                    {
+                        using (RegistryKey subkey = shellkey.CreateSubKey(name))
+                        {
+                            subkey.SetValue("", header);
+ 
