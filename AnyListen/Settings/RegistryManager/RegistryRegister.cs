@@ -28,4 +28,19 @@ namespace AnyListen.Settings.RegistryManager
                         using (RegistryKey subkey = shellkey.CreateSubKey(name))
                         {
                             subkey.SetValue("", header);
- 
+                            subkey.SetValue("Icon", iconpath);
+                            var commandkey = subkey.CreateSubKey("command");
+                            commandkey.SetValue("", applicationpath);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes an item from the windows explorer context menu
+        /// </summary>
+        /// <param name="extension">The file extension (like .mp3)</param>
+        /// <param name="name">The name of the subkey</param>
+        /// <returns>False if the user doesn't have access</returns>
+        publi
