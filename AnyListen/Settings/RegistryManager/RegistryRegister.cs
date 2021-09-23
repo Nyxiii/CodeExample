@@ -43,4 +43,24 @@ namespace AnyListen.Settings.RegistryManager
         /// <param name="extension">The file extension (like .mp3)</param>
         /// <param name="name">The name of the subkey</param>
         /// <returns>False if the user doesn't have access</returns>
-        publi
+        public static void UnregisterExtension(string extension, string name)
+        {
+            using (RegistryKey extensionkey = GetClassesRoot().OpenSubKey(extension))
+            {
+                string keytoadd = extensionkey.GetValue("", string.Empty).ToString();
+
+                using (RegistryKey rootkey = Registry.ClassesRoot.OpenSubKey(keytoadd))
+                {
+                    using (RegistryKey shellkey = rootkey.OpenSubKey("shell", true))
+                    {
+                        shellkey.DeleteSubKeyTree(name, false);
+                    }
+                }
+            }
+        }
+
+        protected static RegistryKey GetClassesRoot()
+        {
+            if (Environment.Is64BitOperatingSystem)
+            {
+ 
