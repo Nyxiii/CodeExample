@@ -63,4 +63,20 @@ namespace AnyListen.Settings.RegistryManager
         {
             if (Environment.Is64BitOperatingSystem)
             {
- 
+               return RegistryKey.OpenBaseKey(RegistryHive.ClassesRoot, RegistryView.Registry64);
+            }
+            else
+            {
+                return RegistryKey.OpenBaseKey(RegistryHive.ClassesRoot, RegistryView.Registry32);
+            }
+        }
+
+
+        public static bool CheckIfExtensionExists(string extension, string name)
+        {
+            using (RegistryKey extensionkey = GetClassesRoot().OpenSubKey(extension, RegistryKeyPermissionCheck.Default, RegistryRights.ReadKey))
+            {
+                if (extensionkey == null) return false;
+                string keytoadd = extensionkey.GetValue("", string.Empty).ToString();
+
+                using (RegistryKey rootkey = Registry.ClassesRoot.OpenSubKey(k
