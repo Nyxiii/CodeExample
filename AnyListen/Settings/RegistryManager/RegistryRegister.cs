@@ -79,4 +79,15 @@ namespace AnyListen.Settings.RegistryManager
                 if (extensionkey == null) return false;
                 string keytoadd = extensionkey.GetValue("", string.Empty).ToString();
 
-                using (RegistryKey rootkey = Registry.ClassesRoot.OpenSubKey(k
+                using (RegistryKey rootkey = Registry.ClassesRoot.OpenSubKey(keytoadd, RegistryKeyPermissionCheck.Default, RegistryRights.ReadKey))
+                {
+                    using (RegistryKey shellkey = rootkey.OpenSubKey("shell", RegistryKeyPermissionCheck.Default, RegistryRights.ReadKey))
+                    {
+                        var key = shellkey.OpenSubKey(name, RegistryKeyPermissionCheck.Default, RegistryRights.ReadKey);
+                        return key != null;
+                    }
+                }
+            }
+        }
+    }
+}
