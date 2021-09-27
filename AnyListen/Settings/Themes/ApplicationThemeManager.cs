@@ -42,4 +42,19 @@ namespace AnyListen.Settings.Themes
 
         public void Refresh()
         {
-            _accent
+            _accentColors = new ObservableCollection<AccentColorBase>();
+            _appThemes = new ObservableCollection<AppThemeBase>();
+            _themePacks = new ObservableCollection<ThemePack>();
+            _audioVisualisations = new ObservableCollection<IAudioVisualisationContainer>();
+
+            foreach (var t in ThemeManager.Accents.Select(a => new AccentColor { Name = a.Name }).OrderBy(x => x.TranslatedName))
+            {
+                _accentColors.Add(t);
+            }
+
+            foreach (var t in ThemeManager.AppThemes.Select(a => new AppTheme { Name = a.Name }).OrderBy(x => x.TranslatedName))
+            {
+                _appThemes.Add(t);
+            }
+
+            foreach (var defaultAudioVisuali
