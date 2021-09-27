@@ -26,4 +26,20 @@ namespace AnyListen.Settings.Themes
             _loadedResources = new Dictionary<string, ResourceDictionary>();
         }
 
-        #endreg
+        #endregion
+
+        private ObservableCollection<AccentColorBase> _accentColors;
+        public ObservableCollection<AccentColorBase> AccentColors => _accentColors;
+
+        private ObservableCollection<AppThemeBase> _appThemes;
+        public ObservableCollection<AppThemeBase> AppThemes => _appThemes;
+
+        private ObservableCollection<ThemePack> _themePacks;
+        public ObservableCollection<ThemePack> ThemePacks => _themePacks;
+
+        private ObservableCollection<IAudioVisualisationContainer> _audioVisualisations;
+        public ObservableCollection<IAudioVisualisationContainer> AudioVisualisations => _audioVisualisations;
+
+        public void Refresh()
+        {
+            _accent
