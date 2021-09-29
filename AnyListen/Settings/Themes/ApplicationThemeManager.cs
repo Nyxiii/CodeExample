@@ -74,4 +74,23 @@ namespace AnyListen.Settings.Themes
                 }
             }
 
-            var appThemesFolder = new DirectoryInfo(AnyListenSettings.Paths
+            var appThemesFolder = new DirectoryInfo(AnyListenSettings.Paths.AppThemesDirectory);
+            if (appThemesFolder.Exists)
+            {
+                foreach (var file in appThemesFolder.GetFiles("*.xaml"))
+                {
+                    CustomAppTheme theme;
+                    if (CustomAppTheme.FromFile(file.FullName, out theme))
+                        _appThemes.Add(theme);
+                }
+            }
+
+            var themePacksFolder = new DirectoryInfo(AnyListenSettings.Paths.ThemePacksDirectory);
+            if (themePacksFolder.Exists)
+            {
+                foreach (var file in themePacksFolder.GetFiles("*.htp"))
+                {
+                    ThemePack pack;
+                    if (ThemePack.FromFile(file.FullName, out pack))
+                    {
+      
