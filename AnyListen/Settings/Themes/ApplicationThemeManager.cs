@@ -57,4 +57,21 @@ namespace AnyListen.Settings.Themes
                 _appThemes.Add(t);
             }
 
-            foreach (var defaultAudioVisuali
+            foreach (var defaultAudioVisualisation in ApplicationDesign.DefaultAudioVisualisations)
+            {
+                _audioVisualisations.Add(defaultAudioVisualisation);
+            }
+
+            var accentColorsFolder = new DirectoryInfo(AnyListenSettings.Paths.AccentColorsDirectory);
+            if (accentColorsFolder.Exists)
+            {
+                foreach (var file in accentColorsFolder.GetFiles("*.xaml"))
+                {
+                    CustomAccentColor theme;
+
+                    if (CustomAccentColor.FromFile(file.FullName, out theme))
+                        _accentColors.Add(theme);
+                }
+            }
+
+            var appThemesFolder = new DirectoryInfo(AnyListenSettings.Paths
