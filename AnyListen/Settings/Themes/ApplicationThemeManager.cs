@@ -93,4 +93,30 @@ namespace AnyListen.Settings.Themes
                     ThemePack pack;
                     if (ThemePack.FromFile(file.FullName, out pack))
                     {
-      
+                        _themePacks.Add(pack);
+                    }
+                }
+            }
+
+            var audioVisualisations = new DirectoryInfo(AnyListenSettings.Paths.AudioVisualisationsDirectory);
+            if (audioVisualisations.Exists)
+            {
+                foreach (var file in audioVisualisations.GetFiles("*.dll"))
+                {
+                    _audioVisualisations.Add(new CustomAudioVisualisation { FileName = file.Name });
+                }
+            }
+        }
+
+        public ThemePack GetThemePack(string name)
+        {
+            return null;
+        }
+
+        public void Apply(ApplicationDesign design)
+        {
+            try
+            {
+                design.AccentColor.ApplyTheme();
+            }
+            catch (E
