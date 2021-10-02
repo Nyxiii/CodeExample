@@ -119,4 +119,26 @@ namespace AnyListen.Settings.Themes
             {
                 design.AccentColor.ApplyTheme();
             }
-            catch (E
+            catch (Exception)
+            {
+                design.AccentColor = AccentColors.First(x => x.Name == "Blue");
+                design.AccentColor.ApplyTheme();
+            }
+
+            try
+            {
+                design.AppTheme.ApplyTheme();
+            }
+            catch (Exception)
+            {
+                design.AppTheme = AppThemes.First();
+                design.AppTheme.ApplyTheme();
+            }
+
+            if (design.AudioVisualisation != null)
+                design.AudioVisualisation.Visualisation.Refresh();
+        }
+
+        private readonly Dictionary<string, ResourceDictionary> _loadedResources;
+        public void LoadResource(string key, ResourceDictionary resource)
+    
