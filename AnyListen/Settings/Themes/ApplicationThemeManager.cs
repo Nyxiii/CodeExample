@@ -141,4 +141,16 @@ namespace AnyListen.Settings.Themes
 
         private readonly Dictionary<string, ResourceDictionary> _loadedResources;
         public void LoadResource(string key, ResourceDictionary resource)
-    
+        {
+            Application.Current.Resources.MergedDictionaries.Add(resource);
+
+            if (_loadedResources.ContainsKey(key))
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(_loadedResources[key]);
+                _loadedResources.Remove(key);
+            }
+
+            _loadedResources.Add(key, resource);
+        }
+    }
+}
