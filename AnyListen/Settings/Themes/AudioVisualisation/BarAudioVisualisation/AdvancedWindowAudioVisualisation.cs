@@ -12,4 +12,33 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.BarAudioVisualisation
 
         public void Enable()
         {
-     
+            if (_spectrumAnalyzer != null) _spectrumAnalyzer.RefreshInterval = 20;
+        }
+
+        public void Disable()
+        {
+            if (_spectrumAnalyzer != null) _spectrumAnalyzer.RefreshInterval = int.MaxValue;
+        }
+
+        public void Dispose()
+        {
+            _spectrumAnalyzer = null;
+        }
+
+        private ISpectrumProvider _spectrumProvider;
+        public ISpectrumProvider SpectrumProvider
+        {
+            set { _spectrumProvider = value; }
+        }
+
+        private ColorInformation _colorInformation;
+        public ColorInformation ColorInformation
+        {
+            set { _colorInformation = value; }
+        }
+
+        public UIElement VisualElement
+        {
+            get
+            {
+  
