@@ -52,4 +52,14 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.BarAudioVisualisation
                     style.Setters.Add(new Setter(SpectrumAnalyzer.BarStyleProperty, barStyle));
 
                     var peakStyle = new Style(typeof(Rectangle));
-                    
+                    peakStyle.Setters.Add(new Setter(Shape.FillProperty, _colorInformation.AccentBrush));
+                    style.Setters.Add(new Setter(SpectrumAnalyzer.PeakStyleProperty, peakStyle));
+
+                    _spectrumAnalyzer = new SpectrumAnalyzer { BarCount = 50, Style = style, RefreshInterval = 20 };
+                    _spectrumAnalyzer.RegisterSoundPlayer(new SpectrumPlayerWrapper(_spectrumProvider));
+                }
+                return _spectrumAnalyzer;
+            }
+        }
+    }
+}
