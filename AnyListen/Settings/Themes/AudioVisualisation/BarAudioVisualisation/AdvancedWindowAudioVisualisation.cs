@@ -41,4 +41,15 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.BarAudioVisualisation
         {
             get
             {
-  
+                if (_spectrumAnalyzer == null)
+                {
+                    var style = new Style(typeof(SpectrumAnalyzer));
+
+                    var barStyle = new Style(typeof(Rectangle));
+                    barStyle.Setters.Add(new Setter(Shape.FillProperty, _colorInformation.GrayBrush));
+                    barStyle.Setters.Add(new Setter(Shape.StrokeDashArrayProperty, new DoubleCollection(new double[] { 4, 4 })));
+                    barStyle.Setters.Add(new Setter(Shape.StrokeThicknessProperty, (double)1));
+                    style.Setters.Add(new Setter(SpectrumAnalyzer.BarStyleProperty, barStyle));
+
+                    var peakStyle = new Style(typeof(Rectangle));
+                    
