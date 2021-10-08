@@ -18,4 +18,19 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.BarAudioVisualisation
                                                                       (_advancedAudioVisualisation = new AdvancedWindowAudioVisualisation());
 
             private IAudioVisualisation _smartWindowAudioVisualisation;
-            public IAudioVisualisation SmartWindowVisualisation =>
+            public IAudioVisualisation SmartWindowVisualisation => _smartWindowAudioVisualisation ??
+                                                                   (_smartWindowAudioVisualisation = new SmartWindowAudioVisualisation());
+
+            public string Creator => "Akaline";
+
+            private GeometryGroup _thumbnail;
+            public GeometryGroup Thumbnail
+            {
+                get
+                {
+                    if (_thumbnail == null)
+                    {
+                        var values = new[]
+                        {
+                            "F1 M 0.000,47.385 L 4.167,47.385 L 4.167,56.696 L 0.000,56.696 L 0.000,47.385 Z",
+                            "F1 M 0.000,41.991 L 4.167,41.991 L 4.167,45.236 L 0.0
