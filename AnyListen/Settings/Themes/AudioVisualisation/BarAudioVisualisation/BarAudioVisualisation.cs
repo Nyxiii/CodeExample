@@ -52,4 +52,22 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.BarAudioVisualisation
                             "F1 M 50.001,30.653 L 54.167,30.653 L 54.167,56.695 L 50.001,56.695 L 50.001,30.653 Z",
                             "F1 M 56.251,27.268 L 60.417,27.268 L 60.417,56.696 L 56.251,56.696 L 56.251,27.268 Z",
                             "F1 M 18.750,42.198 L 22.917,42.198 L 22.917,56.695 L 18.750,56.695 L 18.750,42.198 Z"
-    
+                        };
+                        _thumbnail = new GeometryGroup();
+                        foreach (var value in values)
+                        {
+                            _thumbnail.Children.Add(Geometry.Parse(value));
+                        }
+                        _thumbnail.Freeze();
+                    }
+                    return _thumbnail;
+                }
+            }
+
+            public void Refresh()
+            {
+                if (_advancedAudioVisualisation != null) _advancedAudioVisualisation.Dispose();
+                if (_smartWindowAudioVisualisation != null) _smartWindowAudioVisualisation.Disable();
+
+                _advancedAudioVisualisation = null;
+                _smartWindowAudioV
