@@ -70,4 +70,8 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.BarAudioVisualisation
                 if (_smartWindowAudioVisualisation != null) _smartWindowAudioVisualisation.Disable();
 
                 _advancedAudioVisualisation = null;
-                _smartWindowAudioV
+                _smartWindowAudioVisualisation = null;
+            }
+        }
+    }
+}
