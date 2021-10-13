@@ -22,4 +22,28 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.RectangleVisualisation
 
         public void Dispose()
         {
-            _spectrumA
+            _spectrumAnalyzer = null;
+        }
+
+        private ISpectrumProvider _spectrumProvider;
+        public ISpectrumProvider SpectrumProvider
+        {
+            set { _spectrumProvider = value; }
+        }
+
+        private ColorInformation _colorInformation;
+        public ColorInformation ColorInformation
+        {
+            set { _colorInformation = value; }
+        }
+
+        public UIElement VisualElement
+        {
+            get
+            {
+                if (_spectrumAnalyzer == null)
+                {
+                    var fillColor = _colorInformation.AccentColor;
+                    var fillBrush = new SolidColorBrush(fillColor);
+                    var style = new Style(typeof(SpectrumAnalyzer));
+                    var ba
