@@ -56,4 +56,15 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.RectangleVisualisation
                             Viewport = new Rect(0, 0, 5.5, 5.5),
                             ViewportUnits = BrushMappingMode.Absolute,
                             Viewbox = new Rect(0, 0, 5.5, 5.5),
-                            V
+                            ViewboxUnits = BrushMappingMode.Absolute
+                        }));
+                    barStyle.Setters.Add(new Setter(UIElement.SnapsToDevicePixelsProperty, true));
+
+                    style.Setters.Add(new Setter(SpectrumAnalyzer.BarStyleProperty, barStyle));
+
+                    var peakStyle = new Style(typeof(Rectangle));
+                    peakStyle.Setters.Add(new Setter(Shape.FillProperty, fillBrush));
+                    peakStyle.Setters.Add(new Setter(UIElement.SnapsToDevicePixelsProperty, true));
+                    peakStyle.Setters.Add(new Setter(Rectangle.RadiusXProperty, .8d));
+                    peakStyle.Setters.Add(new Setter(Rectangle.RadiusYProperty, .8d));
+            
