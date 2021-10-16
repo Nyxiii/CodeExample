@@ -46,4 +46,14 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.RectangleVisualisation
                     var fillColor = _colorInformation.AccentColor;
                     var fillBrush = new SolidColorBrush(fillColor);
                     var style = new Style(typeof(SpectrumAnalyzer));
-                    var ba
+                    var barStyle = new Style(typeof(Rectangle));
+                    barStyle.Setters.Add(new Setter(UIElement.RenderTransformOriginProperty, new Point(.5, .5)));
+                    barStyle.Setters.Add(new Setter(UIElement.RenderTransformProperty, new RotateTransform(-180)));
+                    barStyle.Setters.Add(new Setter(Shape.FillProperty,
+                        new VisualBrush(new Rectangle { Width = 10, Height = 3, Fill = fillBrush })
+                        {
+                            TileMode = TileMode.Tile,
+                            Viewport = new Rect(0, 0, 5.5, 5.5),
+                            ViewportUnits = BrushMappingMode.Absolute,
+                            Viewbox = new Rect(0, 0, 5.5, 5.5),
+                            V
