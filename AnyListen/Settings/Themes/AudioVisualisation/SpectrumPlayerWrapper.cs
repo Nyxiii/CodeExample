@@ -16,4 +16,21 @@ namespace AnyListen.Settings.Themes.AudioVisualisation
 
         void _spectrumProvider_PlayStateChanged(object sender, EventArgs e)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new Pr
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("IsPlaying"));
+        }
+
+        public bool GetFFTData(float[] fftDataBuffer)
+        {
+            return _spectrumProvider.GetFFTData(fftDataBuffer);
+        }
+
+        public int GetFFTFrequencyIndex(int frequency)
+        {
+            return _spectrumProvider.GetFFTFrequencyIndex(frequency);
+        }
+
+        public bool IsPlaying => _spectrumProvider.IsPlaying;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+}
