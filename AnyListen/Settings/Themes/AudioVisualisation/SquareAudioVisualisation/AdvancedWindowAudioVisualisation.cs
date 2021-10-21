@@ -31,4 +31,21 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.SquareAudioVisualisation
             set { _spectrumProvider = value; }
         }
 
-        private Colo
+        private ColorInformation _colorInformation;
+        public ColorInformation ColorInformation
+        {
+            set { _colorInformation = value; }
+        }
+
+        public UIElement VisualElement
+        {
+            get
+            {
+                if (_spectrumAnalyzer == null)
+                {
+                    var style = new Style(typeof(SpectrumAnalyzer));
+                    var barStyle = new Style(typeof(Rectangle));
+                    barStyle.Setters.Add(new Setter(UIElement.RenderTransformOriginProperty, new Point(.5, .5)));
+                    barStyle.Setters.Add(new Setter(UIElement.RenderTransformProperty, new RotateTransform(-180)));
+                    barStyle.Setters.Add(new Setter(Shape.FillProperty,
+         
