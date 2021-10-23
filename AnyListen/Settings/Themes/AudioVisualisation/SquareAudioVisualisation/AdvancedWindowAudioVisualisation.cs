@@ -60,4 +60,16 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.SquareAudioVisualisation
 
                     style.Setters.Add(new Setter(SpectrumAnalyzer.BarStyleProperty, barStyle));
 
-                    var peak
+                    var peakStyle = new Style(typeof(Rectangle));
+                    peakStyle.Setters.Add(new Setter(Shape.FillProperty, _colorInformation.AccentBrush));
+                    peakStyle.Setters.Add(new Setter(UIElement.SnapsToDevicePixelsProperty, true));
+                    style.Setters.Add(new Setter(SpectrumAnalyzer.PeakStyleProperty, peakStyle));
+
+                    _spectrumAnalyzer = new SpectrumAnalyzer { BarCount = 50, Style = style, RefreshInterval = 20 };
+                    _spectrumAnalyzer.RegisterSoundPlayer(new SpectrumPlayerWrapper(_spectrumProvider));
+                }
+                return _spectrumAnalyzer;
+            }
+        }
+    }
+}
