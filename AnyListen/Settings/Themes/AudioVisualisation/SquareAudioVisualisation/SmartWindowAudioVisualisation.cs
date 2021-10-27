@@ -59,4 +59,18 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.SquareAudioVisualisation
                         }));
                     barStyle.Setters.Add(new Setter(UIElement.SnapsToDevicePixelsProperty, true));
 
-                    style.Setters.Add(new Setter(S
+                    style.Setters.Add(new Setter(SpectrumAnalyzer.BarStyleProperty, barStyle));
+
+                    var peakStyle = new Style(typeof(Rectangle));
+                    peakStyle.Setters.Add(new Setter(Shape.FillProperty, _colorInformation.AccentBrush));
+                    peakStyle.Setters.Add(new Setter(UIElement.SnapsToDevicePixelsProperty, true));
+                    style.Setters.Add(new Setter(SpectrumAnalyzer.PeakStyleProperty, peakStyle));
+
+                    _spectrumAnalyzer = new SpectrumAnalyzer { BarCount = 32, Style = style, RefreshInterval = 20 };
+                    _spectrumAnalyzer.RegisterSoundPlayer(new SpectrumPlayerWrapper(_spectrumProvider));
+                }
+                return _spectrumAnalyzer;
+            }
+        }
+    }
+}
