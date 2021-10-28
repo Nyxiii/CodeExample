@@ -14,4 +14,19 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.SquareAudioVisualisation
         public class AudioVisualisationPlugin : IAudioVisualisationPlugin
         {
             private IAudioVisualisation _advancedAudioVisualisation;
-            public IAudioVisualisation AdvancedWindowVisualisation =>
+            public IAudioVisualisation AdvancedWindowVisualisation => _advancedAudioVisualisation ??
+                                                                      (_advancedAudioVisualisation = new AdvancedWindowAudioVisualisation());
+
+            private IAudioVisualisation _smartWindowAudioVisualisation;
+            public IAudioVisualisation SmartWindowVisualisation => _smartWindowAudioVisualisation ??
+                                                                   (_smartWindowAudioVisualisation = new SmartWindowAudioVisualisation());
+
+            public string Creator => "Akaline";
+
+            private GeometryGroup _thumbnail;
+            public GeometryGroup Thumbnail
+            {
+                get
+                {
+                    if (_thumbnail == null)
+                  
