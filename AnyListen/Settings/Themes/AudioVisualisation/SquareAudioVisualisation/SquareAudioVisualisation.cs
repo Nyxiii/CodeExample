@@ -76,4 +76,21 @@ namespace AnyListen.Settings.Themes.AudioVisualisation.SquareAudioVisualisation
                         foreach (var value in values)
                         {
                             _thumbnail.Children.Add(Geometry.Parse(value));
-        
+                        }
+                        _thumbnail.Freeze();
+                    }
+                    return _thumbnail;
+                }
+            }
+
+            public void Refresh()
+            {
+                if (_advancedAudioVisualisation != null) _advancedAudioVisualisation.Dispose();
+                if (_smartWindowAudioVisualisation != null) _smartWindowAudioVisualisation.Disable();
+
+                _advancedAudioVisualisation = null;
+                _smartWindowAudioVisualisation = null;
+            }
+        }
+    }
+}
