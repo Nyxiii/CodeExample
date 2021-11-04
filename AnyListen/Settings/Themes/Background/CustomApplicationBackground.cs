@@ -28,4 +28,30 @@ namespace AnyListen.Settings.Themes.Background
             }
         }
 
-        public Uri GetB
+        public Uri GetBackground()
+        {
+            return new Uri(BackgroundPath);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            var other = obj as CustomApplicationBackground;
+            return Equals(other);
+        }
+
+        public bool IsAnimated => GeneralHelper.IsVideo(BackgroundPath);
+
+        public bool IsAvailable => File.Exists(BackgroundPath);
+
+
+        public string DisplayText => BackgroundPath;
+    }
+
+    public enum TextColor
+    {
+        Black,
+        White,
+        Normal
+    }
+}
