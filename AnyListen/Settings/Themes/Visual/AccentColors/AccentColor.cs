@@ -28,4 +28,7 @@ namespace AnyListen.Settings.Themes.Visual.AccentColors
         public override string Group => Application.Current.Resources["Default"].ToString();
 
         [XmlIgnore]
-        public override 
+        public override ResourceDictionary ResourceDictionary => new ResourceDictionary { Source = new Uri(
+            $"/Resources/Themes/{Name}.xaml", UriKind.Relative) };
+    }
+}
