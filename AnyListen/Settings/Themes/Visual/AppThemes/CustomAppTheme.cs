@@ -26,4 +26,22 @@ namespace AnyListen.Settings.Themes.Visual.AppThemes
             catch (XamlParseException)
             {
                 result = null;
-                return fals
+                return false;
+            }
+
+            result = appTheme;
+            return true;
+        }
+
+        [XmlIgnore]
+        public override ResourceDictionary ResourceDictionary => new ResourceDictionary { Source = new Uri(Path.Combine(AnyListenSettings.Paths.AppThemesDirectory, Name + ".xaml"), UriKind.RelativeOrAbsolute) };
+
+        public override string TranslatedName => Name;
+
+        public override string Group => Application.Current.Resources["Custom"].ToString();
+
+        public static bool IsAppThemeDictionary(ResourceDictionary resources)
+        {
+            if (resources == null) throw new ArgumentNullException("resources");
+
+            // Note: add more checks if these ke
