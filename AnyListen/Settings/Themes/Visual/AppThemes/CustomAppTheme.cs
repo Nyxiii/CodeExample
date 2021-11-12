@@ -44,4 +44,24 @@ namespace AnyListen.Settings.Themes.Visual.AppThemes
         {
             if (resources == null) throw new ArgumentNullException("resources");
 
-            // Note: add more checks if these ke
+            // Note: add more checks if these keys aren't sufficient
+            var styleKeys = new List<string>(new[]
+            {
+                "BlackColor",
+                "WhiteColor",
+                "Gray1",
+                "Gray2",
+                "Gray7",
+                "Gray8",
+                "Gray10",
+                "GrayNormal",
+                "GrayHover",
+                "FlyoutColor",
+            });
+
+            foreach (var styleKey in styleKeys)
+            {
+                // Note: do not use contains, because that will look in all merged dictionaries as well. We need to check
+                // out the actual keys of the current resource dictionary
+                if (!(from object resourceKey in resources.Keys
+                      select resourceKey as string).
