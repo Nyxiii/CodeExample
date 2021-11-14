@@ -13,4 +13,25 @@ namespace AnyListen.Utilities
         const uint EVENT_SYSTEM_FOREGROUND = 3;
 
         IntPtr m_hhook;
-        private readonly WinEventD
+        private readonly WinEventDelegate _winEventProc;
+
+        public ActiveWindowHook()
+        {
+            _winEventProc = WinEventProc;
+        }
+
+        public void Hook()
+        {
+            m_hhook = UnsafeNativeMethods.SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, _winEventProc, 0, 0, WINEVENT_OUTOFCONTEXT);
+        }
+
+        void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
+        {
+            if (eventType == EVENT_SYSTEM_FOREGROUND)
+            {
+                if (ActiveWindowChanged != null)
+                    ActiveWindowChanged(this, hwnd);
+            }
+        }
+
+        public
