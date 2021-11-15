@@ -34,4 +34,20 @@ namespace AnyListen.Utilities
             }
         }
 
-        public
+        public void RaiseOne()
+        {
+            if (ActiveWindowChanged != null)
+                ActiveWindowChanged(this, UnsafeNativeMethods.GetForegroundWindow());
+        }
+
+        public void Unhook()
+        {
+            UnsafeNativeMethods.UnhookWinEvent(m_hhook);
+        }
+
+        public void Dispose()
+        {
+            Unhook();
+        }
+    }
+}
