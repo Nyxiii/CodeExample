@@ -28,4 +28,27 @@ namespace AnyListen.Utilities
             return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
         }
 
-        public static List<ListBoxItem> GetVisibleItemsFromItemsControl(Item
+        public static List<ListBoxItem> GetVisibleItemsFromItemsControl(ItemsControl itemsControl, FrameworkElement parentToTestVisibility)
+        {
+            var items = new List<ListBoxItem>();
+
+            foreach (var item in itemsControl.ItemsSource)
+            {
+                var lbItem = (ListBoxItem)itemsControl.ItemContainerGenerator.ContainerFromItem(item);
+                if (lbItem == null)
+                    continue;
+
+                if (IsUserVisible(lbItem, parentToTestVisibility))
+                {
+                    items.Add(lbItem);
+                }
+                else if (items.Any())
+                {
+                    break;
+                }
+            }
+
+            return items;
+        }
+    }
+}
