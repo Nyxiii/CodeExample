@@ -23,4 +23,28 @@ namespace AnyListen.Utilities
         {
             using (var md5 = MD5.Create())
             {
-                using (var stream = File.OpenRead(fi
+                using (var stream = File.OpenRead(filename))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check if the internet is available. It connects to google.com
+        /// </summary>
+        /// <returns>If the connection to google was successful</returns>
+        public async static Task<bool> CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient { Proxy = null })
+                using (await client.OpenReadTaskAsync("http://www.google.com"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+   
