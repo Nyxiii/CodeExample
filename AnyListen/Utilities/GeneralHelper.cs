@@ -63,4 +63,16 @@ namespace AnyListen.Utilities
         }
 
         /// <summary>
-        /// Creates a new s
+        /// Creates a new short cut for to the <see cref="targetPath"/>
+        /// </summary>
+        /// <param name="path">The save location for the shortcut</param>
+        /// <param name="targetPath">The destination of the shortcut</param>
+        /// <param name="iconLocation">The location of the icon for the shortcut</param>
+        public static void CreateShortcut(string path, string targetPath, string iconLocation)
+        {
+            var t = Type.GetTypeFromCLSID(new Guid("72C24DD5-D70A-438B-8A42-98424B88AFB8")); //Windows Script Host Shell Object
+            dynamic shell = Activator.CreateInstance(t);
+            try
+            {
+                var lnk = shell.CreateShortcut(path);
+ 
