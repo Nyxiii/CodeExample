@@ -47,4 +47,20 @@ namespace AnyListen.Utilities
             catch
             {
                 return false;
-   
+            }
+        }
+
+        /// <summary>
+        /// Check if the current user has administrator rights
+        /// </summary>
+        /// <returns>If the current user has administrator rights</returns>
+        public static bool IsRunningWithAdministratorRights()
+        {
+            var localAdminGroupSid = new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null);
+            var windowsIdentity = WindowsIdentity.GetCurrent();
+            if (windowsIdentity == null || windowsIdentity.Groups == null) return false;
+            return windowsIdentity.Groups.Select(g => (SecurityIdentifier)g.Translate(typeof(SecurityIdentifier))).Any(s => s == localAdminGroupSid);
+        }
+
+        /// <summary>
+        /// Creates a new s
