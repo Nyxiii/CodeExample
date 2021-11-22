@@ -75,4 +75,28 @@ namespace AnyListen.Utilities
             try
             {
                 var lnk = shell.CreateShortcut(path);
- 
+                try
+                {
+                    lnk.TargetPath = targetPath;
+                    lnk.IconLocation = iconLocation;
+                    lnk.Save();
+                }
+                finally
+                {
+                    Marshal.FinalReleaseComObject(lnk);
+                }
+            }
+            finally
+            {
+                Marshal.FinalReleaseComObject(shell);
+            }
+        }
+
+        /// <summary>
+        /// Check if the file can be opened
+        /// </summary>
+        /// <param name="fileName">The path to the file</param>
+        /// <returns>If the file can be opened</returns>
+        public static bool IsFileReady(string fileName)
+        {
+            
