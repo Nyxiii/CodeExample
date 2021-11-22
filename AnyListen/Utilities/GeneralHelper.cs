@@ -99,4 +99,24 @@ namespace AnyListen.Utilities
         /// <returns>If the file can be opened</returns>
         public static bool IsFileReady(string fileName)
         {
-            
+            // If the file can be opened for exclusive access it means that the file
+            // is no longer locked by another process.
+            try
+            {
+                using (FileStream inputStream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    return inputStream.Length > 0;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if the file is a video (for AnyListen)
+        /// </summary>
+        /// <param name="fileName">The path to the file</param>
+        /// <returns>If the file is a video</returns>
+        public static bool IsVideo(stri
