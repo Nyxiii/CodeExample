@@ -119,4 +119,17 @@ namespace AnyListen.Utilities
         /// </summary>
         /// <param name="fileName">The path to the file</param>
         /// <returns>If the file is a video</returns>
-        public static bool IsVideo(stri
+        public static bool IsVideo(string fileName)
+        {
+            return fileName.EndsWith(".mp4") || fileName.EndsWith(".wmv");
+        }
+
+        /// <summary>
+        /// Builds the secounds part of a filter entry by the array and adds the missing dots: .mp4|mp3|.wmv|m4a -> .mp4;.mp3;.wmv;.m4a
+        /// </summary>
+        /// <param name="extensions">The list of the extensions</param>
+        /// <returns>The string which contains the extensions, ready for the dialog filter</returns>
+        public static string GetFileDialogFilterFromArray(IEnumerable<string> extensions)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append(string.Concat(extensions.Select(x => (x.StartsWith("*.") ? null : (x.StartsWith(".") ? "*
