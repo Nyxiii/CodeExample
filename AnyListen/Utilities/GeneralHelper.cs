@@ -132,4 +132,19 @@ namespace AnyListen.Utilities
         public static string GetFileDialogFilterFromArray(IEnumerable<string> extensions)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append(string.Concat(extensions.Select(x => (x.StartsWith("*.") ? null : (x.StartsWith(".") ? "*
+            stringBuilder.Append(string.Concat(extensions.Select(x => (x.StartsWith("*.") ? null : (x.StartsWith(".") ? "*" : "*.")) + x + ";").ToArray()));
+            stringBuilder.Remove(stringBuilder.Length - 1, 1);
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Generates a free file name in the give <see cref="directory"/> and with the <see cref="extension"/>
+        /// </summary>
+        /// <param name="directory">The directory where the file should be created</param>
+        /// <param name="extension">The extension of the file</param>
+        /// <returns>A free random file name with the <see cref="extension"/></returns>
+        public static FileInfo GetFreeFileName(DirectoryInfo directory, string extension)
+        {
+            while (true)
+            {
+                var file = new FileInfo(Path.Combine(d
