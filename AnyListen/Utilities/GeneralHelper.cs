@@ -147,4 +147,23 @@ namespace AnyListen.Utilities
         {
             while (true)
             {
-                var file = new FileInfo(Path.Combine(d
+                var file = new FileInfo(Path.Combine(directory.FullName, Guid.NewGuid() + (extension.StartsWith(".") ? null : ".") + extension));
+                if (file.Exists) continue;
+                return file;
+            }
+        }
+
+        /// <summary>
+        /// Check if the path is a file or a folder
+        /// </summary>
+        /// <param name="path">The path</param>
+        /// <returns>True if the path is a file</returns>
+        public static bool PathIsFile(string path)
+        {
+            var attr = File.GetAttributes(path);
+            return (attr & FileAttributes.Directory) != FileAttributes.Directory;
+        }
+
+        public static string GetFilePathWithoutExtension(string path)
+        {
+            return Path.Combine(path.Substring(0, path.LastIndexOf("\\", String
