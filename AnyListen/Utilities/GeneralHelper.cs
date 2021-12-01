@@ -166,4 +166,19 @@ namespace AnyListen.Utilities
 
         public static string GetFilePathWithoutExtension(string path)
         {
-            return Path.Combine(path.Substring(0, path.LastIndexOf("\\", String
+            return Path.Combine(path.Substring(0, path.LastIndexOf("\\", StringComparison.Ordinal)),
+                Path.GetFileNameWithoutExtension(path));
+        }
+        
+        /// <summary>
+        /// Decodes the input with the ROT13 algorithm
+        /// </summary>
+        /// <param name="input">The ROT13 encrypted string</param>
+        /// <returns>The decrypted string</returns>
+        // ReSharper disable once InconsistentNaming
+        public static string ROT13(string input)
+        {
+            return !string.IsNullOrEmpty(input) ? new string(input.ToCharArray().Select(s => (char)((s >= 97 && s <= 122) ? ((s + 13 > 122) ? s - 13 : s + 13) : (s >= 65 && s <= 90 ? (s + 13 > 90 ? s - 13 : s + 13) : s))).ToArray()) : input;
+        }
+    }
+}
