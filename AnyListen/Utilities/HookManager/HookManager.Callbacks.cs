@@ -28,4 +28,12 @@ namespace AnyListen.Utilities.HookManager
         /// <param name="lParam">
         /// [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
         /// </param>
-        //
+        /// <returns>
+        /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+        /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
+        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
+        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
+        /// procedure does not call CallNextHookEx, the return value should be zero. 
+        /// </returns>
+        /// <remarks>
+        /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hook
