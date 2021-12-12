@@ -36,4 +36,17 @@ namespace AnyListen.Utilities.HookManager
         /// procedure does not call CallNextHookEx, the return value should be zero. 
         /// </returns>
         /// <remarks>
-        /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hook
+        /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/callwndproc.asp
+        /// </remarks>
+        private delegate int HookProc(int nCode, int wParam, IntPtr lParam);
+
+        //##############################################################################
+        #region Mouse hook processing
+
+        /// <summary>
+        /// This field is not objectively needed but we need to keep a reference on a delegate which will be 
+        /// passed to unmanaged code. To avoid GC to clean it up.
+        /// When passing delegates to unmanaged code, they must be kept alive by the managed application 
+        /// until it is guaranteed that they will never be called.
+        /// </summary>
+        private static HookProc _
