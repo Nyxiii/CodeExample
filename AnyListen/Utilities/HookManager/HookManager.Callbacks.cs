@@ -79,4 +79,17 @@ namespace AnyListen.Utilities.HookManager
         /// <returns>
         /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
         /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
-        /// and return the val
+        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
+        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
+        /// procedure does not call CallNextHookEx, the return value should be zero. 
+        /// </returns>
+        private static int MouseHookProc(int nCode, int wParam, IntPtr lParam)
+        {
+            if (nCode >= 0)
+            {
+                //Marshall the data from callback.
+                MouseLLHookStruct mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
+
+                //detect button clicked
+                MouseButtons button = MouseButtons.None;
+                short mouseDel
