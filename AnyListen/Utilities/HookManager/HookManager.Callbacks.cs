@@ -49,4 +49,21 @@ namespace AnyListen.Utilities.HookManager
         /// When passing delegates to unmanaged code, they must be kept alive by the managed application 
         /// until it is guaranteed that they will never be called.
         /// </summary>
-        private static HookProc _
+        private static HookProc _mouseDelegate;
+
+        /// <summary>
+        /// Stores the handle to the mouse hook procedure.
+        /// </summary>
+        private static int _mouseHookHandle;
+
+        private static int _oldX;
+        private static int _oldY;
+
+        /// <summary>
+        /// A callback function which will be called every Time a mouse activity detected.
+        /// </summary>
+        /// <param name="nCode">
+        /// [in] Specifies whether the hook procedure must process the message. 
+        /// If nCode is HC_ACTION, the hook procedure must process the message. 
+        /// If nCode is less than zero, the hook procedure must pass the message to the 
+        /// CallNextHookEx function without further processing and must return the 
