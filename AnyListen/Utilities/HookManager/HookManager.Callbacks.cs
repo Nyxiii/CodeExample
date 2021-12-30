@@ -92,4 +92,24 @@ namespace AnyListen.Utilities.HookManager
 
                 //detect button clicked
                 MouseButtons button = MouseButtons.None;
-                short mouseDel
+                short mouseDelta = 0;
+                int clickCount = 0;
+                bool mouseDown = false;
+                bool mouseUp = false;
+
+                switch (wParam)
+                {
+                    case WM_LBUTTONDOWN:
+                        mouseDown = true;
+                        button = MouseButtons.Left;
+                        clickCount = 1;
+                        break;
+                    case WM_LBUTTONUP:
+                        mouseUp = true;
+                        button = MouseButtons.Left;
+                        clickCount = 1;
+                        break;
+                    case WM_LBUTTONDBLCLK:
+                        button = MouseButtons.Left;
+                        clickCount = 2;
+                        break;
