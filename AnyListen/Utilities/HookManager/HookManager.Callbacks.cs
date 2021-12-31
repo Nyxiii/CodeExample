@@ -113,3 +113,19 @@ namespace AnyListen.Utilities.HookManager
                         button = MouseButtons.Left;
                         clickCount = 2;
                         break;
+                    case WM_RBUTTONDOWN:
+                        mouseDown = true;
+                        button = MouseButtons.Right;
+                        clickCount = 1;
+                        break;
+                    case WM_RBUTTONUP:
+                        mouseUp = true;
+                        button = MouseButtons.Right;
+                        clickCount = 1;
+                        break;
+                    case WM_RBUTTONDBLCLK:
+                        button = MouseButtons.Right;
+                        clickCount = 2;
+                        break;
+                    case WM_MOUSEWHEEL:
+                        //If the message is WM_MOUSEWHEEL, the high-order word of MouseData member is th
