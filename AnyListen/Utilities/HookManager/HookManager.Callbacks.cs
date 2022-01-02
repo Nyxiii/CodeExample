@@ -152,4 +152,25 @@ namespace AnyListen.Utilities.HookManager
                 //Mouse up
                 if (s_MouseUp != null && mouseUp)
                 {
-                    s_MouseUp.Inv
+                    s_MouseUp.Invoke(null, e);
+                }
+
+                //Mouse down
+                if (s_MouseDown != null && mouseDown)
+                {
+                    s_MouseDown.Invoke(null, e);
+                }
+
+                //If someone listens to click and a click is heppened
+                if (s_MouseClick != null && clickCount > 0)
+                {
+                    s_MouseClick.Invoke(null, e);
+                }
+
+                //If someone listens to click and a click is heppened
+                if (s_MouseClickExt != null && clickCount > 0)
+                {
+                    s_MouseClickExt.Invoke(null, e);
+                }
+
+                //If someone listens to double cl
