@@ -136,4 +136,20 @@ namespace AnyListen.Utilities.HookManager
                         //TODO: X BUTTONS (I havent them so was unable to test)
                         //If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP, 
                         //or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
-                        //and the low-order word is reserved. This value can 
+                        //and the low-order word is reserved. This value can be one or more of the following values. 
+                        //Otherwise, MouseData is not used. 
+                        break;
+                }
+
+                //generate event 
+                MouseEventExtArgs e = new MouseEventExtArgs(
+                                                   button,
+                                                   clickCount,
+                                                   mouseHookStruct.Point.X,
+                                                   mouseHookStruct.Point.Y,
+                                                   mouseDelta);
+
+                //Mouse up
+                if (s_MouseUp != null && mouseUp)
+                {
+                    s_MouseUp.Inv
