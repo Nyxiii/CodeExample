@@ -173,4 +173,20 @@ namespace AnyListen.Utilities.HookManager
                     s_MouseClickExt.Invoke(null, e);
                 }
 
-                //If someone listens to double cl
+                //If someone listens to double click and a click is heppened
+                if (s_MouseDoubleClick != null && clickCount == 2)
+                {
+                    s_MouseDoubleClick.Invoke(null, e);
+                }
+
+                //Wheel was moved
+                if (s_MouseWheel != null && mouseDelta != 0)
+                {
+                    s_MouseWheel.Invoke(null, e);
+                }
+
+                //If someone listens to move and there was a change in coordinates raise move event
+                if ((_mouseMove != null || s_MouseMoveExt != null) && (_oldX != mouseHookStruct.Point.X || _oldY != mouseHookStruct.Point.Y))
+                {
+                    _oldX = mouseHookStruct.Point.X;
+                    _oldY = mouseHookSt
