@@ -189,4 +189,28 @@ namespace AnyListen.Utilities.HookManager
                 if ((_mouseMove != null || s_MouseMoveExt != null) && (_oldX != mouseHookStruct.Point.X || _oldY != mouseHookStruct.Point.Y))
                 {
                     _oldX = mouseHookStruct.Point.X;
-                    _oldY = mouseHookSt
+                    _oldY = mouseHookStruct.Point.Y;
+                    if (_mouseMove != null)
+                    {
+                        _mouseMove.Invoke(null, e);
+                    }
+
+                    if (s_MouseMoveExt != null)
+                    {
+                        s_MouseMoveExt.Invoke(null, e);
+                    }
+                }
+
+                if (e.Handled)
+                {
+                    return -1;
+                }
+            }
+
+            //call next hook
+            return CallNextHookEx(_mouseHookHandle, nCode, wParam, lParam);
+        }
+
+        private static void EnsureSubscribedToGlobalMouseEvents()
+        {
+            // install Mouse hook only if it is not installed and must 
