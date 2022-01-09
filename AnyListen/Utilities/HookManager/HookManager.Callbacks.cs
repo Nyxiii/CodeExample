@@ -213,4 +213,18 @@ namespace AnyListen.Utilities.HookManager
 
         private static void EnsureSubscribedToGlobalMouseEvents()
         {
-            // install Mouse hook only if it is not installed and must 
+            // install Mouse hook only if it is not installed and must be installed
+            if (_mouseHookHandle == 0)
+            {
+                //See comment of this field. To avoid GC to clean it up.
+                _mouseDelegate = MouseHookProc;
+                //install hook
+                _mouseHookHandle = SetWindowsHookEx(
+                    WH_MOUSE_LL,
+                    _mouseDelegate,
+                    IntPtr.Zero,
+                    0); //Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0])
+                //If SetWindowsHookEx fails.
+                if (_mouseHookHandle == 0)
+                {
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.S
