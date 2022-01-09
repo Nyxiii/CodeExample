@@ -227,4 +227,23 @@ namespace AnyListen.Utilities.HookManager
                 //If SetWindowsHookEx fails.
                 if (_mouseHookHandle == 0)
                 {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.S
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    int errorCode = Marshal.GetLastWin32Error();
+                    //do cleanup
+
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+                    throw new Win32Exception(errorCode);
+                }
+            }
+        }
+
+        private static void TryUnsubscribeFromGlobalMouseEvents()
+        {
+            //if no subsribers are registered unsubsribe from hook
+            if (s_MouseClick == null &&
+                s_MouseDown == null &&
+                _mouseMove == null &&
+                s_MouseUp == null &&
+                s_MouseClickExt == null &&
+                s_MouseMoveExt == null &&
+     
