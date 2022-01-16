@@ -246,4 +246,23 @@ namespace AnyListen.Utilities.HookManager
                 s_MouseUp == null &&
                 s_MouseClickExt == null &&
                 s_MouseMoveExt == null &&
-     
+                s_MouseWheel == null)
+            {
+                ForceUnsubscribeFromGlobalMouseEvents();
+            }
+        }
+
+        private static void ForceUnsubscribeFromGlobalMouseEvents()
+        {
+            if (_mouseHookHandle != 0)
+            {
+                //uninstall hook
+                int result = UnhookWindowsHookEx(_mouseHookHandle);
+                //reset invalid handle
+                _mouseHookHandle = 0;
+                //Free up for GC
+                _mouseDelegate = null;
+                //if failed and exception must be thrown
+                if (result == 0)
+                {
+                    //Returns the error code returned by the last unmanaged function called using pla
