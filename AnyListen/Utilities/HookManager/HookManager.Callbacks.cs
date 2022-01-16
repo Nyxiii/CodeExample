@@ -265,4 +265,19 @@ namespace AnyListen.Utilities.HookManager
                 //if failed and exception must be thrown
                 if (result == 0)
                 {
-                    //Returns the error code returned by the last unmanaged function called using pla
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    int errorCode = Marshal.GetLastWin32Error();
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+                    throw new Win32Exception(errorCode);
+                }
+            }
+        }
+
+        #endregion
+
+        //##############################################################################
+        #region Keyboard hook processing
+
+        /// <summary>
+        /// This field is not objectively needed but we need to keep a reference on a delegate which will be 
+        /// passed to unmanaged code. To avoid GC to clean it 
