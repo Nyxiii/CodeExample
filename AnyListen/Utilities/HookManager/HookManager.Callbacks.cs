@@ -280,4 +280,20 @@ namespace AnyListen.Utilities.HookManager
 
         /// <summary>
         /// This field is not objectively needed but we need to keep a reference on a delegate which will be 
-        /// passed to unmanaged code. To avoid GC to clean it 
+        /// passed to unmanaged code. To avoid GC to clean it up.
+        /// When passing delegates to unmanaged code, they must be kept alive by the managed application 
+        /// until it is guaranteed that they will never be called.
+        /// </summary>
+        private static HookProc _keyboardDelegate;
+
+        /// <summary>
+        /// Stores the handle to the Keyboard hook procedure.
+        /// </summary>
+        private static int _keyboardHookHandle;
+
+        /// <summary>
+        /// A callback function which will be called every Time a keyboard activity detected.
+        /// </summary>
+        /// <param name="nCode">
+        /// [in] Specifies whether the hook procedure must process the message. 
+        /// If nCode is HC_ACTION, the hook
