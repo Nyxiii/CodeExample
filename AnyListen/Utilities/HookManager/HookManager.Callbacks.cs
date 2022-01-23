@@ -296,4 +296,17 @@ namespace AnyListen.Utilities.HookManager
         /// </summary>
         /// <param name="nCode">
         /// [in] Specifies whether the hook procedure must process the message. 
-        /// If nCode is HC_ACTION, the hook
+        /// If nCode is HC_ACTION, the hook procedure must process the message. 
+        /// If nCode is less than zero, the hook procedure must pass the message to the 
+        /// CallNextHookEx function without further processing and must return the 
+        /// value returned by CallNextHookEx.
+        /// </param>
+        /// <param name="wParam">
+        /// [in] Specifies whether the message was sent by the current thread. 
+        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
+        /// </param>
+        /// <param name="lParam">
+        /// [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
+        /// </param>
+        /// <returns>
+        /// If nCode is less than zero, the hook procedure mus
