@@ -309,4 +309,16 @@ namespace AnyListen.Utilities.HookManager
         /// [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
         /// </param>
         /// <returns>
-        /// If nCode is less than zero, the hook procedure mus
+        /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+        /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
+        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
+        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
+        /// procedure does not call CallNextHookEx, the return value should be zero. 
+        /// </returns>
+        private static int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
+        {
+            //indicates if any of underlaing events set e.Handled flag
+            bool handled = false;
+
+            if (nCode >= 0)
+  
