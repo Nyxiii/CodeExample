@@ -321,4 +321,19 @@ namespace AnyListen.Utilities.HookManager
             bool handled = false;
 
             if (nCode >= 0)
-  
+            {
+                //read structure KeyboardHookStruct at lParam
+                KeyboardHookStruct myKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+                //raise KeyDown
+                if (s_KeyDown != null && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
+                {
+                    Keys keyData = (Keys)myKeyboardHookStruct.VirtualKeyCode;
+                    KeyEventArgs e = new KeyEventArgs(keyData);
+                    s_KeyDown.Invoke(null, e);
+                    handled = e.Handled;
+                }
+
+                // raise KeyPress
+                if (s_KeyPress != null && wParam == WM_KEYDOWN)
+                {
+                   
