@@ -336,4 +336,17 @@ namespace AnyListen.Utilities.HookManager
                 // raise KeyPress
                 if (s_KeyPress != null && wParam == WM_KEYDOWN)
                 {
-                   
+                    bool isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80);
+                    bool isDownCapslock = (GetKeyState(VK_CAPITAL) != 0);
+
+                    byte[] keyState = new byte[256];
+                    GetKeyboardState(keyState);
+                    byte[] inBuffer = new byte[2];
+                    if (ToAscii(myKeyboardHookStruct.VirtualKeyCode,
+                              myKeyboardHookStruct.ScanCode,
+                              keyState,
+                              inBuffer,
+                              myKeyboardHookStruct.Flags) == 1)
+                    {
+                        char key = (char)inBuffer[0];
+                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key)) key = Char
