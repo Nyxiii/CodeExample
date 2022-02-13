@@ -385,4 +385,17 @@ namespace AnyListen.Utilities.HookManager
                 //install hook
                 _keyboardHookHandle = SetWindowsHookEx(
                     WH_KEYBOARD_LL,
-                    _keyb
+                    _keyboardDelegate,
+                    Marshal.GetHINSTANCE(
+                        Assembly.GetExecutingAssembly().GetModules()[0]),
+                    0);
+                //If SetWindowsHookEx fails.
+                if (_keyboardHookHandle == 0)
+                {
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    int errorCode = Marshal.GetLastWin32Error();
+                    //do cleanup
+
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+                    throw new Win32Exception(errorCode);
+                }
