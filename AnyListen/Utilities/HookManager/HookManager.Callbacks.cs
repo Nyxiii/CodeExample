@@ -349,4 +349,22 @@ namespace AnyListen.Utilities.HookManager
                               myKeyboardHookStruct.Flags) == 1)
                     {
                         char key = (char)inBuffer[0];
-                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key)) key = Char
+                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key)) key = Char.ToUpper(key);
+                        KeyPressEventArgs e = new KeyPressEventArgs(key);
+                        s_KeyPress.Invoke(null, e);
+                        handled = handled || e.Handled;
+                    }
+                }
+
+                // raise KeyUp
+                if (s_KeyUp != null && (wParam == WM_KEYUP || wParam == WM_SYSKEYUP))
+                {
+                    Keys keyData = (Keys)myKeyboardHookStruct.VirtualKeyCode;
+                    KeyEventArgs e = new KeyEventArgs(keyData);
+                    s_KeyUp.Invoke(null, e);
+                    handled = handled || e.Handled;
+                }
+
+            }
+
+            //if event handled in applic
