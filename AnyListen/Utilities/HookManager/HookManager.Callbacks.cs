@@ -399,3 +399,26 @@ namespace AnyListen.Utilities.HookManager
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
                     throw new Win32Exception(errorCode);
                 }
+            }
+        }
+
+        private static void TryUnsubscribeFromGlobalKeyboardEvents()
+        {
+            //if no subsribers are registered unsubsribe from hook
+            if (s_KeyDown == null &&
+                s_KeyUp == null &&
+                s_KeyPress == null)
+            {
+                ForceUnsunscribeFromGlobalKeyboardEvents();
+            }
+        }
+
+        private static void ForceUnsunscribeFromGlobalKeyboardEvents()
+        {
+            if (_keyboardHookHandle != 0)
+            {
+                //uninstall hook
+                int result = UnhookWindowsHookEx(_keyboardHookHandle);
+                //reset invalid handle
+                _keyboardHookHandle = 0;
+   
