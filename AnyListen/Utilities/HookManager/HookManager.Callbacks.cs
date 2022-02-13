@@ -367,4 +367,22 @@ namespace AnyListen.Utilities.HookManager
 
             }
 
-            //if event handled in applic
+            //if event handled in application do not handoff to other listeners
+            if (handled)
+                return -1;
+
+            //forward to other application
+            return CallNextHookEx(_keyboardHookHandle, nCode, wParam, lParam);
+        }
+
+        private static void EnsureSubscribedToGlobalKeyboardEvents()
+        {
+            // install Keyboard hook only if it is not installed and must be installed
+            if (_keyboardHookHandle == 0)
+            {
+                //See comment of this field. To avoid GC to clean it up.
+                _keyboardDelegate = KeyboardHookProc;
+                //install hook
+                _keyboardHookHandle = SetWindowsHookEx(
+                    WH_KEYBOARD_LL,
+                    _keyb
