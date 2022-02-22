@@ -421,4 +421,20 @@ namespace AnyListen.Utilities.HookManager
                 int result = UnhookWindowsHookEx(_keyboardHookHandle);
                 //reset invalid handle
                 _keyboardHookHandle = 0;
-   
+                //Free up for GC
+                _keyboardDelegate = null;
+                //if failed and exception must be thrown
+                if (result == 0)
+                {
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    int errorCode = Marshal.GetLastWin32Error();
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+                    throw new Win32Exception(errorCode);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+}
