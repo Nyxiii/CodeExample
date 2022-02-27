@@ -38,4 +38,11 @@ namespace AnyListen.Utilities.HookManager
             public Point Point;
             /// <summary>
             /// If the message is WM_MOUSEWHEEL, the high-order word of this member is the wheel delta. 
-            /// The l
+            /// The low-order word is reserved. A positive value indicates that the wheel was rotated forward, 
+            /// away from the user; a negative value indicates that the wheel was rotated backward, toward the user. 
+            /// One wheel click is defined as WHEEL_DELTA, which is 120. 
+            ///If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP,
+            /// or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
+            /// and the low-order word is reserved. This value can be one or more of the following values. Otherwise, MouseData is not used. 
+            ///XBUTTON1
+            ///The first X butto
