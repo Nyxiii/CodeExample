@@ -20,4 +20,22 @@ namespace AnyListen.Utilities.HookManager
             /// Specifies the X-coordinate of the point. 
             /// </summary>
             public int X;
-            ///
+            /// <summary>
+            /// Specifies the Y-coordinate of the point. 
+            /// </summary>
+            public int Y;
+        }
+
+        /// <summary>
+        /// The MSLLHOOKSTRUCT structure contains information about a low-level keyboard input event. 
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        private struct MouseLLHookStruct
+        {
+            /// <summary>
+            /// Specifies a Point structure that contains the X- and Y-coordinates of the cursor, in screen coordinates. 
+            /// </summary>
+            public Point Point;
+            /// <summary>
+            /// If the message is WM_MOUSEWHEEL, the high-order word of this member is the wheel delta. 
+            /// The l
