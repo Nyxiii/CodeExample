@@ -45,4 +45,21 @@ namespace AnyListen.Utilities.HookManager
             /// or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
             /// and the low-order word is reserved. This value can be one or more of the following values. Otherwise, MouseData is not used. 
             ///XBUTTON1
-            ///The first X butto
+            ///The first X button was pressed or released.
+            ///XBUTTON2
+            ///The second X button was pressed or released.
+            /// </summary>
+            public int MouseData;
+            /// <summary>
+            /// Specifies the event-injected flag. An application can use the following value to test the mouse Flags. Value Purpose 
+            ///LLMHF_INJECTED Test the event-injected flag.  
+            ///0
+            ///Specifies whether the event was injected. The value is 1 if the event was injected; otherwise, it is 0.
+            ///1-15
+            ///Reserved.
+            /// </summary>
+            public int Flags;
+            /// <summary>
+            /// Specifies the Time stamp for this message.
+            /// </summary>
+ 
