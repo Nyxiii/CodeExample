@@ -95,4 +95,9 @@ namespace AnyListen.Utilities.HookManager
             /// </summary>
             public int Time;
             /// <summary>
-            /// Specifies extra information associated with 
+            /// Specifies extra information associated with the message. 
+            /// </summary>
+            public int ExtraInfo;
+        }
+    }
+}
