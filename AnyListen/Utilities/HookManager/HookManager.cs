@@ -310,3 +310,20 @@ namespace AnyListen.Utilities.HookManager
         /// Occurs when a key is preseed. 
         /// </summary>
         public static event KeyEventHandler KeyDown
+        {
+            add
+            {
+                EnsureSubscribedToGlobalKeyboardEvents();
+                s_KeyDown += value;
+            }
+            remove
+            {
+                s_KeyDown -= value;
+                TryUnsubscribeFromGlobalKeyboardEvents();
+            }
+        }
+
+
+        #endregion
+    }
+}
