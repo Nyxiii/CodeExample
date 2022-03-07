@@ -41,4 +41,27 @@ namespace AnyListen.Utilities
             for (int i = 1; i <= n; i++)
             {
                 //Step 4
-                for (int j = 1; j <= m; j+
+                for (int j = 1; j <= m; j++)
+                {
+                    // Step 5
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+
+                    // Step 6
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+            // Step 7
+            return d[n, m];
+        }
+    }
+}
+
+namespace System.Security
+{
+    public static class Rot17
+    {
+        public static string Encrypt(string input)
+        {
+            return !string.IsNullOrEmpty(input) ? new string(input.ToCharArray().Select(s => (char)((s >= 97 && s <= 122) ? ((s + 13 > 122) ? s - 13 : s + 13) : (s >= 65 && s <= 90 
