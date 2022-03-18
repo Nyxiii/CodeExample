@@ -38,4 +38,22 @@ namespace AnyListen.Utilities.Native
 
         public override string ToString()
         {
-      
+            if (this == Empty)
+                return "RECT {Empty}";
+            return "RECT { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom + " }";
+        }
+
+        /// <summary> Determine if 2 RECT are equal (deep compare) </summary>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RECT)) { return false; }
+            return (this == (RECT)obj);
+        }
+
+        /// <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>
+        public override int GetHashCode()
+        {
+            return left.GetHashCode() + top.GetHashCode() + right.GetHashCode() + bottom.GetHashCode();
+        }
+
+        public static bool operator ==(RE
