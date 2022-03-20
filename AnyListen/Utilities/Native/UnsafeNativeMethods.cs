@@ -43,4 +43,17 @@ namespace AnyListen.Utilities.Native
         internal static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
         /// <summary>
-        /// The FindWindow function ret
+        /// The FindWindow function retrieves a handle to the top-level 
+        /// window whose class name and window name match the specified strings.
+        /// This function does not search child windows. This function does not perform a case-sensitive search.
+        /// </summary>
+        /// <param name="lpClassName">the class name for the window to search for</param>
+        /// <param name="lpWindowName">the name of the window to search for</param>
+        /// <returns></returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        /// <summary>
+        /// The FindWindowEx API
+        /// </summary>
+        /// <param name="parentHandle">a handle to the pa
