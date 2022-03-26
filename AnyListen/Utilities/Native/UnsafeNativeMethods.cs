@@ -56,4 +56,18 @@ namespace AnyListen.Utilities.Native
         /// <summary>
         /// The FindWindowEx API
         /// </summary>
-        /// <param name="parentHandle">a handle to the pa
+        /// <param name="parentHandle">a handle to the parent window </param>
+        /// <param name="childAfter">a handle to the child window to start search after</param>
+        /// <param name="className">the class name for the window to search for</param>
+        /// <param name="windowTitle">the name of the window to search for</param>
+        /// <returns></returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
+
+
+        /// <summary>
+        /// Send Message
+        /// </summary>
+        /// <param name="hWnd">handle to destination window</param>
+        /// <param name="Msg">message</param>
+        /// <param name="wParam">
