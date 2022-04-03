@@ -85,4 +85,20 @@ namespace AnyListen.Utilities.Native
         /// <param name="lParam">second message parameter</param>
         /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        internal static extern int SendMessage
+        internal static extern int SendMessage(int hWnd, int msg, int wParam, IntPtr lParam);
+
+        /// <summary>
+        /// The SendMessage API
+        /// </summary>
+        /// <param name="hWnd">handle to the required window</param>
+        /// <param name="Msg">the system/Custom message to send</param>
+        /// <param name="wParam">first message parameter</param>
+        /// <param name="lParam">second message parameter</param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        internal static extern int SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, ref CopyDataStruct lParam);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern IntPtr LocalAlloc(int flag, int size);
+
+        [DllImpo
