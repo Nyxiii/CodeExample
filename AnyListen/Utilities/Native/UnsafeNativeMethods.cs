@@ -101,4 +101,19 @@ namespace AnyListen.Utilities.Native
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern IntPtr LocalAlloc(int flag, int size);
 
-        [DllImpo
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern IntPtr LocalFree(IntPtr p);
+
+        /// <summary>
+        /// The PeekMessage function dispatches incoming sent messages, 
+        /// checks the thread message queue for a posted message, 
+        /// and retrieves the message (if any exist).
+        /// </summary>
+        [SuppressUnmanagedCodeSecurity] // We won't use this maliciously
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        internal static extern bool PeekMessage(out Message msg, IntPtr hWnd, uint messageFilterMin, uint messageFilterMax, uint flags);
+
+        [DllImport("user32.dll")]
+        internal extern static int GetWindowLong(IntPtr hwnd, int index);
+
+        [DllImport(
