@@ -19,4 +19,21 @@ namespace AnyListen.Utilities
         /// <returns>The <see cref="fileNameToEscape"/> without the invalid chars</returns>
         public static string ToEscapedFilename(this string fileNameToEscape)
         {
-            char[] illegalchars
+            char[] illegalchars = { '\\', '/', ':', '*', '?', '"', '<', '>', '|' };
+            return RemoveChars(fileNameToEscape, illegalchars);
+        }
+
+        /// <summary>
+        /// Remove all invalid chars for a url
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ToEscapedUrl(this string input)
+        {
+            return HttpUtility.UrlEncode(input);
+        }
+
+        private static string RemoveChars(string content, IEnumerable<char> illegalchars)
+        {
+            if (string.IsNullOrEmpty(content)) return string.Empty;
+            return illegalchars.Aggregate(content, (current, item) => current.Replace(item.ToString(), string.Em
