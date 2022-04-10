@@ -116,4 +116,16 @@ namespace AnyListen.Utilities.Native
         [DllImport("user32.dll")]
         internal extern static int GetWindowLong(IntPtr hwnd, int index);
 
-        [DllImport(
+        [DllImport("user32.dll")]
+        internal extern static int SetWindowLong(IntPtr hwnd, int index, int value);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetCursorPos(out POINT lpPoint);
+    }
+
+    public delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+
+    public delegate bool EnumedWindow(IntPtr handleWindow, ArrayList handles);
+
+}
