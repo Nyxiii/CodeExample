@@ -36,4 +36,7 @@ namespace AnyListen.Utilities
         private static string RemoveChars(string content, IEnumerable<char> illegalchars)
         {
             if (string.IsNullOrEmpty(content)) return string.Empty;
-            return illegalchars.Aggregate(content, (current, item) => current.Replace(item.ToString(), string.Em
+            return illegalchars.Aggregate(content, (current, item) => current.Replace(item.ToString(), string.Empty));
+        }
+    }
+}
