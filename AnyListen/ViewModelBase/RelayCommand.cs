@@ -40,4 +40,37 @@ namespace AnyListen.ViewModelBase
             {
                 if (_canExecute != null)
                 {
-         
+                    CommandManager.RequerySuggested += value;
+                }
+            }
+
+            remove
+            {
+                if (_canExecute != null)
+                {
+                    CommandManager.RequerySuggested -= value;
+                }
+            }
+
+            //This is the RaiseEvent block
+
+        }
+        public bool CanExecute(object parameter)
+        {
+            if (_canExecute == null)
+            {
+                return true;
+            }
+            else
+            {
+                return _canExecute.Invoke();
+            }
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute.Invoke(parameter);
+        }
+        #endregion
+    }
+}
