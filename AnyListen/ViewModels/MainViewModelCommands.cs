@@ -488,3 +488,84 @@ namespace AnyListen.ViewModels
                 return _addCustomStream ?? (_addCustomStream = new RelayCommand(async parameter =>
                 {
                     var dialog = new AddCustomStreamView((NormalPlaylist)MusicManager.SelectedPlaylist, MusicManager, x => _baseWindow.HideMetroDialogAsync(x));
+                    await _baseWindow.ShowMetroDialogAsync(dialog);
+                }));
+            }
+        }
+
+        private RelayCommand _moveLeftCommand;
+        public RelayCommand MoveLeftCommand
+        {
+            get
+            {
+                return _moveLeftCommand ?? (_moveLeftCommand = new RelayCommand(parameter =>
+                {
+                    MoveWindow(true);
+                }));
+            }
+        }
+
+        private RelayCommand _moveRightCommand;
+        public RelayCommand MoveRightCommand
+        {
+            get
+            {
+                return _moveRightCommand ?? (_moveRightCommand = new RelayCommand(parameter =>
+                {
+                    MoveWindow(false);
+                }));
+            }
+        }
+
+        private void MoveWindow(bool moveLeft)
+        {
+            var dockmanager = _baseWindow.MagicArrow.DockManager;
+            if (dockmanager.CurrentSide == DockingSide.None)
+            {
+                dockmanager.CurrentSide = moveLeft ? DockingSide.Left : DockingSide.Right;
+                dockmanager.ApplyCurrentSide();
+                _baseWindow.RefreshHostWindow(true);
+            }
+            if (dockmanager.CurrentSide == (moveLeft ? DockingSide.Right : DockingSide.Left))
+            {
+                dockmanager.CurrentSide = DockingSide.None;
+                dockmanager.ApplyCurrentSide();
+                _baseWindow.RefreshHostWindow(true);
+                _baseWindow.CenterWindowOnScreen();
+            }
+        }
+
+        private RelayCommand _changeMainTabControlIndex;
+        public RelayCommand ChangeMainTabControlIndex
+        {
+            get
+            {
+                return _changeMainTabControlIndex ?? (_changeMainTabControlIndex = new RelayCommand(parameter =>
+                {
+                    MainTabControlIndex = int.Parse(parameter.ToString());
+                }));
+            }
+        }
+
+        private RelayCommand _showWindoCommand;
+        public RelayCommand ShowWindowCommand
+        {
+            get { return _showWindoCommand ?? (_showWindoCommand = new RelayCommand(parameter => { _baseWindow.ShowWindow(); })); }
+        }
+
+        private RelayCommand _openFileLocation;
+        public RelayCommand OpenFileLocation
+        {
+            get
+            {
+                return _openFileLocation ?? (_openFileLocation = new RelayCommand(parameter =>
+                {
+                    if (parameter == null || string.IsNullOrEmpty(parameter.ToString())) return;
+                    var file = new FileInfo(parameter.ToString());
+                    if (!file.Exists) return;
+                    Process.Start("explorer.exe", $"/select,\"{file.FullName}\"");
+                }));
+            }
+        }
+    }
+}
