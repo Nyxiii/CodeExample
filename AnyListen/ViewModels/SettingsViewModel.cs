@@ -36,4 +36,28 @@ namespace AnyListen.ViewModels
             CurrentLanguage = Config.Languages.First(x => x.Code == Config.Language);
         }
 
-        public MusicManager MusicManager => Mai
+        public MusicManager MusicManager => MainViewModel.Instance.MusicManager;
+        public ApplicationThemeManager ApplicationThemeManager => ApplicationThemeManager.Instance;
+        public RegistryManager RegistryManager { get; set; }
+
+        public ConfigSettings Config => AnyListenSettings.Instance.Config;
+
+        public MainWindow BaseWindow => (MainWindow)Application.Current.MainWindow;
+
+        #endregion
+
+        private int _selectedtab;
+        public int SelectedTab
+        {
+            get { return _selectedtab; }
+            set
+            {
+                SetProperty(value, ref _selectedtab);
+                switch (value)
+                {
+                    case 2:
+                        OnPropertyChanged("MusicManager");
+                        break;
+                }
+            }
+       
