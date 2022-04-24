@@ -18,4 +18,22 @@ using Microsoft.Win32;
 
 namespace AnyListen.ViewModels
 {
-    class
+    class SettingsViewModel : PropertyChangedBase
+    {
+        #region "Singleton & Constructor"
+        private static SettingsViewModel _instance;
+        public static SettingsViewModel Instance => _instance ?? (_instance = new SettingsViewModel());
+
+        private SettingsViewModel()
+        {
+            RegistryManager = new RegistryManager(); //important for shortcut
+        }
+
+        public void Load()
+        {
+            SoundOutList = MusicManager.CSCoreEngine.SoundOutManager.SoundOutList;
+            SelectedSoundOut = SoundOutList.First(x => x.SoundOutMode == Config.SoundOutMode);
+            CurrentLanguage = Config.Languages.First(x => x.Code == Config.Language);
+        }
+
+        public MusicManager MusicManager => Mai
