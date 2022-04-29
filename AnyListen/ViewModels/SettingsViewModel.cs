@@ -60,4 +60,30 @@ namespace AnyListen.ViewModels
                         break;
                 }
             }
-       
+        }
+
+        #region Playback
+
+        private ObservableCollection<SoundOutRepresenter> _soundOutList;
+        public ObservableCollection<SoundOutRepresenter> SoundOutList
+        {
+            get { return _soundOutList; }
+            set
+            {
+                SetProperty(value, ref _soundOutList);
+            }
+        }
+
+        
+        private int _selectedAudioDeviceIndex;
+        public int SelectedAudioDeviceIndex
+        {
+            get { return _selectedAudioDeviceIndex; }
+            set
+            {
+                SetProperty(value, ref _selectedAudioDeviceIndex);
+            }
+        }
+
+        private AudioDevice _selectedaudiodevice;
+        public AudioDevi
