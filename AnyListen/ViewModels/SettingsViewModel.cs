@@ -86,4 +86,23 @@ namespace AnyListen.ViewModels
         }
 
         private AudioDevice _selectedaudiodevice;
-        public AudioDevi
+        public AudioDevice SelectedAudioDevice
+        {
+            get { return _selectedaudiodevice; }
+            set
+            {
+                if (SetProperty(value, ref _selectedaudiodevice)) OnPropertyChanged("CanApplySoundOut");
+                if (value == null && SelectedSoundOut.AudioDevices.Count > 0)
+                    SelectedAudioDevice = SelectedSoundOut.AudioDevices.First();
+            }
+        }
+
+        private SoundOutRepresenter _selectedSoundOut;
+        public SoundOutRepresenter SelectedSoundOut
+        {
+            get { return _selectedSoundOut; }
+            set
+            {
+                if (SetProperty(value, ref _selectedSoundOut) && value != null)
+                {
+                    OnPropertyChanged(
