@@ -105,4 +105,21 @@ namespace AnyListen.ViewModels
             {
                 if (SetProperty(value, ref _selectedSoundOut) && value != null)
                 {
-                    OnPropertyChanged(
+                    OnPropertyChanged("CanApplySoundOut");
+
+                    var device = value.AudioDevices.FirstOrDefault(x => x.ID == Config.SoundOutDeviceID) ??
+                                 value.AudioDevices.FirstOrDefault(x => x.IsDefault);
+                    SelectedAudioDeviceIndex = device == null ? 0 : value.AudioDevices.IndexOf(device);
+                }
+            }
+        }
+
+        private RelayCommand _applySoundOut;
+        public RelayCommand ApplySoundOut
+        {
+            get
+            {
+                return _applySoundOut ?? (_applySoundOut = new RelayCommand(parameter =>
+                {
+                    if (!CanApplySoundOut) return;
+                    Config.SoundOutMode
