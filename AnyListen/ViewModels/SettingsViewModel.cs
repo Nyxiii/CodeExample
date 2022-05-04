@@ -122,4 +122,28 @@ namespace AnyListen.ViewModels
                 return _applySoundOut ?? (_applySoundOut = new RelayCommand(parameter =>
                 {
                     if (!CanApplySoundOut) return;
-                    Config.SoundOutMode
+                    Config.SoundOutMode = SelectedSoundOut.SoundOutMode;
+                    Config.SoundOutDeviceID = SelectedAudioDevice.ID;
+                    MusicManager.CSCoreEngine.Refresh();
+                    OnPropertyChanged("CanApplySoundOut");
+                }));
+            }
+        }
+
+        public bool CanApplySoundOut
+        {
+            get
+            {
+                if (SelectedAudioDevice == null || SelectedSoundOut == null) return false;
+                return Config.SoundOutDeviceID != SelectedAudioDevice.ID || Config.SoundOutMode != SelectedSoundOut.SoundOutMode;
+            }
+        }
+
+        #endregion
+
+        #region Apperance
+
+        private RelayCommand _openDesigner;
+        public RelayCommand OpenDesigner
+        {
+          
