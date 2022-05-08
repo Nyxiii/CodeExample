@@ -146,4 +146,28 @@ namespace AnyListen.ViewModels
         private RelayCommand _openDesigner;
         public RelayCommand OpenDesigner
         {
-          
+            get
+            {
+                return _openDesigner ?? (_openDesigner = new RelayCommand(parameter =>
+                {
+                    Process.Start(Assembly.GetExecutingAssembly().Location, "/designer");
+                }));
+            }
+        }
+
+        public bool ShowArtistAndTitle
+        {
+            get { return Config.ShowArtistAndTitle; }
+            set
+            {
+                Config.ShowArtistAndTitle = value;
+                MusicManager.SelectedPlaylist.ViewSource.Refresh();
+            }
+        }
+
+        public IAppTheme SelectedAppTheme
+        {
+            get { return Config.ApplicationDesign.AppTheme; }
+            set
+            {
+                Config.Appl
