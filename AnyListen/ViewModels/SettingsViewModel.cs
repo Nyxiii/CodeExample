@@ -207,4 +207,24 @@ namespace AnyListen.ViewModels
                             Application.Current.Resources["VideoFiles"],
                             Application.Current.Resources["AllFiles"],
                             "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.gif",
-                            "*.mp4;*.wmv
+                            "*.mp4;*.wmv")
+                    };
+
+                    if (ofd.ShowDialog() == true)
+                    {
+                        Config.ApplicationDesign.ApplicationBackground = new CustomApplicationBackground { BackgroundPath = ofd.FileName };
+                        await BaseWindow.BackgroundChanged();
+                    }
+                }));
+            }
+        }
+
+        private RelayCommand _removeBackground;
+        public RelayCommand RemoveBackground
+        {
+            get
+            {
+                return _removeBackground ?? (_removeBackground = new RelayCommand(async parameter =>
+                {
+                    Config.ApplicationDesign.ApplicationBackground = null;
+                    await BaseWindow.B
