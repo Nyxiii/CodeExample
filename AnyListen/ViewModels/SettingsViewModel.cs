@@ -170,4 +170,28 @@ namespace AnyListen.ViewModels
             get { return Config.ApplicationDesign.AppTheme; }
             set
             {
-                Config.Appl
+                Config.ApplicationDesign.AppTheme = value;
+                ApplyTheme();
+            }
+        }
+
+        public IAccentColor SelectedAccentColor
+        {
+            get { return Config.ApplicationDesign.AccentColor; }
+            set
+            {
+                Config.ApplicationDesign.AccentColor = value;
+                ApplyTheme();
+            }
+        }
+
+        private async void ApplyTheme()
+        {
+            await BaseWindow.MoveOut();
+            ApplicationThemeManager.Instance.Apply(Config.ApplicationDesign);
+            await BaseWindow.ResetAndMoveIn();
+        }
+
+        private RelayCommand _selectBackground;
+        public RelayCommand SelectBackground
+     
