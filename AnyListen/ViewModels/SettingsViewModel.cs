@@ -194,4 +194,17 @@ namespace AnyListen.ViewModels
 
         private RelayCommand _selectBackground;
         public RelayCommand SelectBackground
-     
+        {
+            get
+            {
+                return _selectBackground ?? (_selectBackground = new RelayCommand(async parameter =>
+                {
+                    var ofd = new OpenFileDialog
+                    {
+                        Filter = string.Format("{0}|{4};{5}|{1}|{4}|{2}|{5}|{3}|*.*",
+                            Application.Current.Resources["SupportedFiles"],
+                            Application.Current.Resources["PictureFiles"],
+                            Application.Current.Resources["VideoFiles"],
+                            Application.Current.Resources["AllFiles"],
+                            "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.gif",
+                            "*.mp4;*.wmv
