@@ -227,4 +227,33 @@ namespace AnyListen.ViewModels
                 return _removeBackground ?? (_removeBackground = new RelayCommand(async parameter =>
                 {
                     Config.ApplicationDesign.ApplicationBackground = null;
-                    await BaseWindow.B
+                    await BaseWindow.BackgroundChanged();
+                }));
+            }
+        }
+
+        #endregion
+
+        #region Behaviour
+
+        public bool ShowProgressInTaskbar
+        {
+            get { return Config.ShowProgressInTaskbar; }
+            set
+            {
+                Config.ShowProgressInTaskbar = value;
+                BaseWindow.RefreshTaskbarInfo(MainViewModel.Instance.MusicManager.CSCoreEngine.IsPlaying ? PlaybackState.Playing : PlaybackState.Paused);
+            }
+        }
+
+        #endregion
+
+        #region Languages
+
+        private LanguageInfo _currentlanguage;
+        public LanguageInfo CurrentLanguage
+        {
+            get { return _currentlanguage; }
+            set
+            {
+                if (SetProperty(
