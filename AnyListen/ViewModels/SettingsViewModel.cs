@@ -256,4 +256,32 @@ namespace AnyListen.ViewModels
             get { return _currentlanguage; }
             set
             {
-                if (SetProperty(
+                if (SetProperty(value, ref _currentlanguage) && value != null)
+                {
+                    Config.Language = value.Code;
+                    Config.LoadLanguage();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Reset
+
+        public bool SaveSettingsToAppData
+        {
+            get { return SaveLocationManager.IsInstalled(); }
+            set
+            {
+                if (value)
+                {
+                    SaveLocationManager.MoveToAppData(BaseWindow.WindowDialogService);
+                }
+                else
+                {
+                    SaveLocationManager.MoveToLocalFoler(BaseWindow.WindowDialogService);
+                }
+            }
+        }
+
+    
