@@ -304,4 +304,24 @@ namespace AnyListen.ViewModels
         private RelayCommand _resettrackimport;
         public RelayCommand ResetTrackImport
         {
- 
+            get
+            {
+                return _resettrackimport ?? (_resettrackimport = new RelayCommand(parameter =>
+                {
+                    Config.RememberTrackImportPlaylist = false;
+                    Config.PlaylistToImportTrack = null;
+                    OnPropertyChanged("Config");
+                }));
+            }
+        }
+
+        private RelayCommand _totalreset;
+        public RelayCommand TotalReset
+        {
+            get
+            {
+                return _totalreset ?? (_totalreset = new RelayCommand(parameter =>
+                {
+                    Config.SetStandardValues();
+                    SelectedAudioDevice = SoundOutList[0].AudioDevices[0];
+     
