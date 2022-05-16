@@ -284,4 +284,24 @@ namespace AnyListen.ViewModels
             }
         }
 
-    
+        private RelayCommand _switchLocation;
+        public RelayCommand SwitchLocation
+        {
+            get { return _switchLocation ?? (_switchLocation = new RelayCommand(parameter => { SaveSettingsToAppData = !SaveSettingsToAppData; })); }
+        }
+
+        #endregion
+
+        private RelayCommand _testnotification;
+        public RelayCommand TestNotification
+        {
+            get
+            {
+                return _testnotification ?? (_testnotification = new RelayCommand(parameter => { MusicManager.Notification.Test(Config.Notification); }));
+            }
+        }
+
+        private RelayCommand _resettrackimport;
+        public RelayCommand ResetTrackImport
+        {
+ 
