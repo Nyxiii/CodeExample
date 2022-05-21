@@ -324,4 +324,9 @@ namespace AnyListen.ViewModels
                 {
                     Config.SetStandardValues();
                     SelectedAudioDevice = SoundOutList[0].AudioDevices[0];
-     
+                    OnPropertyChanged("Config");
+                }));
+            }
+        }
+    }
+}
