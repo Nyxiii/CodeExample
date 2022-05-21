@@ -21,4 +21,24 @@ namespace AnyListen.ViewModels
 
         public TagEditorViewModel(LocalTrack track, Window baseWindow)
         {
-            TagFile = File.
+            TagFile = File.Create(track.Path);
+            Track = track;
+            baseWindow.Closed += (s, e) => TagFile.Dispose();
+            _baseWindow = baseWindow;
+
+            AllGenres = Genres.Audio.ToList();
+            AllGenres.AddRange(Enum.GetValues(typeof(Genre)).Cast<Genre>().Select(PlayableBase.GenreToString).Where(x => !AllGenres.Contains(x)));
+            AllGenres.Sort();
+
+            SelectedGenres = track.Genres.Select(PlayableBase.GenreToString).ToList();
+        }
+
+        public TagEditorViewModel()
+        {
+            
+        }
+
+        private RelayCommand _closeCommand;
+        public RelayCommand CloseCommand
+        {
+            get { return _closeCommand ?? (_closeCommand = new RelayCommand(parameter => _baseWindow.Cl
