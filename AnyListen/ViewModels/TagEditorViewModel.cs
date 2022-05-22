@@ -41,4 +41,24 @@ namespace AnyListen.ViewModels
         private RelayCommand _closeCommand;
         public RelayCommand CloseCommand
         {
-            get { return _closeCommand ?? (_closeCommand = new RelayCommand(parameter => _baseWindow.Cl
+            get { return _closeCommand ?? (_closeCommand = new RelayCommand(parameter => _baseWindow.Close())); }
+        }
+
+        private RelayCommand _saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return _saveCommand ?? (_saveCommand = new RelayCommand(async parameter =>
+                {
+                    TagFile.Tag.Genres = SelectedGenres.ToArray();
+                    try
+                    {
+                        TagFile.Save();
+                    }
+                    catch (Exception ex)
+                    {
+                        var message =
+                            new MessageWindow(
+                                string.Format(Application.Current.Resources["SaveTagsError"].ToString(), ex.Message),
+                                Application.Current.Resources["Err
