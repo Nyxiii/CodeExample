@@ -102,4 +102,23 @@ namespace AnyListen.ViewModels
                 {
                     var sfd = new SaveFileDialog()
                     {
-     
+                        Filter =
+                            $"{Application.Current.FindResource("TextFiles")} (*.txt)|*.txt|{Application.Current.FindResource("AllFiles")} (*.*)|*.*"
+                    };
+                    if (sfd.ShowDialog() == true)
+                    {
+                        System.IO.File.WriteAllText(sfd.FileName, TagFile.Tag.Lyrics);
+                    }
+                }));
+            }
+        }
+
+        private RelayCommand _clearLyrics;
+        public RelayCommand ClearLyrics
+        {
+            get
+            {
+                return _clearLyrics ?? (_clearLyrics = new RelayCommand(parameter =>
+                {
+                    TagFile.Tag.Lyrics = string.Empty;
+ 
