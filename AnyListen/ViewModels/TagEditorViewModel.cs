@@ -61,4 +61,25 @@ namespace AnyListen.ViewModels
                         var message =
                             new MessageWindow(
                                 string.Format(Application.Current.Resources["SaveTagsError"].ToString(), ex.Message),
-                                Application.Current.Resources["Err
+                                Application.Current.Resources["Error"].ToString(), false) {Owner = _baseWindow};
+                        message.ShowDialog();
+                        return;
+                    }
+
+                    await Track.LoadInformation();
+                    _baseWindow.Close();
+                }));
+            }
+        }
+
+        private RelayCommand _openLyrics;
+        public RelayCommand OpenLyrics
+        {
+            get
+            {
+                return _openLyrics ?? (_openLyrics = new RelayCommand(parameter =>
+                {
+                    var ofd = new OpenFileDialog()
+                    {
+                        Filter =
+                            $"{Application.Current.
