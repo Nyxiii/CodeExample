@@ -82,4 +82,24 @@ namespace AnyListen.ViewModels
                     var ofd = new OpenFileDialog()
                     {
                         Filter =
-                            $"{Application.Current.
+                            $"{Application.Current.FindResource("TextFiles")} (*.txt)|*.txt|{Application.Current.FindResource("AllFiles")} (*.*)|*.*"
+                    };
+                    if (ofd.ShowDialog() == true)
+                    {
+                        TagFile.Tag.Lyrics = System.IO.File.ReadAllText(ofd.FileName);
+                        OnPropertyChanged("TagFile");
+                    }
+                }));
+            }
+        }
+
+        private RelayCommand _saveLyricsAs;
+        public RelayCommand SaveLyricsAs
+        {
+            get
+            {
+                return _saveLyricsAs ?? (_saveLyricsAs = new RelayCommand(parameter =>
+                {
+                    var sfd = new SaveFileDialog()
+                    {
+     
