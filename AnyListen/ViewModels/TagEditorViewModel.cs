@@ -121,4 +121,29 @@ namespace AnyListen.ViewModels
                 return _clearLyrics ?? (_clearLyrics = new RelayCommand(parameter =>
                 {
                     TagFile.Tag.Lyrics = string.Empty;
- 
+                    OnPropertyChanged("TagFile");
+                }));
+            }
+        }
+
+        private RelayCommand _refresValues;
+        public RelayCommand RefreshValues
+        {
+            get
+            {
+                return _refresValues ?? (_refresValues = new RelayCommand(parameter =>
+                {
+                    SelectedValues = string.Join(", ", SelectedGenres);
+                }));
+            }
+        }
+
+        public List<string> AllGenres { get; set; }
+
+        private List<string> _selectedGenres;
+        public List<string> SelectedGenres
+        {
+            get { return _selectedGenres; }
+            set
+            {
+                SetProperty(value, ref _selectedGenres
