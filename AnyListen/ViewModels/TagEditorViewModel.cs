@@ -146,4 +146,18 @@ namespace AnyListen.ViewModels
             get { return _selectedGenres; }
             set
             {
-                SetProperty(value, ref _selectedGenres
+                SetProperty(value, ref _selectedGenres);
+            }
+        }
+
+        private string _selectedValues;
+        public string SelectedValues
+        {
+            get { return _selectedValues; }
+            set
+            {
+                SetProperty(value, ref _selectedValues);
+            }
+        }
+    }
+}
