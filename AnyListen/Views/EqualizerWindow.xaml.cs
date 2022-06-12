@@ -32,4 +32,20 @@ namespace AnyListen.Views
                 {
                     _isClosing = true;
                     Storyboard story = new Storyboard();
-     
+                    DoubleAnimation doubleanimation = new DoubleAnimation(_isLeft ? Left - 25 : Left + 25, TimeSpan.FromMilliseconds(100));
+                    Storyboard.SetTargetProperty(doubleanimation, new PropertyPath(LeftProperty));
+                    Storyboard.SetTarget(doubleanimation, this);
+                    story.Children.Add(doubleanimation);
+
+                    story.Completed += (s, es) => { _canClose = true; Close(); };
+                    story.Begin(this);
+
+                    if (BeginCloseAnimation != null) BeginCloseAnimation(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        private bool _isLeft;
+        public void SetPosition(RECT parentRecantgle, double windowWidth)
+        {
+            To
