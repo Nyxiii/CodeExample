@@ -48,4 +48,22 @@ namespace AnyListen.Views
         private bool _isLeft;
         public void SetPosition(RECT parentRecantgle, double windowWidth)
         {
-            To
+            Top = parentRecantgle.top + 25;
+            if (parentRecantgle.left + windowWidth + windowWidth - WpfScreen.MostRightX > 0) //If left from the parent isn't 300 space
+            {
+                Left = parentRecantgle.left - windowWidth;
+                _isLeft = false;
+            }
+            else
+            {
+                Left = parentRecantgle.left + windowWidth;
+                _isLeft = true;
+            }
+        }
+
+        private void EqualizerView_OnWantClose(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
+}
