@@ -7,4 +7,8 @@
     <StackPanel Orientation="Vertical" Margin="10">
         <TextBlock x:Name="MessageTextBlock" TextWrapping="Wrap"/>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
-            <Button Conte
+            <Button Content="{StaticResource OK}" Width="100" behaviors:ButtonBehavior.DialogResult="true" IsDefault="True" x:Name="PositiveButton"/>
+            <Button Content="{StaticResource Cancel}" Margin="5,0,0,0" x:Name="NegativeButton" Width="100" behaviors:ButtonBehavior.DialogResult="false" IsCancel="True"/>
+        </StackPanel>
+    </StackPanel>
+</controls:MetroWindow>
