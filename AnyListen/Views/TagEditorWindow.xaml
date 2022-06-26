@@ -26,4 +26,13 @@
                             <ColumnDefinition Width="75"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-        
+                        <TextBlock Text="{StaticResource Title}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <TextBox Grid.Column="1" Text="{Binding TagFile.Tag.Title}"/>
+                    </Grid>
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{StaticResource Artists}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <TextBox Grid.Column="1" Text="{Binding TagFile.Tag.P
