@@ -47,4 +47,14 @@
                     </Grid>
                     <DockPanel Margin="0,5,0,0">
                         <Grid VerticalAlignment="Top">
-                            <Grid.ColumnDefinit
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="75"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{StaticResource Year}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox Text="{Binding TagFile.Tag.Year,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Grid.Column="1" VerticalAlignment="Center"/>
+                        </Grid>
+                    </DockPanel>
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+   
