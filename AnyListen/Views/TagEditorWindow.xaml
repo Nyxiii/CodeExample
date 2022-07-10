@@ -57,4 +57,10 @@
                     </DockPanel>
                     <Grid Margin="0,5,0,0">
                         <Grid.ColumnDefinitions>
-   
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{StaticResource Genre}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <xctk:CheckComboBox Grid.Column="1" ItemsSource="{Binding AllGenres}" SelectedItemsOverride="{Binding SelectedGenres}" Delimiter=", "
+                                            SelectedMemberPath="" Foreground="{StaticResource BlackBrush}" Background="{StaticResource WhiteBrush}"
+                                            SelectedValue="{Binding SelectedValues}" Command="{Bi
