@@ -63,4 +63,12 @@
                         <TextBlock Text="{StaticResource Genre}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                         <xctk:CheckComboBox Grid.Column="1" ItemsSource="{Binding AllGenres}" SelectedItemsOverride="{Binding SelectedGenres}" Delimiter=", "
                                             SelectedMemberPath="" Foreground="{StaticResource BlackBrush}" Background="{StaticResource WhiteBrush}"
-                                            SelectedValue="{Binding SelectedValues}" Command="{Bi
+                                            SelectedValue="{Binding SelectedValues}" Command="{Binding RefreshValues}">
+                            <xctk:CheckComboBox.ItemContainerStyle>
+                                <Style TargetType="xctk:SelectorItem">
+                                    <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                                    <Setter Property="Padding" Value="2" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                    <Setter Property="VerticalContentAlignment" Value="Top" />
+                                    <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+                                    <Setter Property="Background" Value="{DynamicResour
