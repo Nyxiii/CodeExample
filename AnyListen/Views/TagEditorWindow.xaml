@@ -71,4 +71,12 @@
                                     <Setter Property="HorizontalContentAlignment" Value="Left" />
                                     <Setter Property="VerticalContentAlignment" Value="Top" />
                                     <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
-                                    <Setter Property="Background" Value="{DynamicResour
+                                    <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="xctk:SelectorItem">
+                                                <Grid Background="{TemplateBinding Background}" Margin="0,0.5">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Norm
