@@ -85,4 +85,13 @@
                                                                 <Storyboard>
                                                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="contentPresenter">
                                                                         <SplineDoubleKeyFrame KeyTime="0" Value=".55" />
-                                                                    </DoubleAnimationUsingKeyFrames
+                                                                    </DoubleAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <Border x:Name="ItemBackground"
+                                IsHitTestVisible="False"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBr
