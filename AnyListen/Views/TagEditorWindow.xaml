@@ -94,4 +94,13 @@
                                 IsHitTestVisible="False"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBr
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"/>
+                                                    <CheckBox Foreground="{TemplateBinding Foreground}"
+                            IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" 
+                            ContentTemplate="{TemplateBinding ContentTemplate}" Margin="2"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                 
