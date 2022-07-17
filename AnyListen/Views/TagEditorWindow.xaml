@@ -79,4 +79,10 @@
                                                 <Grid Background="{TemplateBinding Background}" Margin="0,0.5">
                                                     <VisualStateManager.VisualStateGroups>
                                                         <VisualStateGroup x:Name="CommonStates">
-                                                            <VisualState x:Name="Norm
+                                                            <VisualState x:Name="Normal" />
+                                                            <VisualState x:Name="MouseOver" />
+                                                            <VisualState x:Name="Disabled">
+                                                                <Storyboard>
+                                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="contentPresenter">
+                                                                        <SplineDoubleKeyFrame KeyTime="0" Value=".55" />
+                                                                    </DoubleAnimationUsingKeyFrames
