@@ -103,4 +103,14 @@
                             ContentTemplate="{TemplateBinding ContentTemplate}" Margin="2"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
-                 
+                                                    <Trigger Property="IsSelected"
+                                 Value="True">
+                                                        <Setter TargetName="ItemBackground"
+                                    Property="Background"
+                                    Value="{DynamicResource AccentColorBrush}" />
+                                                        <Setter Property="Foreground"
+                                    Value="{DynamicResource AccentSelectedColorBrush}" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver"
+                                 Value="True">
+  
