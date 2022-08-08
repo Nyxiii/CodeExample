@@ -166,4 +166,10 @@
                             <TextBlock Text="{StaticResource Track}"/>
                             <TextBlock Text=" #"/>
                         </StackPanel>
-                        <Stack
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+                            <TextBox Text="{Binding TagFile.Tag.Track,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Width="40"/>
+                            <TextBlock Text="/" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding TagFile.Tag.TrackCount,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Width="40"/>
+                            <TextBlock Text="{StaticResource Disc}" Margin="40,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text=" #" VerticalAlignment="Center"/>
+                            <TextBo
