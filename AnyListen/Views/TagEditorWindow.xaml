@@ -172,4 +172,16 @@
                             <TextBox Text="{Binding TagFile.Tag.TrackCount,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Width="40"/>
                             <TextBlock Text="{StaticResource Disc}" Margin="40,0,0,0" VerticalAlignment="Center"/>
                             <TextBlock Text=" #" VerticalAlignment="Center"/>
-                            <TextBo
+                            <TextBox Text="{Binding TagFile.Tag.Disc,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Width="40" Margin="5,0,0,0"/>
+                            <TextBlock Text="/" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding TagFile.Tag.DiscCount,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Width="40"/>
+                        </StackPanel>
+
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Lyrics" controls:ControlsHelper.HeaderFontSize="20" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+           
