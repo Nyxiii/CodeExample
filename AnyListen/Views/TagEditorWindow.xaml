@@ -184,4 +184,14 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-           
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Menu>
+                        <MenuItem Header="{StaticResource File}">
+                            <MenuItem Header="{StaticResource Open}" Command="{Binding OpenLyrics}"/>
+                            <MenuItem Header="{StaticResource SaveAs}" Command="{Binding SaveLyricsAs}"/>
+                        </MenuItem>
+                        <MenuItem Header="{StaticResource Remove}" Command="{Binding ClearLyrics}"/>
+                    </Menu>
+                    <TextBox Grid.Row="1" AcceptsReturn="True" AcceptsTab="True" Text="{Binding TagFile.Tag.Lyrics}"/>
+    
