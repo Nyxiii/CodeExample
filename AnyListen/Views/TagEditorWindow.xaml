@@ -206,4 +206,8 @@
                     <ColumnDefinition SharedSizeGroup="Button"/>
                 </Grid.ColumnDefinitions>
                 <Button Content="{StaticResource Close}" Width="150" Command="{Binding CloseCommand}"/>
-                <Button Content="{StaticResource Save}" Grid.Column="2" Command="{Binding SaveComman
+                <Button Content="{StaticResource Save}" Grid.Column="2" Command="{Binding SaveCommand}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</controls:MetroWindow>
