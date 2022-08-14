@@ -194,4 +194,16 @@
                         <MenuItem Header="{StaticResource Remove}" Command="{Binding ClearLyrics}"/>
                     </Menu>
                     <TextBox Grid.Row="1" AcceptsReturn="True" AcceptsTab="True" Text="{Binding TagFile.Tag.Lyrics}"/>
-    
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Row="1">
+            <Separator VerticalAlignment="Top"/>
+            <Grid Margin="10" Grid.IsSharedSizeScope="True" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Button"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition SharedSizeGroup="Button"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="{StaticResource Close}" Width="150" Command="{Binding CloseCommand}"/>
+                <Button Content="{StaticResource Save}" Grid.Column="2" Command="{Binding SaveComman
