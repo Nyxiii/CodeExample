@@ -16,4 +16,13 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="{StaticResource File}">
-                <Menu
+                <MenuItem Header="{StaticResource New}" Command="{Binding NewDocument}" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="{StaticResource Open}" Command="{Binding OpenDocument}" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="{StaticResource Save}" Command="{Binding SaveDocument}" InputGestureText="Ctrl+S">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem" BasedOn="{StaticResource MetroMenuItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding FilePath}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </
