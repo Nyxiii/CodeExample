@@ -25,4 +25,16 @@
                                 <DataTrigger Binding="{Binding FilePath}" Value="{x:Null}">
                                     <Setter Property="IsEnabled" Value="False"/>
                                 </DataTrigger>
-                            </
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+                <MenuItem Header="{StaticResource SaveAs}" Command="{Binding SaveDocumentAs}" InputGestureText="Ctrl+Shift+S">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem" BasedOn="{StaticResource MetroMenuItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentLanguageDocument}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                      
