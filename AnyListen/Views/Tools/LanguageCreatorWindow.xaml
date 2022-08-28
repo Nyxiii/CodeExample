@@ -37,4 +37,19 @@
                                     <Setter Property="IsEnabled" Value="False"/>
                                 </DataTrigger>
                             </Style.Triggers>
-                      
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="{StaticResource Close}" Command="{Binding CloseCommand}"/>
+            </MenuItem>
+            <MenuItem Header="{StaticResource Edit}">
+                <MenuItem Header="{StaticResource Reset}" Command="{Binding ResetValues}"/>
+            </MenuItem>
+        </Menu>
+        <DockPanel Margin="5" Grid.Row="1">
+            <TextBlock Text="{StaticResource Filename}" VerticalAlignment="Center"/>
+            <TextBlock Text=": " VerticalAlignment="Center"/>
+            <TextBox IsReadOnly="True" Text="{Binding FilePath}"/>
+        </DockPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding CurrentLanguageDocument.Langua
