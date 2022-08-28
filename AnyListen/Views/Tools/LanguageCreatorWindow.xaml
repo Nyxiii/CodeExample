@@ -52,4 +52,13 @@
             <TextBlock Text=": " VerticalAlignment="Center"/>
             <TextBox IsReadOnly="True" Text="{Binding FilePath}"/>
         </DockPanel>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding CurrentLanguageDocument.Langua
+        <DataGrid Grid.Row="2" ItemsSource="{Binding CurrentLanguageDocument.LanguageEntries}" RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display" Style="{DynamicResource AzureDataGrid}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Resources>
+                <Style x:Key="TextColumnStyle">
+                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{StaticResource Key}" Binding="{Binding Key}" IsReadOnly="True" Width="180" x:Name="DataGridTextColumn"/>
+                <DataGridText
