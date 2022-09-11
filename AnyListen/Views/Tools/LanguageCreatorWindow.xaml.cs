@@ -30,4 +30,25 @@ namespace AnyListen.Views.Tools
 
         private string _filePath;
         public string FilePath
-     
+        {
+            get { return _filePath; }
+            set { _filePath = value; OnPropertyChanged("FilePath"); }
+        }
+
+        #endregion
+
+        #region Commands
+        private RelayCommand _openDocument;
+        public RelayCommand OpenDocument
+        {
+            get
+            {
+                return _openDocument ?? (_openDocument = new RelayCommand(parameter =>
+                {
+                    var ofd = new OpenFileDialog() { Filter = "XAML files|*.xaml|All files|*.*" };
+                    if (ofd.ShowDialog() != true) return;
+                    ofd.Multiselect = false;
+                    ofd.CheckFileExists = true;
+                    try
+                    {
+                        Curre
