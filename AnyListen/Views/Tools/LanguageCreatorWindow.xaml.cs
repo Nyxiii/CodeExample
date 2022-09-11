@@ -51,4 +51,24 @@ namespace AnyListen.Views.Tools
                     ofd.CheckFileExists = true;
                     try
                     {
-                        Curre
+                        CurrentLanguageDocument = LanguageDocument.FromFile(ofd.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, Application.Current.Resources["Error"].ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    FilePath = ofd.FileName;
+                }));
+            }
+        }
+
+        private RelayCommand _newDocument;
+        public RelayCommand NewDocument
+        {
+            get
+            {
+                return _newDocument ?? (_newDocument = new RelayCommand(parameter =>
+                {
+                    CurrentLangu
