@@ -71,4 +71,28 @@ namespace AnyListen.Views.Tools
             {
                 return _newDocument ?? (_newDocument = new RelayCommand(parameter =>
                 {
-                    CurrentLangu
+                    CurrentLanguageDocument = new LanguageDocument();
+                    FilePath = null;
+                }));
+            }
+        }
+
+        private RelayCommand _saveDocument;
+        public RelayCommand SaveDocument
+        {
+            get
+            {
+                return _saveDocument ?? (_saveDocument = new RelayCommand(parameter =>
+                {
+                    if (CurrentLanguageDocument == null) return;
+                    if (string.IsNullOrEmpty(FilePath)) { SaveAs(); } else { CurrentLanguageDocument.SaveDocument(FilePath); }
+                }));
+            }
+        }
+
+        private RelayCommand _saveDocumentAs;
+        public RelayCommand SaveDocumentAs
+        {
+            get
+            {
+                return _sa
