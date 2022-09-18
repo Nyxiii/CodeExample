@@ -95,4 +95,25 @@ namespace AnyListen.Views.Tools
         {
             get
             {
-                return _sa
+                return _saveDocumentAs ?? (_saveDocumentAs = new RelayCommand(parameter =>
+                {
+                    if (CurrentLanguageDocument == null) return;
+                    SaveAs();
+                }));
+            }
+        }
+
+        private void SaveAs()
+        {
+            var sfd = new SaveFileDialog() { Filter = "XAML files|*.xaml|All files|*.*" };
+            if (sfd.ShowDialog(this) == true)
+            {
+                CurrentLanguageDocument.SaveDocument(sfd.FileName);
+                FilePath = sfd.FileName;
+            }
+        }
+
+        private RelayCommand _closeCommand;
+        public RelayCommand CloseCommand
+        {
+            get { return _c
