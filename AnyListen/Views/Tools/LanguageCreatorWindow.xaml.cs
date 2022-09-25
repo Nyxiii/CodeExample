@@ -116,4 +116,24 @@ namespace AnyListen.Views.Tools
         private RelayCommand _closeCommand;
         public RelayCommand CloseCommand
         {
-            get { return _c
+            get { return _closeCommand ?? (_closeCommand = new RelayCommand(parameter => { Close(); })); }
+        }
+
+        private RelayCommand _resetValues;
+        public RelayCommand ResetValues
+        {
+            get
+            {
+                return _resetValues ?? (_resetValues = new RelayCommand(parameter =>
+                {
+                    if (CurrentLanguageDocument != null)
+                        CurrentLanguageDocument.LanguageEntries.ForEach(x => x.Value = string.Empty);
+                }));
+            }
+        }
+        #endregion
+
+        #region INotifyPropertyChanged
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null) PropertyChanged(this,
