@@ -136,4 +136,26 @@ namespace AnyListen.Views.Tools
         #region INotifyPropertyChanged
         protected void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null) PropertyChanged(this,
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+    }
+
+    public class LanguageDocument
+    {
+        public List<LanguageEntry> LanguageEntries { get; private set; }
+
+        public LanguageDocument()
+        {
+            LanguageEntries = GetEmptyList();
+            var germanDictionary = new ResourceDictionary
+            {
+                Source = new Uri("/Resources/Languages/AnyListen.de-de.xaml", UriKind.Relative)
+            };
+            var englishDictionary = new ResourceDictionary
+            {
+                Source = new Uri("/Resources/Languages/AnyListen.en-us.xaml", UriKind.Relative)
+    
