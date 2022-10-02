@@ -176,4 +176,20 @@ namespace AnyListen.Views.Tools
             using (var sw = new StreamWriter(path))
             {
                 sw.WriteLine("<ResourceDictionary xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"");
-                sw.WriteLine("                    xmlns:x=\"http://schemas.
+                sw.WriteLine("                    xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"");
+                sw.WriteLine("                    xmlns:system=\"clr-namespace:System;assembly=mscorlib\">");
+                foreach (var languageEntry in LanguageEntries)
+                {
+                    sw.WriteLine("    <system:String x:Key=\"{0}\">{1}</system:String>", languageEntry.Key, languageEntry.Value);
+                }
+                sw.WriteLine("</ResourceDictionary>");
+            }
+            MessageBox.Show(Application.Current.Resources["DocumentSaved"].ToString());
+        }
+
+        public static LanguageDocument FromFile(string path)
+        {
+            return FromDictionary(new ResourceDictionary { Source = new Uri(path) });
+        }
+
+        public sta
