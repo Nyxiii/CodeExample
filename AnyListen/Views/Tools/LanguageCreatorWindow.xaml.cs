@@ -158,4 +158,22 @@ namespace AnyListen.Views.Tools
             var englishDictionary = new ResourceDictionary
             {
                 Source = new Uri("/Resources/Languages/AnyListen.en-us.xaml", UriKind.Relative)
-    
+            };
+
+            foreach (var key in germanDictionary.Keys)
+            {
+                LanguageEntries.First(x => x.Key == key.ToString()).GermanWord = germanDictionary[key].ToString();
+            }
+
+            foreach (var key in englishDictionary.Keys)
+            {
+                LanguageEntries.First(x => x.Key == key.ToString()).EnglishWord = englishDictionary[key].ToString();
+            }
+        }
+
+        public void SaveDocument(string path)
+        {
+            using (var sw = new StreamWriter(path))
+            {
+                sw.WriteLine("<ResourceDictionary xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"");
+                sw.WriteLine("                    xmlns:x=\"http://schemas.
