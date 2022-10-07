@@ -192,4 +192,24 @@ namespace AnyListen.Views.Tools
             return FromDictionary(new ResourceDictionary { Source = new Uri(path) });
         }
 
-        public sta
+        public static LanguageDocument FromDictionary(ResourceDictionary dictionary)
+        {
+            var document = new LanguageDocument();
+
+            foreach (var key in dictionary.Keys)
+            {
+                document.LanguageEntries.First(x => x.Key == key.ToString()).Value = dictionary[key].ToString();
+            }
+
+            return document;
+        }
+
+        private static List<string> _allKeys;
+        public static List<string> AllKeys
+        {
+            get
+            {
+                if (_allKeys == null)
+                {
+                    var dictionary = new ResourceDictionary { Source = new Uri("/Resources/Languages/AnyListen.de-de.xaml", UriKind.Relative) };
+              
