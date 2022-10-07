@@ -212,4 +212,31 @@ namespace AnyListen.Views.Tools
                 if (_allKeys == null)
                 {
                     var dictionary = new ResourceDictionary { Source = new Uri("/Resources/Languages/AnyListen.de-de.xaml", UriKind.Relative) };
-              
+                    _allKeys = dictionary.Keys.Cast<string>().ToList();
+                }
+                return _allKeys;
+            }
+        }
+
+        private static List<LanguageEntry> GetEmptyList()
+        {
+            return AllKeys.Select(x => new LanguageEntry { Key = x }).ToList();
+        }
+    }
+
+    public class LanguageEntry : INotifyPropertyChanged
+    {
+        public string Key { get; set; }
+        public string EnglishWord { get; set; }
+        public string GermanWord { get; set; }
+
+        private string _value;
+
+        public string Value
+        {
+            get { return _value; }
+            set
+            {
+                if (value == _value) return;
+                _value = value;
+                if (PropertyCh
