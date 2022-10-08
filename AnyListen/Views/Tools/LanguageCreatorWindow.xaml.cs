@@ -239,4 +239,11 @@ namespace AnyListen.Views.Tools
             {
                 if (value == _value) return;
                 _value = value;
-                if (PropertyCh
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Value"));
+            }
+        }
+        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+}
