@@ -3,4 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:behaviors="clr-namespace:AnyListen.GUI.Behaviors"
-        Title="{StaticResource ImportTrack}" SizeToContent="Height" Width="400" GlowBrush="{StaticResource AccentColorBrush}" ShowInTaskbar="False" ResizeMode="NoResize" x:Name="BaseWindow" Win
+        Title="{StaticResource ImportTrack}" SizeToContent="Height" Width="400" GlowBrush="{StaticResource AccentColorBrush}" ShowInTaskbar="False" ResizeMode="NoResize" x:Name="BaseWindow" WindowStartupLocation="CenterOwner">
+    <StackPanel Orientation="Vertical" Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{StaticResource TrackName}"/>
+                <TextBlock Text=":"/>
+            </StackPanel>
+            <TextBlock Text="{Binding ElementName=BaseWindow,Path=Trackname}" Grid.Column="1"/>
+        </Grid>
+        <Grid Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width
