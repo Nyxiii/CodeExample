@@ -37,4 +37,8 @@
                     <ColumnDefinition SharedSizeGroup="Buttons"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Content="{StaticResource Cancel}" behaviors:ButtonBehavior.DialogResult="False"/>
-                <Button Grid.Column="2" Content="{StaticResource Add}
+                <Button Grid.Column="2" Content="{StaticResource Add}" behaviors:ButtonBehavior.DialogResult="True"/>
+            </Grid>
+        </DockPanel>
+    </StackPanel>
+</controls:MetroWindow>
