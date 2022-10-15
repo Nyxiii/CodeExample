@@ -36,3 +36,29 @@
         </StackPanel>
         <ScrollViewer Grid.Row="1" Margin="0,10,0,0">
             <TextBlock behaviors:TextBlockBehavior.FormattedText="{Binding ElementName=BaseWindow,Path=UpdateService.Changelog}"/>
+        </ScrollViewer>
+        <StackPanel Orientation="Vertical" Grid.Row="2">
+            <Grid Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{StaticResource Size}"/>
+                <TextBlock Grid.Column="1" Text="{Binding ElementName=BaseWindow,Path=UpdateService.UpdateSize,Converter={StaticResource RoundSizeConverter}}"/>
+            </Grid>
+            <Grid Margin="0,10,0,0" x:Name="StateGrid" Visibility="Collapsed" behaviors:VisibilityAnimation.AnimationType="Fade">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <controls:MetroProgressBar VerticalAlignment="Center" Value="{Binding ElementName=BaseWindow,Path=UpdateService.ProgressState}" Foreground="{StaticResource NormalColorBrush}"/>
+                <Button Style="{DynamicResource MetroCircleButtonStyle}" Width="24" Height="24" Grid.Column="1" Click="CancelButton_Click">
+                    <Viewbox Width="6" Height="6" Stretch="UniformToFill">
+                        <Path Data="{StaticResource VectorX}" Fill="{StaticResource GrayBrush1}"/>
+                    </Viewbox>
+                </Button>
+            </Grid>
+            <Button Content="{StaticResource Update}" Margin="10" Click="UpdateButton_Click"/>
+        </StackPanel>
+    </Grid>
+</controls:MetroWindow>
