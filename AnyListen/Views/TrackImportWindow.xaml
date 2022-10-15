@@ -29,4 +29,12 @@
         </Grid>
         <DockPanel Margin="0,15,0,0">
             <CheckBox Content="{StaticResource Remember}" IsChecked="{Binding ElementName=BaseWindow,Path=RememberChoice}" x:Name="RememberCheckBox"/>
-            <CheckBox Content="{StaticResource AlsoAfterRestart}" Margin="5,0,0,0" IsChecked="{Binding ElementName=BaseWindow,Path=Rem
+            <CheckBox Content="{StaticResource AlsoAfterRestart}" Margin="5,0,0,0" IsChecked="{Binding ElementName=BaseWindow,Path=RememberAlsoAfterRestart}" IsEnabled="{Binding ElementName=RememberCheckBox,Path=IsChecked}" ToolTip="{StaticResource CanBeResetedInSettings}"/>
+            <Grid Grid.IsSharedSizeScope="True" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Buttons"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition SharedSizeGroup="Buttons"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="{StaticResource Cancel}" behaviors:ButtonBehavior.DialogResult="False"/>
+                <Button Grid.Column="2" Content="{StaticResource Add}
