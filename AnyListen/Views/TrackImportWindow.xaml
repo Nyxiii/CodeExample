@@ -19,4 +19,14 @@
         <Grid Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{StaticResource Playlist}"/>
+                <TextBlock Text=":"/>
+            </StackPanel>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding ElementName=BaseWindow,Path=Playlists}" SelectedItem="{Binding ElementName=BaseWindow,Path=SelectedPlaylist}" DisplayMemberPath="Name"/>
+        </Grid>
+        <DockPanel Margin="0,15,0,0">
+            <CheckBox Content="{StaticResource Remember}" IsChecked="{Binding ElementName=BaseWindow,Path=RememberChoice}" x:Name="RememberCheckBox"/>
+            <CheckBox Content="{StaticResource AlsoAfterRestart}" Margin="5,0,0,0" IsChecked="{Binding ElementName=BaseWindow,Path=Rem
