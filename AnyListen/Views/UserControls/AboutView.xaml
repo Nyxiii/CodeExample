@@ -32,4 +32,20 @@
                                     <ColorAnimation To="{StaticResource NormalColor}" Duration="0:0:0.1" Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"/>
                                 </Storyboard>
                             </BeginStoryboard>
-                        </Trig
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Hyperlink" BasedOn="{StaticResource HyperlinkStyle}"/>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer Margin="10">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="AnyListen" FontSize="24" FontFamily="Segoe UI Light"/>
+                <StackPanel Orientation="Horizontal"  Margin="0,5,0,0">
+                    <TextBlock Text="Version: "/>
+                  
