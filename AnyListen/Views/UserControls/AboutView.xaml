@@ -22,4 +22,14 @@
                         <Trigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                   
+                                    <ColorAnimation To="{StaticResource LightColor}" Duration="0:0:0.1" Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="{StaticResource NormalColor}" Duration="0:0:0.1" Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trig
