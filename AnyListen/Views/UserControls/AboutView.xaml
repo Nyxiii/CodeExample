@@ -58,4 +58,11 @@
                             <Style TargetType="Button">
                                 <Setter Property="OverridesDefaultStyle" Value="True"/>
                                 <Setter Property="Template">
-          
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.Background>
+                                                    <SolidColorBrush Color="{StaticResource WhiteColor}" Opacity="0.01"/>
+                                                </Grid.Background>
+                                                <Viewbox Width="32" Height="32">
+                                                    <Path x:Name="githubpath" Fill="{DynamicResource BlackBrush}" Data="M28.436,15.099c-1.201-0.202-2.451-0.335-3.466-0.371l-0.179-0.006c0.041-0.09,0.072-0.151,0.082-0.16c0.022-0.018,0.04-0
