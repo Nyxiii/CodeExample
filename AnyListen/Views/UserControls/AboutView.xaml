@@ -72,4 +72,12 @@
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Trigger.EnterActions>
                                                         <BeginStoryboard>
-          
+                                                            <Storyboard>
+                                                                <ColorAnimation To="Gray" Duration="0:0:0.2" Storyboard.TargetName="githubpath" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <C
