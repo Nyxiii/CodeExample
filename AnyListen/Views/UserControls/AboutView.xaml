@@ -80,4 +80,14 @@
                                                     <Trigger.ExitActions>
                                                         <BeginStoryboard>
                                                             <Storyboard>
-                                                                <C
+                                                                <ColorAnimation To="{StaticResource BlackColor}" Duration="0:0:0.2" Storyboard.TargetName="githubpath" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+           
