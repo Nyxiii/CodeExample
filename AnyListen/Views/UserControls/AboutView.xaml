@@ -101,4 +101,11 @@
                                         <ControlTemplate TargetType="Button">
                                             <Grid>
                                                 <Grid.Background>
-                                                    <SolidColorBrush Color="{StaticReso
+                                                    <SolidColorBrush Color="{StaticResource WhiteColor}" Opacity="0.01"/>
+                                                </Grid.Background>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock Text="V" FontWeight="Black" FontSize="20" Foreground="#FF2980B9" x:Name="txtV"/>
+                                                    <TextBlock Text="B" FontWeight="Black" FontSize="20" Foreground="#FF2F97DB" x:Name="txtB"/>
+                                                    <TextBlock Text="-Paradise" FontSize="20" Foreground="{DynamicResource BlackBrush}" x:Name="txtparadise"/>
+                                                </StackPanel>
+ 
