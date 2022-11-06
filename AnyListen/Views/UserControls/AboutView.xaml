@@ -90,4 +90,15 @@
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-           
+                        </Button.Style>
+                    </Button>
+                    <Button Margin="10,0,0,0" Click="ButtonVBP_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.Background>
+                                                    <SolidColorBrush Color="{StaticReso
