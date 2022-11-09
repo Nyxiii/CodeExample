@@ -115,4 +115,10 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <ColorAnimation Duration="0:0:0.2" To="#B42980B9" Storyboard.TargetName="txtV" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
-                                                  
+                                                                <ColorAnimation Duration="0:0:0.2" To="#FF4AB3F7" Storyboard.TargetName="txtB" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
+                                                                <ColorAnimation Duration="0:0:0.2" To="DarkGray" Storyboard.TargetName="txtparadise" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                      
