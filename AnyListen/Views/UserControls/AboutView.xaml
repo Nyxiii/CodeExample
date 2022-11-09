@@ -108,4 +108,11 @@
                                                     <TextBlock Text="B" FontWeight="Black" FontSize="20" Foreground="#FF2F97DB" x:Name="txtB"/>
                                                     <TextBlock Text="-Paradise" FontSize="20" Foreground="{DynamicResource BlackBrush}" x:Name="txtparadise"/>
                                                 </StackPanel>
- 
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Duration="0:0:0.2" To="#B42980B9" Storyboard.TargetName="txtV" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
+                                                  
