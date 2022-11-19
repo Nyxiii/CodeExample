@@ -139,4 +139,14 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
-      
+            <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource Libraries}" Style="{StaticResource TextBlockHeader}" Margin="0,40,0,0"/>
+            <ItemsControl ItemsSource="{Binding ElementName=AboutControl,Path=Components}" Margin="0,10,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock>
+                            <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlin
