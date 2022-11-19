@@ -125,4 +125,18 @@
                                                             <Storyboard>
                                                                 <ColorAnimation Duration="0:0:0.2" To="#FF2980B9" Storyboard.TargetName="txtV" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
                                                                 <ColorAnimation Duration="0:0:0.2" To="#FF2F97DB" Storyboard.TargetName="txtB" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
-                                                                <ColorAnimation Duration="0:0:0.2" To="{StaticResource BlackColor}" Storyboard.TargetName="txtparadise" Storyboard.T
+                                                                <ColorAnimation Duration="0:0:0.2" To="{StaticResource BlackColor}" Storyboard.TargetName="txtparadise" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+      
