@@ -149,4 +149,14 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock>
-                            <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlin
+                            <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource HyperlinkStyle}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                            <TextBlock Text="{Binding Description}" Grid.Column="1" TextWrapping="Wrap" Foreground="{DynamicResource BlackBrush}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource Images}" Style="{StaticResource TextBlockHeader}" Margin="0,30,0,0"/>
+            <ItemsControl ItemsSource="{Binding ElementName=AboutControl,Path=ImageCrea
