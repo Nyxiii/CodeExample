@@ -159,4 +159,15 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource Images}" Style="{StaticResource TextBlockHeader}" Margin="0,30,0,0"/>
-            <ItemsControl ItemsSource="{Binding ElementName=AboutControl,Path=ImageCrea
+            <ItemsControl ItemsSource="{Binding ElementName=AboutControl,Path=ImageCreators}" Margin="0,10,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource BlackBrush}"/>
+                            <TextBlock Grid.Column="1">
+                                <Hyperlink NavigateUri="{Binding Licence}" RequestNavigate="Hyperlink_RequestNavigate" Style="{Stati
