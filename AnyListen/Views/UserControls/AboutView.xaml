@@ -170,4 +170,17 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Name}" Foreground="{DynamicResource BlackBrush}"/>
                             <TextBlock Grid.Column="1">
-                                <Hyperlink NavigateUri="{Binding Licence}" RequestNavigate="Hyperlink_RequestNavigate" Style="{Stati
+                                <Hyperlink NavigateUri="{Binding Licence}" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource HyperlinkStyle}">
+                                    <TextBlock Text="{DynamicResource Licence}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Column="2">
+                                <Hyperlink NavigateUri="{Binding Website}" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource HyperlinkStyle}">
+                                    <TextBlock Text="{DynamicResource Website}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock  behaviors:TextBl
