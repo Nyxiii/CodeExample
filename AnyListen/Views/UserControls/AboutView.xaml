@@ -197,3 +197,13 @@
                 <Label>
                     <behaviors:ContentControlBehavior.FormatValues>
                         <x:Array Type="system:String">
+                            <system:String>ConnyKarras$https://www.vb-paradise.de/index.php/User/16654/</system:String>
+                            <system:String>GimpTutWorks$https://www.vb-paradise.de/index.php/User/10535/</system:String>
+                            <system:String>filoe$https://www.vb-paradise.de/index.php/User/8712/</system:String>
+                        </x:Array>
+                    </behaviors:ContentControlBehavior.FormatValues>
+                    <behaviors:ContentControlBehavior.FormattedContent>
+                        <DynamicResource ResourceKey="AboutThanks3"/>
+                    </behaviors:ContentControlBehavior.FormattedContent>
+                </Label>
+      
