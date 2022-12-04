@@ -206,4 +206,17 @@
                         <DynamicResource ResourceKey="AboutThanks3"/>
                     </behaviors:ContentControlBehavior.FormattedContent>
                 </Label>
-      
+                <Label>
+                    <behaviors:ContentControlBehavior.FormatValues>
+                        <x:Array Type="system:String">
+                            <system:String>VB-Paradise$https://www.vb-paradise.de/</system:String>
+                        </x:Array>
+                    </behaviors:ContentControlBehavior.FormatValues>
+                    <behaviors:ContentControlBehavior.FormattedContent>
+                        <DynamicResource ResourceKey="AboutThanks4"/>
+                    </behaviors:ContentControlBehavior.FormattedContent>
+                </Label>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
