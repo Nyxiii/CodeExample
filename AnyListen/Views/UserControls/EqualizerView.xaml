@@ -20,4 +20,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Separator Visibility="{Binding Element
+        <Separator Visibility="{Binding ElementName=UserControl,Path=ShowSeparator,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Menu Background="Transparent" Grid.Row="1">
+            <MenuItem Header="{DynamicResource Presets}" Background="Transparent">
+                <MenuItem Header="{DynamicResource Bass}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetBass}"/>
+                <MenuItem Header="{DynamicResource BassExtreme}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetBassExteme}"/>
+                <MenuItem Header="{DynamicResource BassAndHeights}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetBassAndHeights}"/>
+                <MenuItem Header="{DynamicResource Heights}" Command="{Binding MusicManager.CS
