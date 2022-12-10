@@ -26,4 +26,9 @@
                 <MenuItem Header="{DynamicResource Bass}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetBass}"/>
                 <MenuItem Header="{DynamicResource BassExtreme}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetBassExteme}"/>
                 <MenuItem Header="{DynamicResource BassAndHeights}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetBassAndHeights}"/>
-                <MenuItem Header="{DynamicResource Heights}" Command="{Binding MusicManager.CS
+                <MenuItem Header="{DynamicResource Heights}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetHeights}"/>
+                <MenuItem Header="{DynamicResource Classic}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetClassic}"/>
+                <MenuItem Header="{DynamicResource Dance}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetDance}"/>
+                <MenuItem Header="{DynamicResource Rock}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetRock}"/>
+                <MenuItem Header="{DynamicResource Techno}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetTechno}"/>
+                <MenuItem Header="{DynamicResource Pop}" Command="{Binding MusicManager.CSCoreEngine.Equ
