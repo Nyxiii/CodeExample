@@ -31,4 +31,11 @@
                 <MenuItem Header="{DynamicResource Dance}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetDance}"/>
                 <MenuItem Header="{DynamicResource Rock}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetRock}"/>
                 <MenuItem Header="{DynamicResource Techno}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetTechno}"/>
-                <MenuItem Header="{DynamicResource Pop}" Command="{Binding MusicManager.CSCoreEngine.Equ
+                <MenuItem Header="{DynamicResource Pop}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetPop}"/>
+                <MenuItem Header="{DynamicResource SoftBass}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetSoftBass}"/>
+                <MenuItem Header="{DynamicResource SoftHeights}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.LoadPresetSoftHeights}"/>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource Reset}" Command="{Binding MusicManager.CSCoreEngine.EqualizerSettings.ResetEqualizer}" Background="Transparent"/>
+        </Menu>
+        <Button Grid.Row="1" Style="{StaticResource WindowButtonStyle}" Click="PART_CLOSE_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="20" Height="20"/>
+        <I
