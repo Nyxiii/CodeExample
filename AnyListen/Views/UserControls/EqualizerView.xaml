@@ -59,4 +59,15 @@
                                             <Setter Property="ToolTip" Value="{Binding Label}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
-                        
+                                </Style>
+                            </Slider.Style>
+                        </Slider>
+                        <TextBlock Text="{Binding Label}" Margin="0,5,0,0" Grid.Row="1" Foreground="{StaticResource BlackBrush}" HorizontalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=UserControl,Path=ShowLabelBelowSlider}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+         
