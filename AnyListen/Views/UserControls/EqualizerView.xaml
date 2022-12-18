@@ -51,4 +51,12 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                       
+                        <Slider Orientation="Vertical" Maximum="100" Minimum="-100" Margin="{Binding ElementName=UserControl,Path=SliderThickness}" Value="{Binding Value}">
+                            <Slider.Style>
+                                <Style TargetType="Slider" BasedOn="{StaticResource MetroSlider}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=UserControl,Path=ShowLabelBelowSlider}" Value="false">
+                                            <Setter Property="ToolTip" Value="{Binding Label}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                        
