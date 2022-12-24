@@ -37,4 +37,28 @@ namespace AnyListen.Views.UserControls
             {
                 _itemSpace = value;
                 SliderThickness = new Thickness(value, 0, value, 0);
-                if (PropertyChanged != null) PropertyChanged(t
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("SliderThickness"));
+            }
+        }
+
+        public static readonly DependencyProperty WantCloseCommandProperty = DependencyProperty.Register(
+            "WantCloseCommand", typeof (ICommand), typeof (EqualizerView), new PropertyMetadata(default(ICommand)));
+
+        public ICommand WantCloseCommand
+        {
+            get { return (ICommand) GetValue(WantCloseCommandProperty); }
+            set { SetValue(WantCloseCommandProperty, value); }
+        }
+
+        public EqualizerView()
+        {
+            InitializeComponent();
+        }
+
+        private void PART_CLOSE_Click(object sender, RoutedEventArgs e)
+        {
+            OnWantClose();
+        }
+
+        protected void OnWantClose()
+    
