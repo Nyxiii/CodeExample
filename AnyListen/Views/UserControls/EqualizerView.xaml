@@ -70,4 +70,13 @@
                                         <DataTrigger Binding="{Binding ElementName=UserControl,Path=ShowLabelBelowSlider}" Value="true">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
-         
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
