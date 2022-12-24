@@ -61,4 +61,17 @@ namespace AnyListen.Views.UserControls
         }
 
         protected void OnWantClose()
-    
+        {
+            if (WantClose != null) WantClose(this, EventArgs.Empty);
+            if (WantCloseCommand != null) WantCloseCommand.Execute(null);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if (e.Key == Key.Escape) OnWantClose();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+}
