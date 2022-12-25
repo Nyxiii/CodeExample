@@ -1,11 +1,12 @@
+
 ﻿namespace AnyListen.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for KeyboardShortcutsView.xaml
+    /// Interaction logic for SettingsView.xaml
     /// </summary>
-    public partial class KeyboardShortcutsView
+    public partial class SettingsView
     {
-        public KeyboardShortcutsView()
+        public SettingsView()
         {
             InitializeComponent();
         }
