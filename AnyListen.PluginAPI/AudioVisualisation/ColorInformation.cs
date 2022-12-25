@@ -22,4 +22,26 @@ namespace AnyListen.PluginAPI.AudioVisualisation
         /// </summary>
         public Color WhiteColor { get; set; }
 
-       
+        /// <summary>
+        /// The black (= background) color
+        /// </summary>
+        public Color BlackColor { get; set; }
+
+        /// <summary>
+        /// A gray color
+        /// </summary>
+        public Color GrayColor { get; set; }
+
+        /// <summary>
+        /// The brush from <see cref="AccentColor"/>
+        /// </summary>
+        public Brush AccentBrush => _accentBrush ?? (_accentBrush = GetBrush(AccentColor));
+
+        /// <summary>
+        /// The brush from <see cref="WhiteColor"/>
+        /// </summary>
+        public Brush WhiteBrush => _whiteBrush ?? (_whiteBrush = GetBrush(WhiteColor));
+
+        /// <summary>
+        /// The brush from <see cref="BlackColor"/>
+        /// <
