@@ -44,4 +44,19 @@ namespace AnyListen.PluginAPI.AudioVisualisation
 
         /// <summary>
         /// The brush from <see cref="BlackColor"/>
-        /// <
+        /// </summary>
+        public Brush BlackBrush => _blackBrush ?? (_blackBrush = GetBrush(BlackColor));
+
+        /// <summary>
+        /// The brush from <see cref="GrayColor"/>
+        /// </summary>
+        public Brush GrayBrush => _grayBrush ?? (_grayBrush = GetBrush(GrayColor));
+
+        protected Brush GetBrush(Color color)
+        {
+            var brush = new SolidColorBrush(color);
+            brush.Freeze();
+            return brush;
+        }
+    }
+}
