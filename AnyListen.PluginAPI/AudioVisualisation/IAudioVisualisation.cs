@@ -34,4 +34,8 @@ namespace AnyListen.PluginAPI.AudioVisualisation
         UIElement VisualElement { get; }
 
         /// <summary>
-        /// Some colors from the
+        /// Some colors from the current theme
+        /// </summary>
+        ColorInformation ColorInformation { set; }
+    }
+}
