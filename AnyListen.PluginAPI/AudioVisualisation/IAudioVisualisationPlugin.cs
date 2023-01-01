@@ -16,4 +16,19 @@ namespace AnyListen.PluginAPI.AudioVisualisation
         /// <summary>
         /// This property should return the audio visualisation for the smart window
         /// </summary>
-        /// <returns>The audio visualisa
+        /// <returns>The audio visualisation</returns>
+        IAudioVisualisation SmartWindowVisualisation { get; }
+
+        void Refresh();
+
+        /// <summary>
+        /// Your name
+        /// </summary>
+        string Creator { get; }
+
+        /// <summary>
+        /// A preview image
+        /// </summary>
+        GeometryGroup Thumbnail { get; }
+    }
+}
