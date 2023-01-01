@@ -28,4 +28,7 @@ namespace AnyListen.PluginAPI.AudioVisualisation
 
         /// <summary>
         /// When <see cref="IsPlaying"/> is changed
-  
+        /// </summary>
+        event EventHandler PlayStateChanged;
+    }
+}
