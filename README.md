@@ -57,4 +57,30 @@ AnyListen is a music player written in C# based on the [CSCore sound library](ht
 2. 调整搜索结果页面布局；
 3. 添加无损下载以及文件重命名机制；
 
-###2016.
+###2016.10.10 V1.0.0 测试版
+1. 添加虾米、百度、腾讯、天天、酷我、酷狗；
+2. 优化播放部分显示；
+3. 优化部分翻译；
+4. 可以搜索HTTP连接；
+5. 优化专辑以及音质排序
+
+###2016.10.10 V1.0.0 预览版
+1. 提升软件稳定性；
+2. 移除无用的界面已经组件；
+3. 添加网易云搜索；
+4. 添加简单程序校验；
+5. 调整搜索结果展示界面
+
+##Screenshots
+Now Playing tab, advanced view:
+![NowPlaying](http://yyfm.oss-cn-qingdao.aliyuncs.com/anylisten/anylisten-02.jpg)
+
+Dark theme
+![DarkTheme](http://yyfm.oss-cn-qingdao.aliyuncs.com/anylisten/anylisten-03.jpg)
+
+Search Online
+![SearchOnline](http://yyfm.oss-cn-qingdao.aliyuncs.com/anylisten/anylisten-04.jpg)
+
+
+##License
+AnyListen is licensed under the [GNU General Public License](LICENSE.txt)
